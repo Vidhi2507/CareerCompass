@@ -1,0 +1,4 @@
+backend/benv/
+node_modules/
+CareerCompass/node_modules/
+CareerCompass/.env
