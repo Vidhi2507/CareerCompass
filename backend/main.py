@@ -5,10 +5,11 @@ from pymongo.mongo_client import MongoClient
 
 from classes import User
 from helperfunctions import create_access_token
+import os
+from dotenv import load_dotenv
 
 ## connect to MongoDB
-db_password = "R4u1qMX6tcmMcLFd" #will set in env file later...+whole uri
-uri = f"mongodb+srv://Vidhi:{db_password}@productioncluster.cdeuc2w.mongodb.net/?appName=ProductionCluster"
+uri = os.getenv("DATABASE_URL")
 client = MongoClient(uri)
 db = client["CareerCompass_db"]
 collection = db["Users"]
