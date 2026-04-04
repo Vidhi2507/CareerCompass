@@ -11,26 +11,47 @@ const ManualEntry = () => {
   const nextStep = () => setStep(prev => prev + 1);
   const prevStep = () => setStep(prev => prev - 1);
 
-  const [formData, setFormData] = useState({fullName: "",gradYear: "",
+  const [formData, setFormData] = useState({
+    fullName: "",
+    currentRole: "",
+    years_experience: "",
     education: [
     { school: "", degree: "", field: "", startYear: "", endYear: "" }
+  ],
+  experience: [
+    { company: "", role: "", description: "", startYear: "", endYear: "" }
   ]
-  ,skills: "",interests: []});
+  ,skills: [
+    { skill: "" ,proficiency: ""}
+  ],
+  interests: []});
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  const handleExperienceAdd = () => {
-    setEducationList([
-      ...educationList,
-      {
-        school: "",
-        degree: "",
-        field: "",
-        startYear: "",
-        endYear: "",
-      },
-    ]);
+
+  const handleExperienceChange = (index, e) => {
+    const updatedExperience = [...formData.experience];
+    updatedExperience[index][e.target.name] = e.target.value;
+
+    setFormData({ ...formData, experience: updatedExperience });
+  };
+
+  const addExperience = () => {
+    setFormData({
+      ...formData,
+      experience: [
+        ...formData.experience,
+        { company: "", role: "", description: "", startYear: "", endYear: "" }
+      ]
+    });
+  };
+
+  const removeExperience = (index) => {
+    const updatedExperience = [...formData.experience];
+    updatedExperience.splice(index, 1);
+
+    setFormData({ ...formData, experience: updatedExperience });
   };
 
     const handleEducationChange = (index, e) => {
@@ -56,6 +77,33 @@ const ManualEntry = () => {
 
     setFormData({ ...formData, education: updatedEducation });
   };
+
+  const handleSkillsChange = (index, e) => {
+    const updatedSkills = [...formData.skills];
+    updatedSkills[index][e.target.name] = e.target.value;
+
+    setFormData({ ...formData, skills: updatedSkills });
+  };
+
+  const addSkills = () => {
+    setFormData({
+      ...formData,
+      skills: [
+        ...formData.skills,
+        { skill: "", proficiency: "" }
+      ]
+    });
+  };
+
+  const removeSkills = (index) => {
+    const updatedSkills = [...formData.skills];
+    updatedSkills.splice(index, 1);
+
+    setFormData({ ...formData, skills: updatedSkills });
+  };
+
+
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -105,7 +153,7 @@ const ManualEntry = () => {
           className="bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-[40px] p-8 md:p-14 shadow-2xl relative overflow-hidden"
         >
           <AnimatePresence mode="wait">
-            {step === 5 && (
+            {step === 1 && (
               <motion.div 
                 key="step1"
                 initial={{ x: 20, opacity: 0 }}
@@ -123,9 +171,6 @@ const ManualEntry = () => {
                   </div>
                   <InputField label="Current Role" placeholder="Student" name="role" value={formData.role} onChange={handleChange} />
                   <InputField label="Years of Experience" placeholder="2" name="years_experience" value={formData.years_experience} onChange={handleChange} />
-                  <div className="md:col-span-2 text font-black text-white">
-                    <button onClick={handleExperienceAdd} style={{ fontSize: 15 }}>➕ Add Experience</button>
-                  </div>
                 </div>
 
 
@@ -141,7 +186,7 @@ const ManualEntry = () => {
                 </div>
                         
 
-                {formData.experience.length > 1 && (
+                {formData.experience.length > 0 && (
                       <button type="button" onClick={() => removeExperience(index)} className="text-red-400 font-bold text-sm"> Remove </button>
                             
                         )}
@@ -200,9 +245,9 @@ const ManualEntry = () => {
               </motion.div>
             )}
 
-            {step === 0 && (
+            {step === 3 && (
               <motion.div 
-                key="not a valid step now"
+                key="step3"
                 initial={{ x: 20, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: -20, opacity: 0 }}
@@ -213,19 +258,67 @@ const ManualEntry = () => {
                     <h2 className="text-3xl font-black tracking-tight text-white">Your Toolkit</h2>
                 </div>
                 <p className="text-white/40 font-medium">Which technologies have you mastered or explored?</p>
-                <textarea 
-                  className="w-full bg-white/[0.05] border border-white/10 rounded-2xl p-6 outline-none focus:border-indigo-500/50 focus:bg-white/[0.08] min-h-[180px] transition-all text-white placeholder:text-white/20 font-medium"
-                  placeholder="e.g. React, Python, Django, Tailwind CSS, PostgreSQL..."
-                  name="skills"
-                  value={formData.skills}
-                  onChange={handleChange}
-                />
+                
+               {formData.skills.map((skill, index) => (
+                  <div
+                    key={index}
+                    className="flex items-end gap-4 border border-white/10 p-4 rounded-2xl"
+                  >
+                    {/* Skill Name */}
+                    <div className="flex-1">
+                      <InputField
+                        label="Skill"
+                        type="text"
+                        name="skill"
+                        placeholder="Skill Name"
+                        value={skill.skill}
+                        onChange={(e) => handleSkillsChange(index, e)}
+                      />
+                    </div>
+
+                    {/* Proficiency Stars */}
+                    <div>
+                      <label className="block text-[10px] font-black uppercase tracking-widest text-white/30 mb-3 ml-1">
+                        Proficiency
+                      </label>
+
+                      <div className="flex gap-1">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <button
+                            key={star}
+                            type="button"
+                            onClick={() =>
+                              handleSkillsChange(index, {
+                                target: { name: "proficiency", value: star }
+                              })
+                            }
+                            className={`text-2xl transition ${
+                              star <= skill.proficiency ? "text-yellow-400" : "text-white/20"
+                            }`}
+                          >
+                            ★
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+              
+                {formData.skills.length > 1 && (
+                      <button type="button" onClick={() => removeSkills(index)} className="text-red-400 font-bold text-sm"> Remove </button>
+                            
+                        )}
+                </div>
+                ))
+                }
+                <button type="button"
+                  onClick={addSkills} className="mt-4 bg-white text-black px-4 py-2 rounded-xl font-bold">
+                  ➕ Add Skill</button>
+
               </motion.div>
             )}
 
-            {step === 3 && (
+            {step === 0 && (
               <motion.div 
-                key="step3"
+                key="notused"
                 initial={{ x: 20, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: -20, opacity: 0 }}
