@@ -4,3 +4,4 @@ uvicorn
 jwt
 pymongo
 python-jose
+dotenv
