@@ -7,6 +7,7 @@ from classes import User
 from helperfunctions import create_access_token
 import os
 from dotenv import load_dotenv
+load_dotenv()
 
 ## connect to MongoDB
 uri = os.getenv("DATABASE_URL")
