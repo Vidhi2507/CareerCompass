@@ -3,8 +3,19 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { ChevronRight, Target, Sparkles, ShieldCheck, Zap } from 'lucide-react';
 
-const Landingpage = () => {
+const Landingpage = ({ openLogin }) => {
   const navigate = useNavigate();
+  const handleGetStarted = () => {
+    const token = localStorage.getItem('token');
+    
+    if (token) {
+      // If a token exists, the user is logged in
+      navigate('/resume-upload');
+    } else {
+      // If no token, call the function we passed from App.jsx
+      openLogin();
+    }
+  };
   return (
     <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-blue-500/40 overflow-x-hidden">
       
@@ -113,7 +124,7 @@ const Landingpage = () => {
               transition={{ delay: 0.4 }}
               className="flex items-center gap-6"
             >
-              <button onClick={() => navigate('/resume-upload')} className="px-10 py-5 bg-white text-black rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-blue-500 hover:text-white transition-all active:scale-95 shadow-2xl shadow-white/5">
+              <button onClick={handleGetStarted} className="px-10 py-5 bg-white text-black rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-blue-500 hover:text-white transition-all active:scale-95 shadow-2xl shadow-white/5">
                 Get Started
               </button>
               <div className="hidden md:flex items-center gap-2 text-zinc-500">

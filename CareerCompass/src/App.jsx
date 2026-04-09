@@ -53,7 +53,15 @@ function App() {
 
         <main className="flex-grow">
           <Routes>
-            <Route path="/" element={<LandingPage />} />
+            <Route path="/" element={
+    <LandingPage 
+      openLogin={() => {
+        setIsRegister(true); // This ensures the "Join the Lab" screen shows up
+        setShowLogin(true);
+      }} 
+    />
+  } 
+/>
             <Route path="/resume-upload" element={<ResumeUpload />} />
             <Route path="/manual-entry" element={<ManualEntry />} />
           </Routes>
