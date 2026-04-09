@@ -8,10 +8,10 @@ class User(BaseModel):
 
 class UserCareerInfo(BaseModel):
     username: Optional[str] = None
-    email: EmailStr
-    Highesteducation: Optional[str] = None
-    graduation_year: Optional[int] = None
-    current_role: Optional[str] = None
+    fullName: Optional[str] = None
+    currentRole: Optional[str] = None
     years_experience: Optional[int] = None
-    skills: Optional[list[str]] = None
-    career_goals: Optional[str] = None
+
+    experience: Optional[list[dict]] = None
+    education : Optional[list[dict]] = None
+    skills: Optional[list[dict]] = None

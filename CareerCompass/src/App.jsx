@@ -36,8 +36,13 @@ function App() {
       window.location.reload();
     } 
     catch (err) {
-      const serverError = err.response?.data;
-      setError(serverError?.username?.[0] || serverError?.email?.[0] || serverError?.message || "Verification failed. Please check your credentials.");
+    const serverError = err.response?.data;
+
+    setError(
+      serverError?.detail ||
+      serverError?.message ||
+      "Verification failed. Please check your credentials."
+      );
     }
   };
 

@@ -12,6 +12,7 @@ const ManualEntry = () => {
   const prevStep = () => setStep(prev => prev - 1);
 
   const [formData, setFormData] = useState({
+    username: localStorage.getItem('username') || "UnRegistered User",
     fullName: "",
     currentRole: "",
     years_experience: "",
@@ -169,7 +170,7 @@ const ManualEntry = () => {
                   <div className="md:col-span-2">
                     <InputField label="Full Name" placeholder="Vidya Shinde" name="fullName" value={formData.fullName} onChange={handleChange} />
                   </div>
-                  <InputField label="Current Role" placeholder="Student" name="role" value={formData.role} onChange={handleChange} />
+                  <InputField label="Current Role" placeholder="Student" name="currentRole" value={formData.currentRole} onChange={handleChange} />
                   <InputField label="Years of Experience" placeholder="2" name="years_experience" value={formData.years_experience} onChange={handleChange} />
                 </div>
 
@@ -178,7 +179,7 @@ const ManualEntry = () => {
                 <div key={index} className="space-y-4 border border-white/10 p-4 rounded-2xl">
                         
                 <InputField label="Company" type="text" name="company" placeholder="Company Name" value={exp.company} onChange={(e) => handleExperienceChange(index, e)} className="w-full bg-white/[0.05] border border-white/10 p-3 rounded-xl text-white"/>
-                <InputField label="Position" type="text" name="position" placeholder="Position Title" value={exp.position} onChange={(e) => handleExperienceChange(index, e)} className="w-full bg-white/[0.05] border border-white/10 p-3 rounded-xl text-white"/>
+                <InputField label="Position/Role" type="text" name="role" placeholder="Position Title" value={exp.role} onChange={(e) => handleExperienceChange(index, e)} className="w-full bg-white/[0.05] border border-white/10 p-3 rounded-xl text-white"/>
                 <InputField label="Description" type="text" name="description" placeholder="Job Description" value={exp.description} onChange={(e) => handleExperienceChange(index, e)} className="w-full bg-white/[0.05] border border-white/10 p-3 rounded-xl text-white"/>
                 <div className="grid grid-cols-2 gap-4">
                           <InputField label="Start Year" type="text" name="startYear" placeholder="2019" value={exp.startYear} onChange={(e) => handleExperienceChange(index, e)} className="w-full bg-white/[0.05] border border-white/10 p-3 rounded-xl text-white"/>

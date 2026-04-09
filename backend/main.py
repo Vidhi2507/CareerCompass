@@ -2,8 +2,9 @@ from http.client import HTTPException
 from fastapi import FastAPI 
 from fastapi.middleware.cors import CORSMiddleware
 from pymongo.mongo_client import MongoClient
+import pandas as pd
 
-from classes import User
+from classes import User,UserCareerInfo
 from helperfunctions import create_access_token
 import os
 from dotenv import load_dotenv
@@ -13,7 +14,8 @@ load_dotenv()
 uri = os.getenv("DATABASE_URL")
 client = MongoClient(uri)
 db = client["CareerCompass_db"]
-collection = db["Users"]
+Users = db["Users"]
+UserCareerDetails = db["User_Career_details"]
 
 ## FastAPI code
 app = FastAPI()
@@ -31,7 +33,7 @@ def home():
 
 @app.post("/login")
 def login(user: User):
-    user_data = collection.find_one({"email": user.email})
+    user_data = Users.find_one({"email": user.email})
 
     if user_data and user_data["password"] == user.password:  
         #valid user
@@ -44,16 +46,19 @@ def login(user: User):
 
 @app.post("/register")
 def register(user: User):   ## hashing of password will be done later
-    if collection.find_one({"email": user.email}):
+    if Users.find_one({"email": user.email}):
         raise HTTPException(status_code=400, detail="Email already exists")
-    
+    if Users.find_one({"username": user.username}):
+        raise HTTPException(status_code=400, detail="Username already exists")
+
     # print(user.dict())
-    collection.insert_one(user.dict())
+    Users.insert_one(user.dict())
 
     return {"message": "User registered successfully", "username": user.username}
 
 
 @app.post("/manual-entry/roadmap")
-def manual_entry(formData: dict):
+def manual_entry(Userdata: UserCareerInfo):
     # Process the manual entry data and save it to the database
-    return {"message": "Manual entry data received successfully", "data": formData}
+    UserCareerDetails.insert_one(Userdata.dict())
+    return {"message": "Manual entry data received successfully", "data": Userdata}
