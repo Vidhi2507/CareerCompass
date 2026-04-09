@@ -1,7 +1,8 @@
-pydantic
+pydantic[email]
 fastapi
 uvicorn
 jwt
 pymongo
 python-jose
 dotenv
+pandas

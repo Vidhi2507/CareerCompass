@@ -1,5 +1,5 @@
 from pydantic import BaseModel, EmailStr
-from typing import Annotated, Optional
+from typing import Annotated, List, Optional
 
 class User(BaseModel):
     username: Optional[str] = None
@@ -15,7 +15,7 @@ class UserCareerInfo(BaseModel):
     experience: Optional[list[dict]] = None
     education : Optional[list[dict]] = None
     skills: Optional[list[dict]] = None
-
+    interests: List[str] = None
 
 class Roadmap(BaseModel):
     Role: Annotated[str,"Roles recommended based on the user's profile and preferences"]

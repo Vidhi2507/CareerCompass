@@ -1,4 +1,5 @@
-from http.client import HTTPException
+
+from fastapi import HTTPException
 from fastapi import FastAPI 
 from fastapi.middleware.cors import CORSMiddleware
 from pymongo.mongo_client import MongoClient
