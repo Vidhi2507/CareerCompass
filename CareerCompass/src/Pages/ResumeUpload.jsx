@@ -1,12 +1,23 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { UploadCloud, FileText, X, CheckCircle2, Sparkles, ArrowRight, Shield } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { UploadCloud, FileText, X, CheckCircle2, Sparkles, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom'; // Changed from Link to useNavigate for logic handling
 
 const ResumeUpload = () => {
   const [dragActive, setDragActive] = useState(false);
   const [file, setFile] = useState(null);
   const fileInputRef = useRef(null);
+  const navigate = useNavigate();
+
+  // Authentication Check Helper
+  const checkAuth = () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert("Please login to access this feature.");
+      return false;
+    }
+    return true;
+  };
 
   const handleDrag = (e) => {
     e.preventDefault();
@@ -18,8 +29,25 @@ const ResumeUpload = () => {
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
+
+    // Check login before allowing drop
+    if (!checkAuth()) return;
+
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
       setFile(e.dataTransfer.files[0]);
+    }
+  };
+
+  const handleManualEntryClick = (e) => {
+    e.preventDefault();
+    if (checkAuth()) {
+      navigate('/manual-entry');
+    }
+  };
+
+  const handleBrowseClick = () => {
+    if (checkAuth()) {
+      fileInputRef.current.click();
     }
   };
 
@@ -83,7 +111,7 @@ const ResumeUpload = () => {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   className="flex flex-col items-center text-center"
-                  onClick={() => fileInputRef.current.click()}
+                  onClick={handleBrowseClick} // Wrapped in Auth check
                 >
                   <div className="w-20 h-20 rounded-2xl bg-zinc-800/50 flex items-center justify-center mb-8 border border-zinc-700 group-hover:border-blue-500/50 transition-all">
                     <UploadCloud size={32} className="text-zinc-500 group-hover:text-blue-400 transition-colors" />
@@ -95,7 +123,11 @@ const ResumeUpload = () => {
                     type="file" 
                     className="hidden" 
                     ref={fileInputRef}
-                    onChange={(e) => e.target.files && setFile(e.target.files[0])}
+                    onChange={(e) => {
+                        if (checkAuth() && e.target.files) {
+                            setFile(e.target.files[0]);
+                        }
+                    }}
                     accept=".pdf,.docx"
                   />
                   
@@ -148,9 +180,12 @@ const ResumeUpload = () => {
           
           <p className="text-zinc-500 text-sm">
             Don't have a resume?{' '}
-            <Link to="/manual-entry" className="text-zinc-200 hover:text-blue-400 font-semibold transition-colors">
+            <button 
+                onClick={handleManualEntryClick} // Intercepts Link click with auth check
+                className="text-zinc-200 hover:text-blue-400 font-semibold transition-colors bg-transparent border-none cursor-pointer"
+            >
               Enter details manually →
-            </Link>
+            </button>
           </p>
         </motion.div>
 
