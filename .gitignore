@@ -5,3 +5,4 @@ CareerCompass/.env
 .env
 __pycache__/
 *.pyc
+try.ipynb

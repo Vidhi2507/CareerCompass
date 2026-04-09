@@ -62,3 +62,10 @@ def manual_entry(Userdata: UserCareerInfo):
     # Process the manual entry data and save it to the database
     UserCareerDetails.insert_one(Userdata.dict())
     return {"message": "Manual entry data received successfully", "data": Userdata}
+
+def roadmap_generation(username: str):
+    user_career_data = UserCareerDetails.find_one({"username": username})
+    if not user_career_data:
+        raise HTTPException(status_code=404, detail="User career data not found")
+    
+    
