@@ -3,13 +3,18 @@ from fastapi import HTTPException
 from fastapi import FastAPI 
 from fastapi.middleware.cors import CORSMiddleware
 from pymongo.mongo_client import MongoClient
-import pandas as pd
+
+from typing import Annotated
 
 from classes import User,UserCareerInfo
 from helperfunctions import create_access_token
 import os
 from dotenv import load_dotenv
 load_dotenv()
+
+
+##Agents
+from langgraph.graph import StateGraph, MessagesState, START, END
 
 ## connect to MongoDB
 uri = os.getenv("DATABASE_URL")
@@ -18,7 +23,7 @@ db = client["CareerCompass_db"]
 Users = db["Users"]
 UserCareerDetails = db["User_Career_details"]
 
-## FastAPI code
+
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
@@ -65,8 +70,14 @@ def manual_entry(Userdata: UserCareerInfo):
     return {"message": "Manual entry data received successfully", "data": Userdata}
 
 def roadmap_generation(username: str):
+    Roadmapstatestate = {
+        'TargetRoles' : Annotated[list[str]]
+    }
+
+    Roadmapstate = Roadmapstate | UserCareerDetails.find_one({"username": "Vidhi"})
     user_career_data = UserCareerDetails.find_one({"username": username})
     if not user_career_data:
         raise HTTPException(status_code=404, detail="User career data not found")
-    
-    
+
+    graph = StateGraph(Roadmapstate)
+    graph.add_node()

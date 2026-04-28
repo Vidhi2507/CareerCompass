@@ -1,5 +1,5 @@
 from pydantic import BaseModel, EmailStr
-from typing import Annotated, List, Optional
+from typing import Annotated, List, Optional,Field
 
 class User(BaseModel):
     username: Optional[str] = None
@@ -21,3 +21,9 @@ class Roadmap(BaseModel):
     Role: Annotated[str,"Roles recommended based on the user's profile and preferences"]
     Skills: Annotated[list[str],"Skills required for the recommended roles"]
     
+
+class TargetRoles(BaseModel):
+    Roles : Annotated[list[str],"Target Roles for a person with following Interests"]
+
+class RequiredSkills(BaseModel):
+    Skills: Annotated[list[dict[str, int]],"List of 10 Highly important skills required for each target roles from basic to advanced and adding their proficiency levels required for that particular role"] = Field(default=None, max_length=10)

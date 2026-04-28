@@ -6,3 +6,6 @@ pymongo
 python-jose
 dotenv
 pandas
+langchain
+langgraph
+langchain_google_genai
