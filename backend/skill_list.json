@@ -1,0 +1,33 @@
+{
+  "Skills": [
+    "Python","Java","C","C++","JavaScript","TypeScript","Go","Rust","Kotlin","Swift","R","MATLAB","Julia","Scala","Dart","Bash","PowerShell","SQL","PLSQL","NoSQL","HTML","CSS","PHP","Ruby","Assembly",
+
+    "Data Structures","Algorithms","Object Oriented Programming","Functional Programming","Multithreading","Concurrency","Memory Management","Operating Systems","Computer Networks","DBMS","System Design","Distributed Systems","Parallel Computing","Graph Theory","Recursion","Dynamic Programming","Greedy Algorithms","Backtracking","Bit Manipulation","Complexity Analysis","Design Patterns","Software Architecture","API Design","Debugging","Profiling","Code Optimization","Unit Testing","Integration Testing","Version Control",
+
+    "Machine Learning","Supervised Learning","Unsupervised Learning","Semi Supervised Learning","Reinforcement Learning","Transfer Learning","Active Learning","Online Learning","Ensemble Learning","Gradient Boosting","Random Forest","Decision Trees","SVM","KNN","Naive Bayes","Linear Regression","Logistic Regression","Clustering","Dimensionality Reduction","PCA","LDA","Feature Engineering","Feature Selection","Model Training","Model Evaluation","Cross Validation","Hyperparameter Tuning","Grid Search","Random Search","Bayesian Optimization","Regularization","Overfitting","Underfitting","Bias Variance Tradeoff","ROC AUC","Precision Recall","F1 Score","Loss Functions","Optimization Algorithms","SGD","Adam","Explainable AI","AutoML","Federated Learning","Edge ML",
+
+    "Deep Learning","Neural Networks","CNN","RNN","LSTM","GRU","Transformers","Attention Mechanism","BERT","GPT","Vision Transformers","Autoencoders","GANs","Diffusion Models","Sequence Modeling","Embedding Learning","Representation Learning","Backpropagation","Gradient Descent","Batch Normalization","Dropout","Model Pruning","Quantization","Knowledge Distillation","Multi Task Learning","Self Supervised Learning","Fine Tuning","Zero Shot Learning","Few Shot Learning","Model Compression","Distributed Training","Mixed Precision Training","GPU Acceleration","CUDA","Graph Neural Networks",
+
+    "Natural Language Processing","Text Preprocessing","Tokenization","Stemming","Lemmatization","Stopword Removal","Ngrams","TFIDF","Word2Vec","GloVe","FastText","Sentence Embeddings","Named Entity Recognition","POS Tagging","Dependency Parsing","Text Classification","Sentiment Analysis","Topic Modeling","Question Answering","Question Generation","Summarization","Machine Translation","Prompt Engineering","Chain of Thought","Retrieval Augmented Generation","Semantic Search","Document Retrieval","Context Windowing","Chunking Strategies","Sliding Window","Embedding Models","Vector Similarity","Cosine Similarity","ANN Search","Hybrid Retrieval","Knowledge Base Construction","Hallucination Mitigation","Grounded Generation","LLM Evaluation","Instruction Tuning","RLHF","Multimodal Models","OCR Integration","Markdown Parsing","Regex Parsing","Text Normalization","Corpus Building","Language Modeling",
+
+    "Pandas","NumPy","Data Cleaning","Data Wrangling","Data Transformation","Data Aggregation","Data Pipelines","ETL","ELT","Data Integration","Data Validation","Missing Value Handling","Outlier Detection","Normalization","Standardization","Time Series Analysis","Forecasting","Exploratory Data Analysis","Data Profiling","Data Sampling","Data Balancing","Encoding Techniques","Data Imputation","Data Engineering","Data Lakes","Data Warehousing","OLAP","OLTP","Data Governance","Data Quality","Metadata Management",
+
+    "MySQL","PostgreSQL","SQLite","MongoDB","Cassandra","Redis","DynamoDB","Neo4j","Firebase","ElasticSearch","Qdrant","Pinecone","Weaviate","Milvus","Vector Databases","Graph Databases","Columnar Databases","Key Value Stores","Data Indexing","Query Optimization","Transactions","Sharding","Replication","Backup Recovery","Data Partitioning","Schema Design","JSON Storage","XML Storage","Data Serialization",
+
+    "Vector Search","Semantic Retrieval","Hybrid Search","BM25","Dense Retrieval","Sparse Retrieval","Embedding Indexing","Context Retrieval","Top K Retrieval","Query Expansion","Reranking","Search Optimization","Information Retrieval","Similarity Matching","ANN Indexing","HNSW","FAISS","Elasticsearch DSL","Query Filtering",
+
+    "FastAPI","Flask","Django","REST APIs","GraphQL","API Integration","Microservices","Authentication","Authorization","JWT","OAuth","Session Management","Middleware","Async Programming","WebSockets","Rate Limiting","Logging","Monitoring","Error Handling","Swagger","Backend Testing","Caching","Redis Cache","Message Queues","Kafka","RabbitMQ",
+
+    "React","NextJS","HTML5","CSS3","Tailwind","Bootstrap","JavaScript ES6","TypeScript Frontend","Redux","UI Components","Responsive Design","Web Performance","DOM Manipulation","SPA","Routing","Form Handling","Frontend API Integration","KaTeX","Math Rendering",
+
+    "AWS","GCP","Azure","Docker","Kubernetes","CI CD","Jenkins","GitHub Actions","Terraform","Infrastructure as Code","Containerization","Deployment Pipelines","Cloud Storage","S3","EC2","Lambda","Serverless","API Gateway","Load Balancing","Auto Scaling","Monitoring Tools","Logging Systems","Prometheus","Grafana","Cloud Security","IAM","Networking Basics","CDN","Nginx","DevOps Practices",
+
+    "MLOps","Model Deployment","Model Serving","Model Versioning","Experiment Tracking","ML Pipelines","Feature Stores","Drift Detection","Monitoring Models","Reproducibility","Pipeline Automation","Airflow","Kubeflow","MLflow","Model Registry","A B Testing","Canary Deployment","Batch Inference","Real Time Inference","Evaluation Pipelines",
+
+    "Matplotlib","Seaborn","Plotly","Tableau","Power BI","Dash","Streamlit","Dashboards","Reporting Tools","Charting Libraries","Data Storytelling","KPI Tracking",
+
+    "Git","GitHub","GitLab","Bitbucket","Agile","Scrum","Kanban","JIRA","Trello","SDLC","Code Reviews","Refactoring","Documentation","PyTest","Selenium","Debugging Tools","VS Code","IntelliJ","Linters","Static Analysis","Package Management","Dependency Management","Build Systems",
+
+    "PDF Parsing","Marker Tool","Markdown Conversion","TOC Extraction","Metadata Mapping","Recursive Text Splitting","Embedding Pipelines","Batch Processing","Parallel Processing","Regex Extraction","Image Handling","Multimodal Inputs","Trend Analysis","Probabilistic Sampling","Weighted Sampling","Blueprint Generation","Question Generation Systems","Validator Agents","Multi Agent Systems","Evaluation Frameworks","Feedback Loops","Exam Simulation Systems","EdTech Systems"
+  ]
+}
