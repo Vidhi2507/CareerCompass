@@ -36,5 +36,6 @@ class Roadmapstate(TypedDict):
     education: dict
     experience: dict
     currentRole: str
+    skills:list[dict]
     TargetRoles : Annotated[list[str], operator.add]
     RequiredSkills : Annotated[dict[str, list[dict]], operator.or_]

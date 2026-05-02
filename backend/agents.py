@@ -35,16 +35,48 @@ def Suggest_Target_Roles(state):
 
 def Required_Skills(state):
     Target_role = state['TargetRoles']
-    prompt = f"Suggest some 10 highly important skills required for the roles \
-            {Target_role[0]}, {Target_role[1]}, {Target_role[2]} in the format of list of list,\
-             where each inner list should contain skills for each role respectively and \
-            should be in order of {Target_role[0], Target_role[1], Target_role[2]} \
-            Each skills should be highly relevant and in demand for the respective role and should be mostly technical learnable Interview skills, Only skills that are usually added on Resumes and available on Job descriptions \
-            Ordered in the way that for each role, \
-            skills should be arranged from basic to advanced level \
-            and also add the proficiency level required for each skill based on the Target role in the format of 0 to 5 where 0 means no proficiency required and 5 means highly proficient required \
-            for a person currently a {state["currentRole"]} \
-            experience as {state["experience"]} and their education from {state["education"]}"
+    prompt = f"""
+    You are an expert career coach and hiring manager.
+
+        TASK:
+        Generate a list of EXACTLY 10 highly important technical skills required for each target role.
+
+        TARGET ROLES:
+        1. {Target_role[0]}
+        2. {Target_role[1]}
+        3. {Target_role[2]}
+
+        USER CONTEXT:
+        - Current Role: {state["currentRole"]}
+        - Education: {state["education"]}
+        - Experience: {state["experience"]}
+
+        OUTPUT FORMAT (STRICT):
+        Return a JSON dictionary where:
+        - key = role name
+        - value = list of exactly 10 dictionaries
+        - each dictionary must have ONLY ONE skill and its required proficiency level (0 to 5)
+
+        Example:
+        {{
+        "{Target_role[0]}": [
+            {{"Python": 5}},
+            {{"SQL": 4}}
+        ],
+        "{Target_role[1]}": [
+            {{"MLOps": 4}}
+        ]
+        }}
+
+        RULES:
+        - Skills must be resume/job-description skills only.
+        - Skills must be mostly technical and learnable (no vague soft skills).
+        - Order skills from beginner → advanced for each role.
+        - Required proficiency must be integer 0 to 5.
+        - Include modern industry-demand skills relevant in 2025.
+        - Avoid duplicates and avoid generic phrases like "problem solving".
+        - Do NOT include explanations, only output JSON.
+        """
 
     structured_model = chatmodel.with_structured_output(RequiredSkills)
     skill_list = structured_model.invoke(prompt)
