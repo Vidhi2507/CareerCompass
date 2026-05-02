@@ -5,8 +5,8 @@ from pydantic import BaseModel,Field
 from typing import Annotated
 from classes import TargetRoles, RequiredSkills
 from sentence_transformers import SentenceTransformer
-
-
+from qdrant_client import QdrantClient
+from helperfunctions import normalize_skill
 
 load_dotenv() 
 
@@ -19,6 +19,13 @@ chatmodel = ChatGoogleGenerativeAI(
 )
 targetrole_model = chatmodel.with_structured_output(TargetRoles)
 embeddingmodel = SentenceTransformer("all-MiniLM-L6-v2")
+
+
+qdrant_client = QdrantClient(
+    url=os.getenv("QDRANT_URL"),
+    api_key=os.getenv("QDRANT_KEY")
+)
+
 
 def Suggest_Target_Roles(state):
     prompt = f"Suggest 3 roles in a list which a career Guide will suggest to a person Interested in  \
@@ -44,18 +51,24 @@ def Required_Skills(state):
     return {"RequiredSkills" : skill_list.Skills}
 
 
-# def normalize_skill(state):
+def normalize_userandReq_skill(state):
+    Required_Skills_dict = state["RequiredSkills"]
+    normalized = {}
 
-#     skill_emb = embeddingmodel.encode([skill])
-#     sims = cosine_similarity(skill_emb, canonical_embeddings)[0]
+    for role, skill_list in Required_Skills_dict.items():
+        normalized[role] = []
 
-#     best_idx = int(np.argmax(sims))
-#     best_score = sims[best_idx]
+        for skill_dict in skill_list:   
+            new_dict = {}
 
-#     if best_score >= threshold:
-#         return skill_vocab[best_idx], float(best_score)
+            for skill_name, level in skill_dict.items():
+                mapped_skill = normalize_skill(embeddingmodel, qdrant_client, skill_name)
+                new_dict[mapped_skill] = level
 
-#     return skill, float(best_score)
+            normalized[role].append(new_dict)
+
+    return {"RequiredSkills": normalized}
+
 
 
 
