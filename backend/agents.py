@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 import os
 from pydantic import BaseModel,Field
 from typing import Annotated
-from classes import TargetRoles, RequiredSkills
+from classes import TargetRoles, RequiredSkills,RoadmapLLMStructuredOutput
 from sentence_transformers import SentenceTransformer
 from qdrant_client import QdrantClient
 from helperfunctions import normalize_skill
@@ -20,6 +20,7 @@ chatmodel = ChatGoogleGenerativeAI(
 )
 targetrole_model = chatmodel.with_structured_output(TargetRoles)
 embeddingmodel = SentenceTransformer("all-MiniLM-L6-v2")
+Roadmap_model = chatmodel.with_structured_output(RoadmapLLMStructuredOutput)
 
 
 qdrant_client = QdrantClient(
@@ -158,3 +159,40 @@ def Skill_Gap_Analysis(state):
 
 
 
+def roadmap_generation_agent(state):
+    Target_role = state['TargetRoles']
+    mastered_skills = state['masteredSkills']
+    missing_skills = state['missingSkills']
+    to_be_improved = state['to_be_improved_skills']
+
+
+    prompt_for_roadmap = f"""
+    You are a career coach AI.
+
+        Generate a highly personalized roadmap for the target role: {Target_role[0]}.
+
+            USER PROFILE:
+                - Current Role: {state['currentRole']}
+                - Experience Years: {state['years_experience']}
+                - Education: {state['education']}
+                - Work Experience: {state['experience']}
+
+            SKILL ANALYSIS (out of 5):
+                - Mastered Skills: {mastered_skills}
+                - Missing Skills: {missing_skills}
+                - Skills to Improve: {to_be_improved}
+
+            READINESS SCORE:
+                - Current Readiness Score: {state['readinessScore']} (DO NOT CHANGE THIS SCORE)
+
+            REQUIREMENTS:
+                1. Roadmap must be divided into phases (Beginner → Intermediate → Advanced → Job Ready).
+                2. Each phase must have:
+                - duration_days
+                - skills_to_focus and tasks to learn that skill (step-by-step) and recommended resources
+                - one mini project + one major project
+                3. Include interview preparation tasks in the final phase.
+                4. Ensure prerequisites are respected (example: ML before DL, DL before NLP transformers).
+                """
+    roadmap = Roadmap_model.invoke(prompt_for_roadmap)
+    return {"Roadmap": roadmap}

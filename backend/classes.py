@@ -37,9 +37,98 @@ class Roadmapstate(TypedDict):
     experience: dict
     currentRole: str
     skills:list[dict]
+    years_experience: int
+    currentRole: str
     TargetRoles : Annotated[list[str], operator.add]
     RequiredSkills : Annotated[dict[str, list[dict]], operator.or_]
     missingSkills : list[dict]
     masteredSkills : list[dict]
     to_be_improved_skills : list[dict]
     readinessScore : float
+    roadmap : dict
+    
+class Skill(BaseModel):
+    skill: str = Field(..., description="Name of the skill to learn or improve (e.g., 'Feature Engineering', 'PyTorch').")
+
+    tasks: List[str] = Field(
+        ...,
+        description="Step-by-step learning tasks or practice exercises for this skill."
+    )
+
+    resource_book: Optional[str] = Field(
+        None,
+        description="Recommended book or free learning resource for this skill (if available)."
+    )
+
+    official_docs: Optional[str] = Field(
+        None,
+        description="Official documentation link for the skill/tool/library (e.g., PyTorch docs)."
+    )
+
+
+class Project(BaseModel):
+    title: str = Field(..., description="Short title of the project.")
+
+    description: str = Field(
+        ...,
+        description="Detailed description of what the project involves and what problem it solves."
+    )
+
+    skills_used: List[str] = Field(
+        ...,
+        description="List of skills/technologies that will be applied while building this project."
+    )
+
+    difficulty: str = Field(
+        ...,
+        description="Difficulty level of the project. Must be one of: Beginner, Intermediate, Advanced."
+    )
+
+
+class Phase(BaseModel):
+    phase_name: str = Field(
+        ...,
+        description="Name of the learning phase (e.g., 'Machine Learning Fundamentals', 'MLOps & Deployment')."
+    )
+
+    duration_days: int = Field(
+        ...,
+        description="Estimated duration of this phase in days."
+    )
+
+    skills_to_focus: List[Skill] = Field(
+        ...,
+        description="List of skills covered in this phase along with tasks and learning resources."
+    )
+
+    mini_project: Project = Field(
+        ...,
+        description="A small project to reinforce learning from this phase."
+    )
+
+    major_project: Project = Field(
+        ...,
+        description="A portfolio-level project for this phase, useful for resume and interviews."
+    )
+
+
+class RoadmapLLMStructuredOutput(BaseModel):
+    role: str = Field(
+        ...,
+        description="Target job role for which the roadmap is generated (e.g., 'Data Scientist', 'ML Engineer')."
+    )
+
+    readinessScore: int = Field(
+        ...,
+        description="User's readiness score for the target role in percentage (0-100)."
+    )
+
+    estimated_days_to_job_ready: int = Field(
+        ...,
+        description="Estimated number of days required for the user to become job-ready for the target role."
+    )
+
+    phases: List[Phase] = Field(
+        ...,
+        description="Complete roadmap divided into sequential learning phases."
+    )
