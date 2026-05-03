@@ -7,6 +7,7 @@ from classes import TargetRoles, RequiredSkills
 from sentence_transformers import SentenceTransformer
 from qdrant_client import QdrantClient
 from helperfunctions import normalize_skill
+# from langgraph.graph import interrupt
 
 load_dotenv() 
 
@@ -85,10 +86,10 @@ def Required_Skills(state):
 
 def normalize_userandReq_skill(state):
     Required_Skills_dict = state["RequiredSkills"]
-    normalized = {}
+    normalized_req_skills = {}
 
     for role, skill_list in Required_Skills_dict.items():
-        normalized[role] = []
+        normalized_req_skills[role] = []
 
         for skill_dict in skill_list:   
             new_dict = {}
@@ -97,10 +98,63 @@ def normalize_userandReq_skill(state):
                 mapped_skill = normalize_skill(embeddingmodel, qdrant_client, skill_name)
                 new_dict[mapped_skill] = level
 
-            normalized[role].append(new_dict)
+            normalized_req_skills[role].append(new_dict)
 
-    return {"RequiredSkills": normalized}
+    user_skills = state["skills"]
+    # user_skills= {'skill': 'Python', 'proficiency': 5}
+    #convert user skills to same format as required skills
+    user_skill_dicts = [{skill['skill']: skill['proficiency']} for skill in user_skills]
 
+    normalized_user_skills = {}
+    for skill_dict in user_skill_dicts:
+        for skill_name, level in skill_dict.items():
+            mapped_skill = normalize_skill(embeddingmodel, qdrant_client, skill_name)
+            normalized_user_skills[mapped_skill] = level    
+    
+
+
+    return {"RequiredSkills": normalized_req_skills, "skills": normalized_user_skills}
+
+def Skill_Gap_Analysis(state):
+    # decison = interrupt(f"choose one of the target roles for gap analysis: {state['TargetRoles']}")
+    # Target_role_index = state["TargetRoles"].index(decison)
+    user_skills = state["skills"]  # dict of skill: proficiency
+    role = list(state["RequiredSkills"].keys())[0]   # Data Scientist
+    req_skills_list = state["RequiredSkills"][role]  # list of dicts
+    req_skills = {}
+    for d in req_skills_list:
+        req_skills.update(d)
+
+    missing_skills = []
+    mastered_skills = []
+    to_be_improved = []
+    total_gap = 0
+    req_score = 0
+
+    for skill, req_level in req_skills.items():
+        user_level = user_skills.get(skill, 0)
+        gap = max(0, req_level - user_level)
+
+        if user_level == 0:
+            missing_skills.append({"skill": skill,"required": req_level})
+
+        elif gap == 0:
+            mastered_skills.append({"skill": skill,"current": user_level})
+
+        else:
+            to_be_improved.append({"skill": skill,"current": user_level,"required": req_level,"gap": gap})
+    
+        req_score+=req_level
+        total_gap+=gap
+
+    final_readiness_score = int(((req_score - total_gap) / req_score) * 100)
+
+    return {
+        "missingSkills": missing_skills,
+        "masteredSkills": mastered_skills,
+        "to_be_improved_skills": to_be_improved,
+        "readinessScore": final_readiness_score
+    }
 
 
 

@@ -39,3 +39,7 @@ class Roadmapstate(TypedDict):
     skills:list[dict]
     TargetRoles : Annotated[list[str], operator.add]
     RequiredSkills : Annotated[dict[str, list[dict]], operator.or_]
+    missingSkills : list[dict]
+    masteredSkills : list[dict]
+    to_be_improved_skills : list[dict]
+    readinessScore : float

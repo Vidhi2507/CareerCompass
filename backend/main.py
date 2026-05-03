@@ -15,7 +15,7 @@ load_dotenv()
 
 ##Agents
 from langgraph.graph import StateGraph, MessagesState, START, END
-from agents import Suggest_Target_Roles, Required_Skills, normalize_userandReq_skill
+from agents import Skill_Gap_Analysis, Suggest_Target_Roles, Required_Skills, normalize_userandReq_skill
 
 ## connect to MongoDB
 uri = os.getenv("DATABASE_URL")
@@ -89,12 +89,15 @@ def roadmap_generation(username: str):
 
     graph.add_node("Suggest_Target_Roles", Suggest_Target_Roles)
     graph.add_node("Required_Skills", Required_Skills)
-    graph.add_node("normalize_skill", normalize_userandReq_skill)
+    graph.add_node("normalize_skill", normalize_userandReq_skill) #ATP- zeroth index: Human in the loop for asking user to choose target role from suggested roles 
+    graph.add_node("Skill_Gap_Analysis", Skill_Gap_Analysis)
 
     graph.add_edge(START, "Suggest_Target_Roles") 
     graph.add_edge("Suggest_Target_Roles", "Required_Skills")
     graph.add_edge("Required_Skills", "normalize_skill")
-    graph.add_edge("normalize_skill", END)
+    graph.add_edge("normalize_skill", "Skill_Gap_Analysis")
+    graph.add_edge("Skill_Gap_Analysis", END)
+    
 
     graph = graph.compile()
     Roadmap = graph.invoke(Roadmap_state)
