@@ -8,6 +8,7 @@ import Navbar from './Components/Navbar';
 import LandingPage from './Pages/LangingPage';
 import ResumeUpload from './Pages/ResumeUpload';
 import ManualEntry from './Pages/ManualEntry';
+import Roadmap from './Pages/Roadmap';
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
@@ -64,6 +65,7 @@ function App() {
 />
             <Route path="/resume-upload" element={<ResumeUpload />} />
             <Route path="/manual-entry" element={<ManualEntry />} />
+            <Route path='/roadmap' element={<Roadmap/>}/>
           </Routes>
         </main>
 

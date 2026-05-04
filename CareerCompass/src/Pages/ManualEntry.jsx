@@ -135,7 +135,7 @@ const ManualEntry = () => {
     try {
       const response = await axios.post(`http://127.0.0.1:8000${endpoint}`, formData);
       console.log(response.data);
-      navigate('/Roadmap');
+      navigate('/roadmap');
     } catch (err) {
       console.error("Submission failed:", err);
     }

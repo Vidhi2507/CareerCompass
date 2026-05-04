@@ -70,14 +70,14 @@ def manual_entry(Userdata: UserCareerInfo):
     UserCareerDetails.insert_one(Userdata.dict())
     return {"message": "Manual entry data received successfully", "data": Userdata}
 
-@app.get("/roadmap")
+@app.get("/roadmap/{username}")
 def roadmap_generation(username: str):
 
-    user_career_data = UserCareerDetails.find_one({"username": username})
-    if not user_career_data:
+    user_data = UserCareerDetails.find_one({"username": username})
+    if not user_data:
         raise HTTPException(status_code=404, detail="User career data not found")
 
-    user_data = UserCareerDetails.find_one({"username": "Vidhi"})
+    # user_data = UserCareerDetails.find_one({"username": "Vidhi"})
     roadmap_state: Roadmapstate = {
     "TargetRoles": [],
     "RequiredSkills": {}
