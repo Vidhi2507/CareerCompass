@@ -1,126 +1,280 @@
-import React, { useState, useEffect } from 'react';
-import { ChevronRight, ChevronDown, Terminal, Loader2, Sparkles } from 'lucide-react';
+import React, { useEffect, useState, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Sparkles, Compass, Map, FlaskConical, Target, Terminal, Loader2, ChevronRight } from 'lucide-react';
+import * as d3 from 'd3';
 
 const Roadmap = () => {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [expandedPhases, setExpandedPhases] = useState({ 0: true });
+    const svgRef = useRef(null);
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [activePhase, setActivePhase] = useState(null);
+    const username = localStorage.getItem('username');
 
-  // Get username from localStorage (fallback to null)
-  const username = localStorage.getItem('username');
-
-  useEffect(() => {
-    const fetchRoadmap = async () => {
-      if (!username) {
-        console.error("No username found in session");
+    // 1. Fetch Data from your Backend
+    useEffect(() => {
+        const fetchRoadmap = async () => {
+    if (!username) {
         setLoading(false);
         return;
-      }
-
-      try {
+    }
+    try {
         const response = await fetch(`http://localhost:8000/roadmap/${username}`);
         const result = await response.json();
         
-        // result.data matches your backend's {"data": result_state.get("roadmap")}
-        if (result.data) {
-          setData(result.data);
-          console.log(result.data)
+        // Use result.data because your API returns {"data": {role: ..., phases: ...}}
+        const roadmapObj = result.data;
+
+        if (roadmapObj && roadmapObj.phases) {
+            const hierarchy = {
+                name: roadmapObj.role || "Career Path",
+                isRoot: true,
+                children: roadmapObj.phases.map(phase => ({
+                    name: phase.phase_name,
+                    type: 'phase',
+                    duration: phase.duration_days,
+                    // Defensive check: ensure skills_to_focus exists
+                    children: (phase.skills_to_focus || []).map(skill => ({
+                        name: skill.skill,
+                        type: 'topic',
+                        tasks: skill.tasks || []
+                    }))
+                }))
+            };
+            setData({ raw: roadmapObj, tree: hierarchy });
+        } else {
+            console.error("Data received but 'phases' is missing:", result);
         }
-      } catch (err) {
+    } catch (err) {
         console.error("Error fetching roadmap:", err);
-      } finally {
+    } finally {
         setLoading(false);
-      }
-    };
-    fetchRoadmap();
-  }, [username]);
+    }
+};
+        fetchRoadmap();
+    }, [username]);
 
-  if (loading) return <TreeLoader />;
-  
-  // Handle case where API call fails or user isn't found
-  if (!data) return (
-    <div className="flex items-center justify-center min-h-screen text-slate-500 font-medium">
-      No roadmap data found for "{username}".
-    </div>
-  );
+    // 2. D3 Tree Logic
+    useEffect(() => {
+        if (!data || !svgRef.current) return;
 
-  return (
-    <div className="max-w-4xl mx-auto p-8 bg-slate-50 min-h-screen">
-      <header className="mb-12 border-l-4 border-blue-600 pl-6">
-        <h1 className="text-4xl font-black text-slate-900 tracking-tight uppercase">
-          {data.role} <span className="text-blue-600 font-light italic">MAP</span>
-        </h1>
-        <p className="text-slate-500 font-medium mt-1 uppercase tracking-wider text-xs">
-          Target readiness: {data.readinessScore}% • Approx. {data.estimated_days_to_job_ready} days
-        </p>
-      </header>
+        d3.select(svgRef.current).selectAll("*").remove();
 
-      {/* Main Tree Trunk */}
-      <div className="relative border-l-2 border-dashed border-slate-300 ml-4 space-y-10">
-        {data.phases?.map((phase, pIdx) => (
-          <div key={pIdx} className="relative pl-10">
-            {/* Tree Node (Phase Joint) */}
-            <div 
-              onClick={() => setExpandedPhases(v => ({...v, [pIdx]: !v[pIdx]}))}
-              className={`absolute -left-[17px] top-0 w-8 h-8 rounded-full border-4 border-white shadow-sm cursor-pointer flex items-center justify-center transition-all duration-300
-                ${expandedPhases[pIdx] ? 'bg-blue-600 scale-110 shadow-blue-200 shadow-lg' : 'bg-slate-400 hover:bg-blue-500'}`}
-            >
-              {expandedPhases[pIdx] ? <ChevronDown size={16} color="white" /> : <ChevronRight size={16} color="white" />}
+        const width = svgRef.current.clientWidth;
+        const height = svgRef.current.clientHeight;
+        const margin = { top: 20, right: 160, bottom: 20, left: 160 };
+
+        const svg = d3.select(svgRef.current)
+            .append("g")
+            .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+        const treeLayout = d3.tree().size([height - 100, width - margin.left - margin.right]);
+        const diagonal = d3.linkHorizontal().x(d => d.y).y(d => d.x);
+
+        const root = d3.hierarchy(data.tree);
+        root.x0 = height / 2;
+        root.y0 = 0;
+
+        // Collapse helper
+        const collapse = (d) => {
+            if (d.children) {
+                d._children = d.children;
+                d._children.forEach(collapse);
+                d.children = null;
+            }
+        };
+
+        // Initially collapse all phases
+        if (root.children) {
+            root.children.forEach(collapse);
+        }
+
+        let i = 0;
+        const update = (source) => {
+            const treeData = treeLayout(root);
+            const nodes = treeData.descendants();
+            const links = treeData.links();
+
+            nodes.forEach(d => d.y = d.depth * 220);
+
+            // NODES
+            const node = svg.selectAll('g.node')
+                .data(nodes, d => d.id || (d.id = ++i));
+
+            const nodeEnter = node.enter().append('g')
+                .attr('class', 'node')
+                .attr("transform", d => `translate(${source.y0},${source.x0})`)
+                .on('click', (event, d) => {
+                    if (d.data.type === 'topic') {
+                        setActivePhase(d.data); // Show task details in modal
+                    } else {
+                        if (d.children) {
+                            d._children = d.children;
+                            d.children = null;
+                        } else {
+                            d.children = d._children;
+                            d._children = null;
+                        }
+                        update(d);
+                    }
+                });
+
+            nodeEnter.append('circle')
+                .attr('class', 'node-circle')
+                .attr('r', 1e-6)
+                .style("fill", d => d._children ? "#3b82f6" : "#18181b")
+                .style("stroke", "#3b82f6")
+                .style("stroke-width", "2px")
+                .style("cursor", "pointer");
+
+            nodeEnter.append('text')
+                .attr("dy", ".35em")
+                .attr("x", d => d.children || d._children ? -15 : 15)
+                .attr("text-anchor", d => d.children || d._children ? "end" : "start")
+                .text(d => d.data.name)
+                .style("fill", d => d.data.isRoot ? "#fff" : "#a1a1aa")
+                .style("font-size", d => d.data.isRoot ? "14px" : "11px")
+                .style("font-weight", d => d.data.isRoot ? "bold" : "normal")
+                .style("pointer-events", "none")
+                .style("fill-opacity", 0);
+
+            const nodeUpdate = nodeEnter.merge(node);
+
+            nodeUpdate.transition().duration(600)
+                .attr("transform", d => `translate(${d.y},${d.x})`);
+
+            nodeUpdate.select('circle.node-circle')
+                .attr('r', d => d.data.isRoot ? 10 : 6)
+                .style("fill", d => d._children ? "#3b82f6" : "#09090b");
+
+            nodeUpdate.select('text').style('fill-opacity', 1);
+
+            const nodeExit = node.exit().transition().duration(600)
+                .attr("transform", d => `translate(${source.y},${source.x})`)
+                .remove();
+
+            nodeExit.select('circle').attr('r', 1e-6);
+            nodeExit.select('text').style('fill-opacity', 0);
+
+            // LINKS
+            const link = svg.selectAll('path.link')
+                .data(links, d => d.target.id);
+
+            const linkEnter = link.enter().insert('path', "g")
+                .attr("class", "link")
+                .attr("fill", "none")
+                .attr("stroke", "#27272a")
+                .attr("stroke-width", "1.5px")
+                .attr('d', d => {
+                    const o = { x: source.x0, y: source.y0 };
+                    return diagonal({ source: o, target: o });
+                });
+
+            linkEnter.merge(link).transition().duration(600).attr('d', d => diagonal(d));
+
+            link.exit().transition().duration(600)
+                .attr('d', d => {
+                    const o = { x: source.x, y: source.y };
+                    return diagonal({ source: o, target: o });
+                }).remove();
+
+            nodes.forEach(d => { d.x0 = d.x; d.y0 = d.y; });
+        };
+
+        update(root);
+    }, [data]);
+
+    if (loading) return <TreeLoader />;
+    if (!data) return <div className="min-h-screen bg-black flex items-center justify-center text-zinc-500">No data found.</div>;
+
+    return (
+        <div className="min-h-screen bg-[#050505] text-zinc-100 pt-24 pb-20 px-6 flex flex-col items-center relative overflow-hidden">
+            {/* Background Glow */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-blue-600/10 blur-[140px] pointer-events-none" />
+            
+            {/* Header */}
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12 relative z-10">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-black tracking-widest uppercase mb-6">
+                    <Compass size={12} /> Personalized Learning Path
+                </div>
+                <h1 className="text-5xl md:text-6xl font-bold tracking-tighter mb-4 italic">
+                    {data.raw.role} <span className="text-zinc-600">Map.</span>
+                </h1>
+                <div className="flex items-center justify-center gap-8 text-zinc-500 text-xs font-bold uppercase tracking-widest">
+                    <span className="flex items-center gap-2"><Target size={14} className="text-blue-500" /> Readiness: {data.raw.readinessScore}%</span>
+                    <span className="flex items-center gap-2"><Map size={14} className="text-blue-500" /> {data.raw.estimated_days_to_job_ready} Day Sprint</span>
+                </div>
+            </motion.div>
+
+            {/* Tree Container */}
+            <div className="w-full max-w-6xl h-[650px] border border-zinc-800/50 rounded-[2.5rem] bg-zinc-900/20 backdrop-blur-md relative overflow-hidden group shadow-2xl">
+                <div className="absolute top-6 left-8 flex items-center gap-2 text-[10px] text-zinc-500 uppercase font-bold tracking-widest">
+                    <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" /> Interactive Visualizer
+                </div>
+                <svg ref={svgRef} className="w-full h-full cursor-grab active:cursor-grabbing" />
             </div>
 
-            <div className="mb-4">
-              <h2 className="text-2xl font-bold text-slate-800 leading-tight">{phase.phase_name}</h2>
-              <div className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mt-1">
-                Phase Duration: {phase.duration_days} Days
-              </div>
+            {/* Instruction Footer */}
+            <div className="mt-8 flex items-center gap-4 text-zinc-500 text-[10px] font-bold uppercase tracking-[0.3em]">
+                Click nodes to drill down <ChevronRight size={12} /> Explore Skills <Sparkles size={12} className="text-yellow-500" />
             </div>
 
-            {/* Branching Content */}
-            {expandedPhases[pIdx] && (
-              <div className="space-y-6 animate-in slide-in-from-left-4 duration-500">
-                {phase.skills_to_focus?.map((skill, sIdx) => (
-                  <div key={sIdx} className="relative">
-                    {/* Horizontal Branch Line */}
-                    <div className="absolute -left-10 top-5 w-10 h-0.5 bg-blue-200"></div>
-                    <div className="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm ml-2 hover:shadow-md transition-shadow">
-                      <div className="flex items-center gap-2 mb-4 text-blue-600">
-                        <Terminal size={18} />
-                        <h3 className="font-bold text-slate-800 tracking-tight">{skill.skill}</h3>
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        {skill.tasks?.map((task, tIdx) => (
-                          <div key={tIdx} className="text-sm text-slate-600 bg-slate-50 p-3 rounded-xl border border-slate-100/50 flex items-start gap-2">
-                            <span className="text-blue-400 font-bold">•</span>
-                            {task}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+            {/* Task Detail Modal */}
+            <AnimatePresence>
+                {activePhase && (
+                    <motion.div 
+                        initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/80 backdrop-blur-sm"
+                        onClick={() => setActivePhase(null)}
+                    >
+                        <motion.div 
+                            initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }}
+                            className="w-full max-w-lg bg-zinc-900 border border-zinc-800 p-8 rounded-[2rem] shadow-3xl"
+                            onClick={e => e.stopPropagation()}
+                        >
+                            <div className="flex items-center gap-4 mb-6">
+                                <div className="p-3 bg-blue-500/10 rounded-2xl text-blue-400">
+                                    <Terminal size={24} />
+                                </div>
+                                <div>
+                                    <h3 className="text-xl font-bold text-white">{activePhase.name}</h3>
+                                    <p className="text-zinc-500 text-xs uppercase tracking-widest mt-1">Syllabus Breakdown</p>
+                                </div>
+                            </div>
+                            
+                            <div className="space-y-3 mb-8">
+                                {activePhase.tasks?.map((task, idx) => (
+                                    <div key={idx} className="flex items-start gap-3 p-4 bg-zinc-800/30 border border-zinc-800 rounded-2xl group hover:border-blue-500/30 transition-all">
+                                        <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
+                                        <p className="text-sm text-zinc-300 group-hover:text-white transition-colors">{task}</p>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <button 
+                                onClick={() => setActivePhase(null)}
+                                className="w-full py-4 bg-zinc-100 text-black font-black text-xs uppercase tracking-widest rounded-xl hover:bg-white transition-all active:scale-[0.98]"
+                            >
+                                Close Insight
+                            </button>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </div>
+    );
 };
 
 const TreeLoader = () => (
-  <div className="flex flex-col items-center justify-center min-h-screen bg-slate-50 space-y-6">
-    <div className="relative">
-      <Loader2 className="w-12 h-12 text-blue-600 animate-spin" />
-      <Sparkles className="absolute -top-2 -right-2 text-yellow-400 animate-pulse" />
+    <div className="flex flex-col items-center justify-center min-h-screen bg-[#050505] space-y-6">
+        <div className="relative">
+            <Loader2 className="w-12 h-12 text-blue-500 animate-spin" />
+            <div className="absolute inset-0 bg-blue-500 blur-xl opacity-20 animate-pulse" />
+        </div>
+        <div className="text-center">
+            <h2 className="text-zinc-100 font-bold tracking-tighter text-xl">Synthesizing Career Arc</h2>
+            <p className="text-zinc-500 text-xs uppercase tracking-[0.2em] mt-2">Analyzing gap data for {localStorage.getItem('username')}...</p>
+        </div>
     </div>
-    <div className="text-center">
-      <h2 className="text-xl font-bold text-slate-800 tracking-tight">Generating Career Roadmap</h2>
-      <p className="text-slate-500 text-sm mt-1">AI Agents are analyzing your skill gaps...</p>
-    </div>
-    <div className="w-64 h-1.5 bg-slate-200 rounded-full overflow-hidden">
-      <div className="h-full bg-blue-600 animate-[loading_17s_ease-in-out_forwards]"></div>
-    </div>
-  </div>
 );
 
 export default Roadmap;
