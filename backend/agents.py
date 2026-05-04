@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 import os
 from pydantic import BaseModel,Field
 from typing import Annotated
-from classes import TargetRoles, RequiredSkills,RoadmapLLMStructuredOutput
+from classes import TargetRoles, RequiredSkills,RoadmapLLMStructuredOutput,QuestionStructuredOutput
 from sentence_transformers import SentenceTransformer
 from qdrant_client import QdrantClient
 from helperfunctions import normalize_skill
@@ -21,6 +21,7 @@ chatmodel = ChatGoogleGenerativeAI(
 targetrole_model = chatmodel.with_structured_output(TargetRoles)
 embeddingmodel = SentenceTransformer("all-MiniLM-L6-v2")
 Roadmap_model = chatmodel.with_structured_output(RoadmapLLMStructuredOutput)
+question_model = chatmodel.with_structured_output(QuestionStructuredOutput)
 
 
 qdrant_client = QdrantClient(
@@ -196,3 +197,8 @@ def roadmap_generation_agent(state):
                 """
     roadmap = Roadmap_model.invoke(prompt_for_roadmap)
     return {"Roadmap": roadmap}
+
+def question_generation(skill,proficiency,role):
+    prompt = f"Generate 5 MCQ questions of Interview relevant concept for the Role of {role} with strictly proficiency level {proficiency} for the skill {skill} with 4 options and also the correct answer (proficiency level 1 is basic and 5 is advanced) "
+    Questions = question_model.invoke(prompt)
+    return Questions

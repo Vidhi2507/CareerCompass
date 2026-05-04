@@ -15,7 +15,7 @@ load_dotenv()
 
 ##Agents
 from langgraph.graph import StateGraph, MessagesState, START, END
-from agents import Skill_Gap_Analysis, Suggest_Target_Roles, Required_Skills, normalize_userandReq_skill, roadmap_generation_agent
+from agents import Skill_Gap_Analysis, Suggest_Target_Roles, Required_Skills, normalize_userandReq_skill, roadmap_generation_agent, question_generation
 
 ## connect to MongoDB
 uri = os.getenv("DATABASE_URL")
@@ -102,5 +102,28 @@ def roadmap_generation(username: str):
 
     graph = graph.compile()
     Roadmap = graph.invoke(Roadmap_state)
+
+    #adding roadmap to database
+    UserCareerDetails.update_one({"username": username}, {"$set": {"Roadmap": Roadmap["Roadmap"]}})
+
     return {"message": "Roadmap Generated successfully", "data": Roadmap["Roadmap"]}
 
+@app.get("/skilltest/{username}/{skill}")
+def Skill_Test(username: str, skill: str):
+    User_data = UserCareerDetails.find_one({"username": username})
+    if not User_data:
+        raise HTTPException(status_code=404, detail="User career data not found")
+    
+    #get the proficiency level of the skill for the user
+    proficiency = None
+    for s in User_data["skills"]:
+        if s["skill"] == skill:
+            proficiency = s["proficiency"]
+            break
+    print(proficiency)
+
+    questions = question_generation(skill,proficiency,User_data["currentRole"])
+    # have to change from current role to target role later. (unless data for Roadmap is not updated in database)
+
+    return {"message": "Skill test generated successfully", "data": questions}
+   

@@ -132,3 +132,27 @@ class RoadmapLLMStructuredOutput(BaseModel):
         ...,
         description="Complete roadmap divided into sequential learning phases."
     )
+
+class Question(BaseModel):
+    question: str = Field(
+        ...,
+        description="MCQ Question based on the skill/technology/concept "
+    )
+    options : List[str] = Field(
+        ...,
+        description="Options for the MCQ question"
+    )
+    answer: str = Field(
+        ...,
+        description="Answer to the MCQ question"
+    )
+    proficiency_level: str = Field(
+        ...,
+        description="Proficiency level of the question ranging from 1 to 5, where 1 is very basic and 5 is very advanced"
+    )
+
+class QuestionStructuredOutput(BaseModel):
+    questions: List[Question] = Field(
+        ...,
+        description="List of questions for the user to answer"
+    )
