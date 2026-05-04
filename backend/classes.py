@@ -45,7 +45,7 @@ class Roadmapstate(TypedDict):
     masteredSkills : list[dict]
     to_be_improved_skills : list[dict]
     readinessScore : float
-    roadmap : dict
+    Roadmap : dict
     
 class Skill(BaseModel):
     skill: str = Field(..., description="Name of the skill to learn or improve (e.g., 'Feature Engineering', 'PyTorch').")

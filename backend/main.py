@@ -102,4 +102,5 @@ def roadmap_generation(username: str):
 
     graph = graph.compile()
     Roadmap = graph.invoke(Roadmap_state)
-    return {"message": "Roadmap Generated successfully", "data": Roadmap}
+    return {"message": "Roadmap Generated successfully", "data": Roadmap["Roadmap"]}
+
