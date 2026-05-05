@@ -130,16 +130,42 @@ const ManualEntry = () => {
     setShowPreview(true);
   };
 
-  const generateRoadmap = async () => {
+const generateRoadmap = async () => {
     const endpoint = "/manual-entry/roadmap";
+
+    // 1. Clean the experience: Remove entries where company/role are empty
+    const cleanExperience = formData.experience.filter(
+        exp => exp.company.trim() !== "" || exp.role.trim() !== ""
+    );
+
+    // 2. Clean the education: Remove entries where school is empty
+    const cleanEducation = formData.education.filter(
+        edu => edu.school.trim() !== ""
+    );
+
+    // 3. Construct the final payload with proper types
+    const payload = {
+        ...formData,
+        years_experience: Number(formData.years_experience),
+        experience: cleanExperience, 
+        education: cleanEducation,
+        // Ensure years in education/experience are numbers if your backend requires it
+        skills: formData.skills.map(s => ({
+            ...s,
+            proficiency: Number(s.proficiency)
+        }))
+    };
+
     try {
-      const response = await axios.post(`http://127.0.0.1:8000${endpoint}`, formData);
-      console.log(response.data);
-      navigate('/roadmap');
+        const response = await axios.post(`http://127.0.0.1:8000${endpoint}`, payload);
+        navigate('/roadmap');
     } catch (err) {
-      console.error("Submission failed:", err);
+        if (err.response?.status === 422) {
+            console.error("Validation Details:", err.response.data.detail);
+            alert("Server validation failed. Check console for details.");
+        }
     }
-  };
+};
 
   // --- CONDITIONAL RENDERING (PREVIEW MODE) ---
   if (showPreview) {
