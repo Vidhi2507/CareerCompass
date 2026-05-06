@@ -2,12 +2,13 @@ import React, { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Compass, Map, FlaskConical, Target, Terminal, Loader2, ChevronRight } from 'lucide-react';
 import * as d3 from 'd3';
-
+import { useNavigate } from 'react-router-dom';
 const Roadmap = () => {
     const svgRef = useRef(null);
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [activePhase, setActivePhase] = useState(null);
+    const navigate = useNavigate();
     const username = localStorage.getItem('username');
 
     // 1. Fetch Data from your Backend
@@ -240,6 +241,13 @@ const Roadmap = () => {
                                     <p className="text-zinc-500 text-xs uppercase tracking-widest mt-1">Syllabus Breakdown</p>
                                 </div>
                             </div>
+
+                            <button 
+        onClick={() => navigate(`/test/${username}/${activePhase.name}`)}
+        className="w-full mb-4 py-3 bg-blue-600/20 border border-blue-500/40 text-blue-400 rounded-xl hover:bg-blue-600/30 transition-all flex items-center justify-center gap-2 font-bold text-xs uppercase tracking-widest"
+    >
+        <Sparkles size={16} /> Verify Skill via Assessment
+    </button>
                             
                             <div className="space-y-3 mb-8">
                                 {activePhase.tasks?.map((task, idx) => (

@@ -103,10 +103,12 @@ def roadmap_generation(username: str):
     graph = graph.compile()
     Roadmap = graph.invoke(Roadmap_state)
 
-    #adding roadmap to database
-    UserCareerDetails.update_one({"username": username}, {"$set": {"Roadmap": Roadmap["Roadmap"]}})
+    roadmap_data = Roadmap["Roadmap"].model_dump()
 
-    return {"message": "Roadmap Generated successfully", "data": Roadmap["Roadmap"]}
+    #adding roadmap to database
+    UserCareerDetails.update_one({"username": username}, {"$set": {"Roadmap": roadmap_data}})
+
+    return {"message": "Roadmap Generated successfully", "data": roadmap_data}
 
 @app.get("/skilltest/{username}/{skill}")
 def Skill_Test(username: str, skill: str):
@@ -126,4 +128,33 @@ def Skill_Test(username: str, skill: str):
     # have to change from current role to target role later. (unless data for Roadmap is not updated in database)
 
     return {"message": "Skill test generated successfully", "data": questions}
+
+
+@app.post("/update-skill-and-rebuild")
+def update_skill_assessment(username: str, skill_name: str, score_out_of_5: int):
+    # 1. Update the user's proficiency in MongoDB
+    User_data = UserCareerDetails.find_one({"username": username})
+    if not User_data:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    # Update or add the skill
+    updated_skills = User_data.get("skills", [])
+    found = False
+    for s in updated_skills:
+        if s["skill"] == skill_name:
+            s["proficiency"] = score_out_of_5
+            found = True
+            break
+    
+    if not found:
+        updated_skills.append({"skill": skill_name, "proficiency": score_out_of_5})
+
+    UserCareerDetails.update_one(
+        {"username": username}, 
+        {"$set": {"skills": updated_skills}}
+    )
+
+    # 2. Trigger Roadmap regeneration (re-using your existing logic)
+    # This will return the NEW roadmap based on updated skills
+    return roadmap_generation(username)
    

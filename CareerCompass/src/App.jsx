@@ -9,6 +9,7 @@ import LandingPage from './Pages/LangingPage';
 import ResumeUpload from './Pages/ResumeUpload';
 import ManualEntry from './Pages/ManualEntry';
 import Roadmap from './Pages/Roadmap';
+import Skilltest from './Pages/Skilltest';
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
@@ -66,6 +67,7 @@ function App() {
             <Route path="/resume-upload" element={<ResumeUpload />} />
             <Route path="/manual-entry" element={<ManualEntry />} />
             <Route path='/roadmap' element={<Roadmap/>}/>
+            <Route path='/test/:username/:skillName' element={<Skilltest/>}/>
           </Routes>
         </main>
 
