@@ -129,16 +129,14 @@ def Skill_Test(username: str, skill: str):
 
     return {"message": "Skill test generated successfully", "data": questions}
 
-
-@app.post("/update-skill-and-rebuild")
+@app.post("/update-skill-assessment") # Renamed to avoid confusion
 def update_skill_assessment(username: str, skill_name: str, score_out_of_5: int):
     # 1. Update the user's proficiency in MongoDB
-    User_data = UserCareerDetails.find_one({"username": username})
-    if not User_data:
+    user_data = UserCareerDetails.find_one({"username": username})
+    if not user_data:
         raise HTTPException(status_code=404, detail="User not found")
 
-    # Update or add the skill
-    updated_skills = User_data.get("skills", [])
+    updated_skills = user_data.get("skills", [])
     found = False
     for s in updated_skills:
         if s["skill"] == skill_name:
@@ -154,7 +152,12 @@ def update_skill_assessment(username: str, skill_name: str, score_out_of_5: int)
         {"$set": {"skills": updated_skills}}
     )
 
-    # 2. Trigger Roadmap regeneration (re-using your existing logic)
-    # This will return the NEW roadmap based on updated skills
-    return roadmap_generation(username)
-   
+    # We return the score only, NO regeneration to save API credits
+    return {"message": "Skill updated", "score": score_out_of_5}
+
+@app.get("/user-skills/{username}")
+def get_user_skills(username: str):
+    user_data = UserCareerDetails.find_one({"username": username}, {"skills": 1})
+    if not user_data:
+        return {"skills": []}
+    return {"skills": user_data.get("skills", [])}

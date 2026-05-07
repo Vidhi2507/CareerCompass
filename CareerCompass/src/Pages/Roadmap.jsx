@@ -3,55 +3,61 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Compass, Map, FlaskConical, Target, Terminal, Loader2, ChevronRight } from 'lucide-react';
 import * as d3 from 'd3';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
 const Roadmap = () => {
     const svgRef = useRef(null);
     const [data, setData] = useState(null);
+    const [userSkills, setUserSkills] = useState([]); // Stores test results
     const [loading, setLoading] = useState(true);
     const [activePhase, setActivePhase] = useState(null);
     const navigate = useNavigate();
     const username = localStorage.getItem('username');
 
-    // 1. Fetch Data from your Backend
+    // 1. Fetch Roadmap AND User Skill Scores
     useEffect(() => {
-        const fetchRoadmap = async () => {
-    if (!username) {
-        setLoading(false);
-        return;
-    }
-    try {
-        const response = await fetch(`http://localhost:8000/roadmap/${username}`);
-        const result = await response.json();
-        
-        // Use result.data because your API returns {"data": {role: ..., phases: ...}}
-        const roadmapObj = result.data;
+        const initializeData = async () => {
+            if (!username) {
+                setLoading(false);
+                return;
+            }
 
-        if (roadmapObj && roadmapObj.phases) {
-            const hierarchy = {
-                name: roadmapObj.role || "Career Path",
-                isRoot: true,
-                children: roadmapObj.phases.map(phase => ({
-                    name: phase.phase_name,
-                    type: 'phase',
-                    duration: phase.duration_days,
-                    // Defensive check: ensure skills_to_focus exists
-                    children: (phase.skills_to_focus || []).map(skill => ({
-                        name: skill.skill,
-                        type: 'topic',
-                        tasks: skill.tasks || []
-                    }))
-                }))
-            };
-            setData({ raw: roadmapObj, tree: hierarchy });
-        } else {
-            console.error("Data received but 'phases' is missing:", result);
-        }
-    } catch (err) {
-        console.error("Error fetching roadmap:", err);
-    } finally {
-        setLoading(false);
-    }
-};
-        fetchRoadmap();
+            try {
+                // Parallel fetch for Roadmap and Skill Scores
+                const [roadmapRes, skillsRes] = await Promise.all([
+                    fetch(`http://localhost:8000/roadmap/${username}`),
+                    axios.get(`http://localhost:8000/user-skills/${username}`)
+                ]);
+
+                const roadmapResult = await roadmapRes.json();
+                const roadmapObj = roadmapResult.data;
+                setUserSkills(skillsRes.data.skills || []);
+
+                if (roadmapObj && roadmapObj.phases) {
+                    const hierarchy = {
+                        name: roadmapObj.role || "Career Path",
+                        isRoot: true,
+                        children: roadmapObj.phases.map(phase => ({
+                            name: phase.phase_name,
+                            type: 'phase',
+                            duration: phase.duration_days,
+                            children: (phase.skills_to_focus || []).map(skill => ({
+                                name: skill.skill,
+                                type: 'topic',
+                                tasks: skill.tasks || []
+                            }))
+                        }))
+                    };
+                    setData({ raw: roadmapObj, tree: hierarchy });
+                }
+            } catch (err) {
+                console.error("Error initializing roadmap data:", err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        initializeData();
     }, [username]);
 
     // 2. D3 Tree Logic
@@ -75,7 +81,6 @@ const Roadmap = () => {
         root.x0 = height / 2;
         root.y0 = 0;
 
-        // Collapse helper
         const collapse = (d) => {
             if (d.children) {
                 d._children = d.children;
@@ -84,7 +89,6 @@ const Roadmap = () => {
             }
         };
 
-        // Initially collapse all phases
         if (root.children) {
             root.children.forEach(collapse);
         }
@@ -97,7 +101,6 @@ const Roadmap = () => {
 
             nodes.forEach(d => d.y = d.depth * 220);
 
-            // NODES
             const node = svg.selectAll('g.node')
                 .data(nodes, d => d.id || (d.id = ++i));
 
@@ -106,7 +109,7 @@ const Roadmap = () => {
                 .attr("transform", d => `translate(${source.y0},${source.x0})`)
                 .on('click', (event, d) => {
                     if (d.data.type === 'topic') {
-                        setActivePhase(d.data); // Show task details in modal
+                        setActivePhase(d.data);
                     } else {
                         if (d.children) {
                             d._children = d.children;
@@ -122,9 +125,6 @@ const Roadmap = () => {
             nodeEnter.append('circle')
                 .attr('class', 'node-circle')
                 .attr('r', 1e-6)
-                .style("fill", d => d._children ? "#3b82f6" : "#18181b")
-                .style("stroke", "#3b82f6")
-                .style("stroke-width", "2px")
                 .style("cursor", "pointer");
 
             nodeEnter.append('text')
@@ -134,7 +134,6 @@ const Roadmap = () => {
                 .text(d => d.data.name)
                 .style("fill", d => d.data.isRoot ? "#fff" : "#a1a1aa")
                 .style("font-size", d => d.data.isRoot ? "14px" : "11px")
-                .style("font-weight", d => d.data.isRoot ? "bold" : "normal")
                 .style("pointer-events", "none")
                 .style("fill-opacity", 0);
 
@@ -143,9 +142,26 @@ const Roadmap = () => {
             nodeUpdate.transition().duration(600)
                 .attr("transform", d => `translate(${d.y},${d.x})`);
 
+            // DYNAMIC COLOR LOGIC
             nodeUpdate.select('circle.node-circle')
                 .attr('r', d => d.data.isRoot ? 10 : 6)
-                .style("fill", d => d._children ? "#3b82f6" : "#09090b");
+                .style("fill", d => {
+                    if (d.data.type === 'topic') {
+                        const skillRecord = userSkills.find(s => s.skill === d.data.name);
+                        if (skillRecord) {
+                            return skillRecord.proficiency >= 3 ? "#22c55e" : "#ef4444";
+                        }
+                    }
+                    return d._children ? "#3b82f6" : "#09090b";
+                })
+                .style("stroke", d => {
+                    const skillRecord = userSkills.find(s => s.skill === d.data.name);
+                    if (skillRecord) {
+                        return skillRecord.proficiency >= 3 ? "#22c55e" : "#ef4444";
+                    }
+                    return "#3b82f6";
+                })
+                .style("stroke-width", "2px");
 
             nodeUpdate.select('text').style('fill-opacity', 1);
 
@@ -156,7 +172,6 @@ const Roadmap = () => {
             nodeExit.select('circle').attr('r', 1e-6);
             nodeExit.select('text').style('fill-opacity', 0);
 
-            // LINKS
             const link = svg.selectAll('path.link')
                 .data(links, d => d.target.id);
 
@@ -182,17 +197,15 @@ const Roadmap = () => {
         };
 
         update(root);
-    }, [data]);
+    }, [data, userSkills]);
 
     if (loading) return <TreeLoader />;
     if (!data) return <div className="min-h-screen bg-black flex items-center justify-center text-zinc-500">No data found.</div>;
 
     return (
         <div className="min-h-screen bg-[#050505] text-zinc-100 pt-24 pb-20 px-6 flex flex-col items-center relative overflow-hidden">
-            {/* Background Glow */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-blue-600/10 blur-[140px] pointer-events-none" />
             
-            {/* Header */}
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12 relative z-10">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-black tracking-widest uppercase mb-6">
                     <Compass size={12} /> Personalized Learning Path
@@ -206,7 +219,6 @@ const Roadmap = () => {
                 </div>
             </motion.div>
 
-            {/* Tree Container */}
             <div className="w-full max-w-6xl h-[650px] border border-zinc-800/50 rounded-[2.5rem] bg-zinc-900/20 backdrop-blur-md relative overflow-hidden group shadow-2xl">
                 <div className="absolute top-6 left-8 flex items-center gap-2 text-[10px] text-zinc-500 uppercase font-bold tracking-widest">
                     <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" /> Interactive Visualizer
@@ -214,12 +226,10 @@ const Roadmap = () => {
                 <svg ref={svgRef} className="w-full h-full cursor-grab active:cursor-grabbing" />
             </div>
 
-            {/* Instruction Footer */}
             <div className="mt-8 flex items-center gap-4 text-zinc-500 text-[10px] font-bold uppercase tracking-[0.3em]">
                 Click nodes to drill down <ChevronRight size={12} /> Explore Skills <Sparkles size={12} className="text-yellow-500" />
             </div>
 
-            {/* Task Detail Modal */}
             <AnimatePresence>
                 {activePhase && (
                     <motion.div 
@@ -243,13 +253,13 @@ const Roadmap = () => {
                             </div>
 
                             <button 
-        onClick={() => navigate(`/test/${username}/${activePhase.name}`)}
-        className="w-full mb-4 py-3 bg-blue-600/20 border border-blue-500/40 text-blue-400 rounded-xl hover:bg-blue-600/30 transition-all flex items-center justify-center gap-2 font-bold text-xs uppercase tracking-widest"
-    >
-        <Sparkles size={16} /> Verify Skill via Assessment
-    </button>
+                                onClick={() => navigate(`/test/${username}/${encodeURIComponent(activePhase.name)}`)}
+                                className="w-full mb-6 py-4 bg-blue-600/20 border border-blue-500/40 text-blue-400 rounded-xl hover:bg-blue-600/30 transition-all flex items-center justify-center gap-2 font-black text-xs uppercase tracking-widest"
+                            >
+                                <Sparkles size={16} /> Verify Skill via Assessment
+                            </button>
                             
-                            <div className="space-y-3 mb-8">
+                            <div className="space-y-3 mb-8 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
                                 {activePhase.tasks?.map((task, idx) => (
                                     <div key={idx} className="flex items-start gap-3 p-4 bg-zinc-800/30 border border-zinc-800 rounded-2xl group hover:border-blue-500/30 transition-all">
                                         <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
@@ -279,8 +289,8 @@ const TreeLoader = () => (
             <div className="absolute inset-0 bg-blue-500 blur-xl opacity-20 animate-pulse" />
         </div>
         <div className="text-center">
-            <h2 className="text-zinc-100 font-bold tracking-tighter text-xl">Synthesizing Career Arc</h2>
-            <p className="text-zinc-500 text-xs uppercase tracking-[0.2em] mt-2">Analyzing gap data for {localStorage.getItem('username')}...</p>
+            <h2 className="text-zinc-100 font-bold tracking-tighter text-xl italic text-zinc-100">Synthesizing Career Arc</h2>
+            <p className="text-zinc-500 text-xs uppercase tracking-[0.2em] mt-2">Syncing performance data...</p>
         </div>
     </div>
 );
