@@ -1,18 +1,20 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { UploadCloud, FileText, X, CheckCircle2, Sparkles, ArrowRight } from 'lucide-react';
-import { useNavigate } from 'react-router-dom'; // Changed from Link to useNavigate for logic handling
+import { UploadCloud, FileText, X, CheckCircle2, Sparkles, ArrowRight, Loader2 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const ResumeUpload = () => {
   const [dragActive, setDragActive] = useState(false);
   const [file, setFile] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
 
-  // Authentication Check Helper
   const checkAuth = () => {
     const token = localStorage.getItem('token');
-    if (!token) {
+    const username = localStorage.getItem('username');
+    if (!token || !username) {
       alert("Please login to access this feature.");
       return false;
     }
@@ -30,50 +32,72 @@ const ResumeUpload = () => {
     e.stopPropagation();
     setDragActive(false);
 
-    // Check login before allowing drop
     if (!checkAuth()) return;
 
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      setFile(e.dataTransfer.files[0]);
+      const droppedFile = e.dataTransfer.files[0];
+      if (droppedFile.type === "application/pdf") {
+        setFile(droppedFile);
+      } else {
+        alert("Please upload a PDF file.");
+      }
+    }
+  };
+
+  const handleUpload = async () => {
+    if (!file || !checkAuth()) return;
+
+    setSubmitting(true);
+    const username = localStorage.getItem('username');
+    
+    // Create FormData for file upload
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      // POST to your new FastAPI endpoint
+      const response = await axios.post(
+        `http://localhost:8000/upload-resume/${username}`,
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
+
+      console.log("Upload Success:", response.data);
+      navigate('/roadmap');
+    } catch (err) {
+      console.error("Upload failed:", err);
+      alert(err.response?.data?.detail || "Failed to analyze resume. Try manual entry.");
+    } finally {
+      setSubmitting(false);
     }
   };
 
   const handleManualEntryClick = (e) => {
     e.preventDefault();
-    if (checkAuth()) {
-      navigate('/manual-entry');
-    }
+    if (checkAuth()) navigate('/manual-entry');
   };
 
   const handleBrowseClick = () => {
-    if (checkAuth()) {
-      fileInputRef.current.click();
-    }
+    if (checkAuth()) fileInputRef.current.click();
   };
 
   return (
     <div className="min-h-screen bg-[#050505] text-zinc-100 pt-32 pb-20 px-6 flex flex-col items-center relative overflow-hidden">
-      
-      {/* --- AMBIENT BACKGROUND --- */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-500/5 blur-[120px] pointer-events-none" />
-      <div className="absolute inset-0 opacity-[0.02] pointer-events-none" 
-           style={{ backgroundImage: `radial-gradient(#fff 1px, transparent 1px)`, backgroundSize: '30px 30px' }} />
-
+      
       <div className="max-w-3xl w-full relative z-10">
-        
-        {/* --- HEADER --- */}
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[11px] font-bold tracking-widest uppercase mb-6"
-          >
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[11px] font-bold tracking-widest uppercase mb-6">
             <Sparkles size={12} /> Step 01: The Blueprint
-          </motion.div>
+          </div>
           <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-6">
             Upload your <span className="text-zinc-500">profile.</span>
           </h1>
@@ -82,7 +106,6 @@ const ResumeUpload = () => {
           </p>
         </motion.div>
 
-        {/* --- UPLOAD BOX --- */}
         <motion.div
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -94,41 +117,34 @@ const ResumeUpload = () => {
             onDragOver={handleDrag}
             onDrop={handleDrop}
             className={`
-              relative z-20 group cursor-pointer
-              border border-zinc-800 rounded-[2rem] transition-all duration-500
+              relative z-20 group border border-zinc-800 rounded-[2rem] transition-all duration-500
               flex flex-col items-center justify-center p-12 md:p-20
-              ${dragActive 
-                ? 'border-blue-500 bg-blue-500/5 scale-[1.01]' 
-                : 'bg-zinc-900/40 backdrop-blur-sm hover:border-zinc-700'
-              }
+              ${dragActive ? 'border-blue-500 bg-blue-500/5 scale-[1.01]' : 'bg-zinc-900/40 backdrop-blur-sm hover:border-zinc-700'}
+              ${file ? 'cursor-default' : 'cursor-pointer'}
             `}
           >
             <AnimatePresence mode="wait">
               {!file ? (
                 <motion.div 
                   key="empty"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
+                  initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                   className="flex flex-col items-center text-center"
-                  onClick={handleBrowseClick} // Wrapped in Auth check
+                  onClick={handleBrowseClick}
                 >
                   <div className="w-20 h-20 rounded-2xl bg-zinc-800/50 flex items-center justify-center mb-8 border border-zinc-700 group-hover:border-blue-500/50 transition-all">
                     <UploadCloud size={32} className="text-zinc-500 group-hover:text-blue-400 transition-colors" />
                   </div>
                   <h3 className="text-xl font-semibold mb-2">Drop file here</h3>
-                  <p className="text-zinc-500 text-sm mb-8">PDF or DOCX (Max 10MB)</p>
+                  <p className="text-zinc-500 text-sm mb-8">PDF Files only (Max 10MB)</p>
                   
                   <input 
                     type="file" 
                     className="hidden" 
                     ref={fileInputRef}
                     onChange={(e) => {
-                        if (checkAuth() && e.target.files) {
-                            setFile(e.target.files[0]);
-                        }
+                        if (checkAuth() && e.target.files[0]) setFile(e.target.files[0]);
                     }}
-                    accept=".pdf,.docx"
+                    accept=".pdf"
                   />
                   
                   <div className="text-blue-500 text-xs font-bold uppercase tracking-widest flex items-center gap-2 group-hover:gap-3 transition-all">
@@ -138,8 +154,7 @@ const ResumeUpload = () => {
               ) : (
                 <motion.div 
                   key="selected"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
                   className="flex flex-col items-center text-center w-full"
                 >
                   <div className="w-16 h-16 rounded-xl bg-blue-500/10 flex items-center justify-center mb-6 border border-blue-500/20">
@@ -149,17 +164,29 @@ const ResumeUpload = () => {
                   <div className="mb-10">
                     <p className="text-2xl font-bold tracking-tight mb-2">{file.name}</p>
                     <div className="flex items-center justify-center gap-2 text-emerald-500 text-[10px] font-black uppercase tracking-[0.2em]">
-                      <CheckCircle2 size={14} /> File Analyzed
+                      <CheckCircle2 size={14} /> File Ready for Analysis
                     </div>
                   </div>
 
                   <div className="flex flex-col sm:flex-row gap-4 w-full max-w-xs">
-                    <button className="flex-grow bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-xl font-bold text-sm transition-all shadow-lg shadow-blue-600/20 active:scale-95">
-                      Start Mapping
+                    <button 
+                      onClick={handleUpload}
+                      disabled={submitting}
+                      className="flex-grow bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-xl font-bold text-sm transition-all shadow-lg shadow-blue-600/20 active:scale-95 disabled:opacity-50 flex items-center justify-center gap-2"
+                    >
+                      {submitting ? (
+                        <>
+                          <Loader2 size={18} className="animate-spin" />
+                          Analyzing...
+                        </>
+                      ) : (
+                        "Start Mapping"
+                      )}
                     </button>
                     <button 
                       onClick={() => setFile(null)}
-                      className="px-6 py-4 rounded-xl border border-zinc-800 hover:bg-zinc-800 transition-all text-zinc-400"
+                      disabled={submitting}
+                      className="px-6 py-4 rounded-xl border border-zinc-800 hover:bg-zinc-800 transition-all text-zinc-400 disabled:opacity-30"
                     >
                       <X size={18} />
                     </button>
@@ -170,25 +197,22 @@ const ResumeUpload = () => {
           </div>
         </motion.div>
 
-        {/* --- TRUST BADGE --- */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
           className="mt-12 flex flex-col items-center gap-6"
         >
-          
           <p className="text-zinc-500 text-sm">
             Don't have a resume?{' '}
             <button 
-                onClick={handleManualEntryClick} // Intercepts Link click with auth check
+                onClick={handleManualEntryClick}
                 className="text-zinc-200 hover:text-blue-400 font-semibold transition-colors bg-transparent border-none cursor-pointer"
             >
               Enter details manually →
             </button>
           </p>
         </motion.div>
-
       </div>
     </div>
   );

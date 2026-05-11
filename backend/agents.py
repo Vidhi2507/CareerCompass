@@ -8,6 +8,7 @@ from sentence_transformers import SentenceTransformer
 from qdrant_client import QdrantClient
 from helperfunctions import normalize_skill
 # from langgraph.graph import interrupt
+from classes import UserCareerInfo
 
 load_dotenv() 
 
@@ -29,6 +30,22 @@ qdrant_client = QdrantClient(
     api_key=os.getenv("QDRANT_KEY")
 )
 
+
+resume_parser_model = chatmodel.with_structured_output(UserCareerInfo)
+
+def parse_resume_to_json(resume_text: str):
+    prompt = f"""
+    Extract professional and educational information from the following resume text.
+    
+    RESUME TEXT:
+    {resume_text}
+    
+    RULES:
+    1. If a section is missing, return an empty list or null.
+    2. Ensure 'years_experience' is an integer.
+    3. Return structured data exactly matching the UserCareerInfo schema.
+    """
+    return resume_parser_model.invoke(prompt)
 
 def Suggest_Target_Roles(state):
     prompt = f"Suggest 3 roles in a list which a career Guide will suggest to a person Interested in  \

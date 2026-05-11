@@ -4,6 +4,11 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pymongo.mongo_client import MongoClient
 
+from fastapi import File, UploadFile
+import PyPDF2
+import io
+from agents import parse_resume_to_json
+
 from typing import Annotated
 
 from classes import User,UserCareerInfo,Roadmapstate
@@ -161,3 +166,37 @@ def get_user_skills(username: str):
     if not user_data:
         return {"skills": []}
     return {"skills": user_data.get("skills", [])}
+
+
+# Add this endpoint
+@app.post("/upload-resume/{username}")
+async def upload_resume(username: str, file: UploadFile = File(...)):
+    if file.content_type != "application/pdf":
+        raise HTTPException(status_code=400, detail="Only PDF files are allowed")
+
+    # 1. Extract Text from PDF
+    try:
+        content = await file.read()
+        pdf_reader = PyPDF2.PdfReader(io.BytesIO(content))
+        resume_text = ""
+        for page in pdf_reader.pages:
+            resume_text += page.extract_text()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to read PDF: {str(e)}")
+
+    # 2. Parse text to structured UserCareerInfo
+    parsed_info = parse_resume_to_json(resume_text)
+
+    career_data = parsed_info.dict()
+    career_data["username"] = username
+
+    # 3. Save to MongoDB (Same logic as manual_entry)
+    UserCareerDetails.update_one(
+        {"username": username}, 
+        {"$set": parsed_info.model_dump(exclude_unset=True)}, 
+        upsert=True
+    )
+
+    # 4. Trigger Roadmap Generation logic (Reuse your existing graph logic)
+    # This ensures the resume flow ends with a roadmap in the DB just like manual entry
+    return {"message": "Resume analyzed and roadmap pending", "username": username}
