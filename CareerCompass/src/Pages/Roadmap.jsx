@@ -289,7 +289,7 @@ const TreeLoader = () => (
             <div className="absolute inset-0 bg-blue-500 blur-xl opacity-20 animate-pulse" />
         </div>
         <div className="text-center">
-            <h2 className="text-zinc-100 font-bold tracking-tighter text-xl italic text-zinc-100">Synthesizing Career Arc</h2>
+            <h2 className="text-zinc-100 font-bold tracking-tighter text-xl italic text-zinc-100">Generating Roadmap</h2>
             <p className="text-zinc-500 text-xs uppercase tracking-[0.2em] mt-2">Syncing performance data...</p>
         </div>
     </div>

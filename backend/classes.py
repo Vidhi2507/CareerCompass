@@ -149,7 +149,7 @@ class Question(BaseModel):
         ...,
         description="Proficiency level of the question ranging from 1 to 5, where 1 is very basic and 5 is very advanced"
     )
-    topic: str = Field(
+    sub_topic: str = Field(
         ...,
         description="The specific topic or concept within the skill that this question is testing (e.g., 'Overfitting in Decision Trees', 'PyTorch Tensors')."
     )

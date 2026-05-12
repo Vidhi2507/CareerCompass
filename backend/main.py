@@ -134,7 +134,7 @@ def Skill_Test(username: str, skill: str):
 
     return {"message": "Skill test generated successfully", "data": questions}
 
-@app.post("/update-skill-assessment") # Renamed to avoid confusion
+@app.post("/update-skill-assessment") 
 def update_skill_assessment(username: str, skill_name: str, score_out_of_5: int):
     # 1. Update the user's proficiency in MongoDB
     user_data = UserCareerDetails.find_one({"username": username})

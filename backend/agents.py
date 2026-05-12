@@ -217,6 +217,6 @@ def roadmap_generation_agent(state):
     return {"Roadmap": roadmap}
 
 def question_generation(skill,proficiency,role):
-    prompt = f"Generate 5 MCQ questions of Interview relevant concept for the Role of {role} with strictly proficiency level {proficiency} for the skill {skill} with 4 options and also the correct answer (proficiency level 1 is basic and 5 is advanced) "
+    prompt = f"Generate 5 MCQ questions of Interview relevant concept for the Role of {role} with strictly proficiency level {proficiency} for the skill {skill} with 4 options and also the correct answer (proficiency level 1 is basic and 5 is advanced) and the subtopic "
     Questions = question_model.invoke(prompt)
     return Questions
