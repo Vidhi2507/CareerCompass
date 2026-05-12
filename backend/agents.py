@@ -16,7 +16,7 @@ api_key = os.getenv("API_KEY")
 
 chatmodel = ChatGoogleGenerativeAI(
     api_key=os.getenv("GEMINI"),
-    model="gemini-2.5-flash-lite",   # fast + cheap
+    model="gemini-2.5-flash-lite", 
     temperature=0
 )
 targetrole_model = chatmodel.with_structured_output(TargetRoles)
@@ -39,11 +39,12 @@ def parse_resume_to_json(resume_text: str):
     
     RESUME TEXT:
     {resume_text}
-    
     RULES:
     1. If a section is missing, return an empty list or null.
     2. Ensure 'years_experience' is an integer.
     3. Return structured data exactly matching the UserCareerInfo schema.
+    4. e.g., skills to be in dict with key 'skill' and 'proficiency' (0-5 scale).
+    5. If skill proficiency cannot be determined, set it to 2.
     """
     return resume_parser_model.invoke(prompt)
 

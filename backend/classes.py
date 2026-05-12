@@ -8,14 +8,13 @@ class User(BaseModel):
     password: str
 
 class UserCareerInfo(BaseModel):
-    username: Optional[str] = None
     fullName: Optional[str] = None
     currentRole: Optional[str] = None
     years_experience: Optional[int] = None
 
     experience: Optional[list[dict]] = None
     education : Optional[list[dict]] = None
-    skills: Optional[list[dict]] = None
+    skills: Annotated[list[dict], "List of skills with proficiency levels, e.g., [{'skill': 'Python', 'proficiency': 4}]"] = None
     interests: List[str] = None
 
 # class Roadmap(BaseModel):
@@ -149,6 +148,10 @@ class Question(BaseModel):
     proficiency_level: str = Field(
         ...,
         description="Proficiency level of the question ranging from 1 to 5, where 1 is very basic and 5 is very advanced"
+    )
+    topic: str = Field(
+        ...,
+        description="The specific topic or concept within the skill that this question is testing (e.g., 'Overfitting in Decision Trees', 'PyTorch Tensors')."
     )
 
 class QuestionStructuredOutput(BaseModel):

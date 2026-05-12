@@ -11,3 +11,5 @@ langgraph
 langchain_google_genai
 sentence-transformers
 qdrant-client
+pyPDF2
+python-multipart
