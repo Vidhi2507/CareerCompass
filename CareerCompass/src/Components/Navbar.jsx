@@ -89,7 +89,6 @@ const Navbar = ({ onLoginClick }) => {
         <div className="hidden md:flex items-center gap-2 p-1 rounded-xl bg-white/5 border border-white/5 backdrop-blur-sm">
           <NavLink to="/" label="Home" active={location.pathname === "/"} />
           <NavLink to="/resume-upload" label="Roadmap" active={location.pathname === "/resume-upload"} />
-          <NavLink to="/contact" label="Contact" active={location.pathname === "/contact"} />
         </div>
 
         {/* AUTH SECTION - Modern Pill Design */}
