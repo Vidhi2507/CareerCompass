@@ -1,29 +1,40 @@
 from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_groq import ChatGroq
 from dotenv import load_dotenv 
 import os
 from pydantic import BaseModel,Field
 from typing import Annotated
 from classes import TargetRoles, RequiredSkills,RoadmapLLMStructuredOutput,QuestionStructuredOutput
-from sentence_transformers import SentenceTransformer
+# from sentence_transformers import SentenceTransformer
+from google import genai
+from google.genai import types
+
 from qdrant_client import QdrantClient
 from helperfunctions import normalize_skill
-# from langgraph.graph import interrupt
 from classes import UserCareerInfo
 
 load_dotenv() 
 
 api_key = os.getenv("API_KEY")
+secret = os.getenv("GROQ_KEY")
 
-chatmodel = ChatGoogleGenerativeAI(
-    api_key=os.getenv("GEMINI"),
-    model="gemini-2.5-flash-lite", 
-    temperature=0
+# chatmodel = ChatGoogleGenerativeAI(
+#     api_key=os.getenv("GEMINI"),
+#     model="gemini-2.5-flash-lite", 
+#     temperature=0
+# )
+
+chatmodel = ChatGroq(
+    model="llama-3.3-70b-versatile",
+    api_key=secret,
+    temperature=0.2
 )
+
 targetrole_model = chatmodel.with_structured_output(TargetRoles)
-embeddingmodel = SentenceTransformer("all-MiniLM-L6-v2")
 Roadmap_model = chatmodel.with_structured_output(RoadmapLLMStructuredOutput)
 question_model = chatmodel.with_structured_output(QuestionStructuredOutput)
 
+embedding_client = genai.Client(api_key=os.getenv("EMBEDDING_KEY"))
 
 qdrant_client = QdrantClient(
     url=os.getenv("QDRANT_URL"),
@@ -72,22 +83,9 @@ def Required_Skills(state):
         - Education: {state["education"]}
         - Experience: {state["experience"]}
 
-        OUTPUT FORMAT (STRICT):
-        Return a JSON dictionary where:
-        - key = role name
-        - value = list of exactly 10 dictionaries
-        - each dictionary must have ONLY ONE skill and its required proficiency level (0 to 5)
+        Generate the required skills for each role.
 
-        Example:
-        {{
-        "{Target_role[0]}": [
-            {{"Python": 5}},
-            {{"SQL": 4}}
-        ],
-        "{Target_role[1]}": [
-            {{"MLOps": 4}}
-        ]
-        }}
+        Follow the provided output schema exactly.
 
         RULES:
         - Skills must be resume/job-description skills only.
@@ -115,7 +113,7 @@ def normalize_userandReq_skill(state):
             new_dict = {}
 
             for skill_name, level in skill_dict.items():
-                mapped_skill = normalize_skill(embeddingmodel, qdrant_client, skill_name)
+                mapped_skill = normalize_skill(embedding_client, qdrant_client, skill_name)
                 new_dict[mapped_skill] = level
 
             normalized_req_skills[role].append(new_dict)
@@ -128,10 +126,8 @@ def normalize_userandReq_skill(state):
     normalized_user_skills = {}
     for skill_dict in user_skill_dicts:
         for skill_name, level in skill_dict.items():
-            mapped_skill = normalize_skill(embeddingmodel, qdrant_client, skill_name)
+            mapped_skill = normalize_skill(embedding_client, qdrant_client, skill_name)
             normalized_user_skills[mapped_skill] = level    
-    
-
 
     return {"RequiredSkills": normalized_req_skills, "skills": normalized_user_skills}
 

@@ -13,3 +13,4 @@ sentence-transformers
 qdrant-client
 pyPDF2
 python-multipart
+langchain_groq
