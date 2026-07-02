@@ -34,7 +34,7 @@ UserCareerDetails = db["User_Career_details"]
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=["http://localhost:5173", "https://careercompass-0b6l.onrender.com","https://careercompass-frontend-penn.onrender.com"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
