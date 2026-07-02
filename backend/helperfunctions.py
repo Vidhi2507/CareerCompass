@@ -1,6 +1,9 @@
 from datetime import datetime, timedelta
 from qdrant_client import QdrantClient
-from sentence_transformers import SentenceTransformer
+
+from google import genai
+from google.genai import types
+
 import os
 from jose import jwt
 from dotenv import load_dotenv
@@ -22,7 +25,7 @@ def normalize_skill(client,qdrant_client,skill_name):
   query_vector = client.models.embed_content(
     model="gemini-embedding-2",
     contents=skill_name,
-    config=types.EmbedContentConfig(output_dimensionality=768)
+    config= types.EmbedContentConfig(output_dimensionality=768)
     ).embeddings[0].values
   
   # query_vector = model.encode(skill_name).tolist()
@@ -44,15 +47,15 @@ def normalize_skill(client,qdrant_client,skill_name):
     return skill_name
   
 
-qdrant_client = QdrantClient(
-    url=os.getenv("QDRANT_URL"),
-    api_key=os.getenv("QDRANT_KEY")
-)
+# qdrant_client = QdrantClient(
+#     url=os.getenv("QDRANT_URL"),
+#     api_key=os.getenv("QDRANT_KEY")
+# )
 
 
-from google import genai
-from google.genai import types
+# from google import genai
+# from google.genai import types
 
-client = genai.Client(api_key=os.getenv("EMBEDDING_KEY"))
+# client = genai.Client(api_key=os.getenv("EMBEDDING_KEY"))
 
-print(normalize_skill(client, qdrant_client, "Pythons"))
+# print(normalize_skill(client, qdrant_client, "Pythons"))

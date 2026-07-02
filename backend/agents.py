@@ -5,7 +5,6 @@ import os
 from pydantic import BaseModel,Field
 from typing import Annotated
 from classes import TargetRoles, RequiredSkills,RoadmapLLMStructuredOutput,QuestionStructuredOutput
-# from sentence_transformers import SentenceTransformer
 from google import genai
 from google.genai import types
 
