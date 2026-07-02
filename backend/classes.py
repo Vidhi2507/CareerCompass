@@ -16,10 +16,6 @@ class UserCareerInfo(BaseModel):
     education : Optional[list[dict]] = None
     skills: Annotated[list[dict], "List of skills with proficiency levels, e.g., [{'skill': 'Python', 'proficiency': 4}]"] = None
     interests: List[str] = None
-
-# class Roadmap(BaseModel):
-#     Role: Annotated[str,"Roles recommended based on the user's profile and preferences"]
-#     Skills: Annotated[list[str],"Skills required for the recommended roles"]
     
 
 class TargetRoles(BaseModel):

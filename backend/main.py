@@ -4,13 +4,13 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pymongo.mongo_client import MongoClient
 
+# Vidya part
 from fastapi import File, UploadFile
 import PyPDF2
 import io
 from agents import parse_resume_to_json
 
 from typing import Annotated
-
 from classes import User,UserCareerInfo,Roadmapstate
 from helperfunctions import create_access_token
 
@@ -73,22 +73,28 @@ def register(user: User):   ## hashing of password will be done later
 @app.post("/manual-entry/roadmap")
 def manual_entry(Userdata: UserCareerInfo):
     # Process the manual entry data and save it to the database
-    UserCareerDetails.insert_one(Userdata.dict())
+    if UserCareerDetails.find_one({"username": Userdata.username}):
+        UserCareerDetails.update_one({"username": Userdata.username}, {"$set": Userdata.dict()})
+    else:
+        UserCareerDetails.insert_one(Userdata.dict())
     return {"message": "Manual entry data received successfully", "data": Userdata}
+
 
 @app.get("/roadmap/{username}")
 def roadmap_generation(username: str):
-
-    user_data = UserCareerDetails.find_one({"username": username})
-    if not user_data:
+    user_career_data = UserCareerDetails.find_one({"username": username})
+    if not user_career_data:
         raise HTTPException(status_code=404, detail="User career data not found")
 
+    if "Roadmap" in user_career_data:
+        return {"message": "Roadmap already exists", "data": user_career_data["Roadmap"]}
+    
     # user_data = UserCareerDetails.find_one({"username": "Vidhi"})
     roadmap_state: Roadmapstate = {
     "TargetRoles": [],
     "RequiredSkills": {}
-}
-    Roadmap_state = {**roadmap_state, **user_data}
+    }
+    Roadmap_state = {**roadmap_state, **user_career_data}
     Roadmap_state.pop("_id") 
 
     graph = StateGraph(Roadmapstate)
@@ -130,9 +136,7 @@ def Skill_Test(username: str, skill: str):
             break
     print(proficiency)
 
-    questions = question_generation(skill,proficiency,User_data["currentRole"])
-    # have to change from current role to target role later. (unless data for Roadmap is not updated in database)
-
+    questions = question_generation(skill,proficiency,User_data["Roadmap"]["role"])
     return {"message": "Skill test generated successfully", "data": questions}
 
 @app.post("/update-skill-assessment") 
@@ -157,8 +161,6 @@ def update_skill_assessment(username: str, skill_name: str, score_out_of_5: int)
         {"username": username}, 
         {"$set": {"skills": updated_skills}}
     )
-
-    # We return the score only, NO regeneration to save API credits
     return {"message": "Skill updated", "score": score_out_of_5}
 
 @app.get("/user-skills/{username}")
