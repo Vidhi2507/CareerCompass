@@ -157,7 +157,7 @@ const generateRoadmap = async () => {
     };
 
     try {
-        const response = await axios.post(`http://127.0.0.1:8000${endpoint}`, payload);
+        const response = await axios.post(`https://careercompass-0b6l.onrender.com${endpoint}`, payload);
         navigate('/roadmap');
     } catch (err) {
         if (err.response?.status === 422) {

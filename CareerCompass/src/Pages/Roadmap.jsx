@@ -25,8 +25,8 @@ const Roadmap = () => {
             try {
                 // Parallel fetch for Roadmap and Skill Scores
                 const [roadmapRes, skillsRes] = await Promise.all([
-                    fetch(`http://localhost:8000/roadmap/${username}`),
-                    axios.get(`http://localhost:8000/user-skills/${username}`)
+                    fetch(`https://careercompass-0b6l.onrender.com/roadmap/${username}`),
+                    axios.get(`https://careercompass-0b6l.onrender.com/user-skills/${username}`)
                 ]);
 
                 const roadmapResult = await roadmapRes.json();

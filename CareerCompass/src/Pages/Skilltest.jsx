@@ -17,7 +17,7 @@ const Skilltest = () => {
         const fetchQuestions = async () => {
             try {
                 const encodedSkill = encodeURIComponent(skillName);
-                const response = await axios.get(`http://localhost:8000/skilltest/${username}/${encodedSkill}`);
+                const response = await axios.get(`https://careercompass-0b6l.onrender.com/skilltest/${username}/${encodedSkill}`);
                 setQuestions(response.data.data.questions);
             } catch (err) {
                 console.error("Failed to fetch test:", err);
@@ -53,7 +53,7 @@ const Skilltest = () => {
 
         try {
             // Updated endpoint: Only updates skill proficiency, does NOT rebuild roadmap to save API credits
-            await axios.post(`http://localhost:8000/update-skill-assessment?username=${username}&skill_name=${encodeURIComponent(skillName)}&score_out_of_5=${proficiencyScore}`);
+            await axios.post(`https://careercompass-0b6l.onrender.com/update-skill-assessment?username=${username}&skill_name=${encodeURIComponent(skillName)}&score_out_of_5=${proficiencyScore}`);
             
             setResult({
                 score: proficiencyScore,

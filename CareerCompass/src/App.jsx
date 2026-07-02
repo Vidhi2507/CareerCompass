@@ -27,7 +27,7 @@ function App() {
     const endpoint = isRegister ? '/register' : '/login';
     
     try {
-      const response = await axios.post(`http://127.0.0.1:8000${endpoint}`, formData);
+      const response = await axios.post(`https://careercompass-0b6l.onrender.com${endpoint}`, formData);
       // console.log(response.data);
       if (!isRegister && response.data.token) {
         localStorage.setItem('token', response.data.token);

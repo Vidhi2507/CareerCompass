@@ -57,7 +57,7 @@ const ResumeUpload = () => {
     try {
       // POST to your new FastAPI endpoint
       const response = await axios.post(
-        `http://localhost:8000/upload-resume/${username}`,
+        `https://careercompass-0b6l.onrender.com/upload-resume/${username}`,
         formData,
         {
           headers: {
