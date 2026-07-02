@@ -50,6 +50,7 @@ def parse_resume_to_json(resume_text: str):
     3. Return structured data exactly matching the UserCareerInfo schema.
     4. e.g., skills to be in dict with key 'skill' and 'proficiency' (0-5 scale).
     5. If skill proficiency cannot be determined, set it to 2.
+    6. Interests should be a list of strings. if not found, return an empty list.
     """
     return resume_parser_model.invoke(prompt)
 

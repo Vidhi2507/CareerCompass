@@ -31,6 +31,7 @@ class Roadmapstate(TypedDict):
     education: dict
     experience: dict
     currentRole: str
+    interests: list[str]
     skills:list[dict]
     years_experience: int
     currentRole: str
