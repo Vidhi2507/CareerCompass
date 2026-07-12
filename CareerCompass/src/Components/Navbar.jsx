@@ -22,6 +22,11 @@ const Navbar = ({ onLoginClick }) => {
     window.location.reload();
   };
 
+  const handleProfileUpdate = () => {
+    // Navigate to the profile update page
+    window.location.href = '/manual-entry';
+  }
+
   return (
     <div className="fixed w-full top-0 left-0 z-[100] px-4 sm:px-8 py-4">
       <motion.nav
@@ -89,6 +94,8 @@ const Navbar = ({ onLoginClick }) => {
         <div className="hidden md:flex items-center gap-2 p-1 rounded-xl bg-white/5 border border-white/5 backdrop-blur-sm">
           <NavLink to="/" label="Home" active={location.pathname === "/"} />
           <NavLink to="/resume-upload" label="Roadmap" active={location.pathname === "/resume-upload"} />
+          <NavLink to="/roadmap" label="Career Paths" active={location.pathname === "/roadmap"} />
+          <NavLink to="/interview" label="Interview Prep" active={location.pathname === "/interview"} />
         </div>
 
         {/* AUTH SECTION - Modern Pill Design */}
@@ -102,14 +109,42 @@ const Navbar = ({ onLoginClick }) => {
                 exit={{ opacity: 0, x: 10 }}
                 className="flex items-center gap-2 pl-1 pr-1 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 backdrop-blur-sm shadow-inner"
               >
-                <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-indigo-500 to-cyan-400 p-[1px]">
-                  <div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center">
-                    <User size={14} className="text-indigo-400" />
+                
+               <div className="relative inline-block group">
+                  <button
+                    onClick={handleProfileUpdate}
+                    className="flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 hover:bg-indigo-500/30 transition-colors text-slate-200 font-semibold text-xs"
+                  >
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-indigo-500 to-cyan-400 p-[1px]">
+                      <div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center">
+                        <User size={14} className="text-indigo-400" />
+                      </div>
+                    </div>
+
+                    <span className="text-[11px] font-black text-slate-200 uppercase tracking-widest px-2">
+                      {user}
+                    </span>
+                  </button>
+
+                  {/* Tooltip */}
+                  <div
+                    className="
+                      absolute left-1/2 -translate-x-1/2
+                      -top+25
+                      whitespace-nowrap
+                      rounded-md bg-slate-900 border border-slate-700
+                      px-3 py-1.5 text-xs text-slate-200
+                      opacity-0 scale-95
+                      transition-all duration-200
+                      pointer-events-none
+                      group-hover:opacity-100
+                      group-hover:scale-100
+                    "
+                  >
+                    Update Profile
                   </div>
                 </div>
-                <span className="text-[11px] font-black text-slate-200 uppercase tracking-widest px-2">
-                  {user}
-                </span>
+
                 <button 
                   onClick={handleLogout}
                   className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-red-500/10 hover:text-red-400 transition-all text-slate-500"

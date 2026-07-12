@@ -13,6 +13,8 @@ const ManualEntry = () => {
 
   const nextStep = () => setStep(prev => prev + 1);
   const prevStep = () => setStep(prev => prev - 1);
+  
+  // get the
 
   const [formData, setFormData] = useState({
     username: localStorage.getItem('username') || "UnRegistered User",

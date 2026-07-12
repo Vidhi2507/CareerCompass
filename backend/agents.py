@@ -23,6 +23,7 @@ chatmodel = ChatGroq(
     temperature=0.2
 )
 
+resume_parser_model = chatmodel.with_structured_output(UserCareerInfo)
 targetrole_model = chatmodel.with_structured_output(TargetRoles)
 requiredSkills_model = chatmodel.with_structured_output(RequiredSkills)
 Roadmap_model = chatmodel.with_structured_output(RoadmapLLMStructuredOutput)
@@ -34,9 +35,6 @@ qdrant_client = QdrantClient(
     url=os.getenv("QDRANT_URL"),
     api_key=os.getenv("QDRANT_KEY")
 )
-
-
-resume_parser_model = chatmodel.with_structured_output(UserCareerInfo)
 
 def parse_resume_to_json(resume_text: str):
     prompt = f"""

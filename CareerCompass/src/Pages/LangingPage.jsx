@@ -90,14 +90,7 @@ const Landingpage = ({ openLogin }) => {
 
           {/* RIGHT: THE CONTENT */}
           <div className="flex flex-col items-start text-left">
-            <motion.div 
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="flex items-center gap-3 mb-8 bg-zinc-900/50 border border-white/5 px-4 py-2 rounded-2xl"
-            >
-              <Sparkles size={16} className="text-blue-400" />
-              <span className="text-xs font-bold tracking-widest text-zinc-400 uppercase">AI-Guided Navigation</span>
-            </motion.div>
+           
 
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
@@ -109,15 +102,7 @@ const Landingpage = ({ openLogin }) => {
               <span className="text-blue-500">Future !</span>
             </motion.h1>
 
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="text-zinc-500 text-lg md:text-xl max-w-lg mb-12 leading-relaxed"
-            >
-          Precision career mapping powered by neural analysis. We bridge the gap between where you are and where the industry demands you to be.
-            </motion.p>
-
+            
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -128,44 +113,99 @@ const Landingpage = ({ openLogin }) => {
                 Get Started
               </button>
               <div className="hidden md:flex items-center gap-2 text-zinc-500">
-                <ShieldCheck size={18} />
+                
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* --- REFINED BENTO FEATURES --- */}
-      <section className="max-w-7xl mx-auto px-6 py-24 border-t border-white/5">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <FeatureCard 
-            icon={<Target className="text-blue-500" />}
-            title="Skill Precision"
-            desc="We identify the exact technical gaps between you and your target salary."
-          />
-          <FeatureCard 
-            icon={<Zap className="text-purple-500" />}
-            title="Neural Matching"
-            desc="Our AI mimics executive recruiters to find roles that aren't publicly listed."
-          />
-          <FeatureCard 
-            icon={<Target className="text-emerald-500" />}
-            title="Market Value"
-            desc="Real-time global data tells you exactly what your expertise is worth today."
-          />
+      {/* --- STEPWISE CAREER ROADMAP --- */}
+      <section className="py-24 border-t border-white/5">
+        <div className="max-w-3xl mx-auto relative">
+
+          {/* Vertical Roadmap Line */}
+
+          <div className="grid grid-cols-1 gap-8 relative z-10">
+
+            <FeatureCard
+              icon={<Target className="text-blue-500" />}
+              title="Create Your Profile"
+              desc="Upload your resume or manually enter your education, experience and skills"
+            />
+
+            <FeatureCard
+              icon={<Target className="text-blue-500" />}
+              title="Rate Your Skills"
+              desc="Add your technical skills and proficiency level to help us understand your current strengths."
+            />
+
+            <FeatureCard
+              icon={<Target className="text-blue-500" />}
+              title="Choose Your Interests"
+              desc="Select the career domains you're passionate about."
+            />
+
+            <FeatureCard
+              icon={<Target className="text-blue-500" />}
+              title="AI Recommends Target Roles"
+              desc="Based on your profile, we identify the best job roles suited for your career goals."
+            />
+
+            <FeatureCard
+              icon={<Target className="text-blue-500" />}
+              title="Skill Gap Analysis"
+              desc="Compare your skills with industry requirements to identify strengths, weaknesses and missing skills."
+            />
+
+            <FeatureCard
+              icon={<Target className="text-blue-500" />}
+              title="Personalized Learning Roadmap"
+              desc="Receive a structured roadmap with learning phases tailored specifically for you."
+            />
+
+            <FeatureCard
+              icon={<Target className="text-blue-500" />}
+              title="Build Real Projects"
+              desc="Complete curated mini and major projects while mastering each phase"
+            />
+
+            <FeatureCard
+              icon={<Target className="text-blue-500" />}
+              title="Assess & Become Job Ready"
+              desc="Take assessments, track your progress and achieve your target career."
+            />
+
+          </div>
         </div>
       </section>
+
     </div>
   );
 };
 
-const FeatureCard = ({ icon, title, desc }) => (
-  <div className="p-8 rounded-[2rem] bg-zinc-900/20 border border-white/5 hover:border-white/10 transition-all group">
-    <div className="w-12 h-12 rounded-xl bg-zinc-900 border border-white/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-      {icon}
+const FeatureCard = ({ icon, title, desc, isLast }) => (
+  <div className="relative flex flex-col items-center">
+
+    {/* Card */}
+    <div className="w-full p-8 rounded-[2rem] bg-zinc-900/20 border border-white/5 hover:border-white/10 transition-all group">
+      <div className="mx-auto w-12 h-12 rounded-xl bg-zinc-900 border border-white/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+        {icon}
+      </div>
+
+      <h3 className="text-lg font-bold mb-3 text-center">
+        {title}
+      </h3>
+
+      <p className="text-zinc-500 text-sm leading-relaxed text-center">
+        {desc}
+      </p>
     </div>
-    <h3 className="text-lg font-bold mb-3">{title}</h3>
-    <p className="text-zinc-500 text-sm leading-relaxed">{desc}</p>
+
+    {/* Connector */}
+    {!isLast && (
+      <div className="w-[2px] h-10 bg-gradient-to-b from-blue-500 via-purple-500 to-emerald-500"></div>
+    )}
   </div>
 );
 
