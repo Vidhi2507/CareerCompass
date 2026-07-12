@@ -291,13 +291,13 @@ const generateRoadmap = async () => {
             </button>
             <button 
                 onClick={generateRoadmap} 
-                className="px-8 py-4 bg-indigo-600 rounded-2xl font-black tracking-widest hover:bg-indigo-500 transition-all shadow-lg shadow-indigo-600/30 active:scale-95"
+                className="px-8 py-4 bg-gradient-to-r from-pink-500 via-purple-600 to-orange-500 text-white rounded-2xl font-black tracking-widest hover:opacity-90 transition-all shadow-lg shadow-pink-500/20 active:scale-95"
             >
               GENERATE ROADMAP →
             </button>
             <button 
                 onClick={() => setShowPreview(false)} 
-                className="text-zinc-500 font-bold hover:text-white transition-colors"
+                className="text-zinc-500 font-bold hover:text-pink-400 transition-colors"
             >
                 Edit Info
             </button>
@@ -311,13 +311,13 @@ const generateRoadmap = async () => {
   return (
     <div className="min-h-screen bg-[#050505] text-white pt-32 pb-20 px-6 flex flex-col items-center overflow-hidden">
       {/* Background Decor */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-600/5 blur-[120px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-600/5 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-pink-600/5 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-orange-600/5 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="max-w-3xl w-full relative z-10">
         <div className="mb-16 px-4">
           <div className="flex justify-between mb-4">
-            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-400">Step {step} of 4</span>
+            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-pink-400">Step {step} of 4</span>
             <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30">
               {step === 1 ? 'Experience' : step === 2 ? 'Education' : step === 3 ? 'Skills' : 'Goals'}
             </span>
@@ -326,7 +326,7 @@ const generateRoadmap = async () => {
             <motion.div
               initial={{ width: "25%" }}
               animate={{ width: `${(step / 4) * 100}%` }}
-              className="h-full bg-gradient-to-r from-indigo-600 to-purple-500 shadow-[0_0_15px_rgba(79,70,229,0.5)]"
+              className="h-full bg-gradient-to-r from-pink-500 via-purple-600 to-orange-500 shadow-[0_0_15px_rgba(236,72,153,0.5)]"
             />
           </div>
         </div>
@@ -336,7 +336,7 @@ const generateRoadmap = async () => {
             {step === 1 && (
               <motion.div key="step1" initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: -20, opacity: 0 }} className="space-y-8">
                 <div className="flex items-center gap-4 mb-2">
-                  <div className="p-3 bg-indigo-500/10 rounded-2xl text-indigo-400"><User size={24} /></div>
+                  <div className="p-3 bg-pink-500/10 rounded-2xl text-pink-400"><User size={24} /></div>
                   <h2 className="text-3xl font-black tracking-tight text-white">The Basics</h2>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -365,7 +365,7 @@ const generateRoadmap = async () => {
             {step === 2 && (
               <motion.div key="step2" initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: -20, opacity: 0 }} className="space-y-8">
                 <div className="flex items-center gap-4 mb-2">
-                  <div className="p-3 bg-yellow-500/10 rounded-2xl text-yellow-400"><Code size={24} /></div>
+                  <div className="p-3 bg-purple-500/10 rounded-2xl text-purple-400"><Code size={24} /></div>
                   <h2 className="text-3xl font-black tracking-tight text-white">Education Details</h2>
                 </div>
                 {formData.education.map((edu, index) => (
@@ -387,7 +387,7 @@ const generateRoadmap = async () => {
             {step === 3 && (
               <motion.div key="step3" initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: -20, opacity: 0 }} className="space-y-8">
                 <div className="flex items-center gap-4 mb-2">
-                  <div className="p-3 bg-blue-500/10 rounded-2xl text-blue-400"><Code size={24} /></div>
+                  <div className="p-3 bg-orange-500/10 rounded-2xl text-orange-400"><Code size={24} /></div>
                   <h2 className="text-3xl font-black tracking-tight text-white">Your Toolkit</h2>
                 </div>
                 {formData.skills.map((skill, index) => (
@@ -411,7 +411,7 @@ const generateRoadmap = async () => {
             {step === 4 && (
               <motion.div key="step4" initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: -20, opacity: 0 }} className="space-y-8">
                 <div className="flex items-center gap-4 mb-2">
-                  <div className="p-3 bg-emerald-500/10 rounded-2xl text-emerald-400"><Rocket size={24} /></div>
+                  <div className="p-3 bg-rose-500/10 rounded-2xl text-rose-400"><Rocket size={24} /></div>
                   <h2 className="text-3xl font-black tracking-tight text-white">Aspirations</h2>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -422,17 +422,18 @@ const generateRoadmap = async () => {
                 </div>
               </motion.div>
             )}
+
           </AnimatePresence>
 
           <div className="flex justify-between mt-12 pt-8 border-t border-white/5">
             {step > 1 ? (
-              <button onClick={prevStep} className="flex items-center gap-2 text-white/40 font-bold hover:text-white transition-colors"><ChevronLeft size={20} /> Back</button>
+              <button onClick={prevStep} className="flex items-center gap-2 text-white/40 font-bold hover:text-pink-400 transition-colors"><ChevronLeft size={20} /> Back</button>
             ) : <div />}
 
             {step < 4 ? (
-              <button onClick={nextStep} className="bg-white text-black px-10 py-4 rounded-2xl font-black text-sm tracking-widest hover:scale-105 active:scale-95 transition-all shadow-white/10 flex items-center gap-2">CONTINUE <ChevronRight size={18} /></button>
+              <button onClick={nextStep} className="bg-white text-black px-10 py-4 rounded-2xl font-black text-sm tracking-widest hover:bg-gradient-to-r hover:from-pink-500 hover:via-purple-600 hover:to-orange-500 hover:text-white transition-all shadow-white/5 flex items-center gap-2 active:scale-95">CONTINUE <ChevronRight size={18} /></button>
             ) : (
-              <button onClick={handleSubmit} className="group relative bg-indigo-600 text-white px-10 py-4 rounded-2xl font-black text-sm tracking-widest hover:bg-indigo-500 transition-all flex items-center gap-2 overflow-hidden shadow-indigo-600/40 active:scale-95">
+              <button onClick={handleSubmit} className="group relative bg-gradient-to-r from-pink-500 via-purple-600 to-orange-500 text-white px-10 py-4 rounded-2xl font-black text-sm tracking-widest hover:opacity-90 transition-all flex items-center gap-2 overflow-hidden shadow-lg shadow-pink-500/20 active:scale-95">
                 <Sparkles size={18} />
                 <span className="relative z-10">REVIEW & GENERATE</span>
               </button>
@@ -455,7 +456,7 @@ const InputField = ({ label, placeholder, name, value, onChange }) => (
       name={name}
       value={value}
       onChange={onChange}
-      className="w-full bg-white/[0.05] border border-white/10 p-4 rounded-xl outline-none focus:border-indigo-500/40 focus:bg-white/[0.08] transition-all text-white placeholder:text-white/20 font-medium"
+      className="w-full bg-white/[0.05] border border-white/10 p-4 rounded-xl outline-none focus:border-pink-500/40 focus:bg-white/[0.08] transition-all text-white placeholder:text-white/20 font-medium"
     />
   </div>
 );
@@ -464,7 +465,7 @@ const InterestCard = ({ label, icon, isSelected, onToggle }) => (
   <button
     type='button'
     onClick={onToggle}
-    className={`p-5 rounded-2xl border-2 transition-all duration-300 flex items-center gap-4 text-left ${isSelected ? 'border-indigo-500 bg-indigo-500/10 text-white shadow-indigo-600/15' : 'border-white/5 bg-white/[0.02] text-white/40 hover:border-white/20 hover:text-white/60'}`}
+    className={`p-5 rounded-2xl border-2 transition-all duration-300 flex items-center gap-4 text-left ${isSelected ? 'border-pink-500 bg-pink-500/10 text-white shadow-pink-500/15' : 'border-white/5 bg-white/[0.02] text-white/40 hover:border-white/20 hover:text-white/60'}`}
   >
     <span className="text-2xl">{icon}</span>
     <span className="font-bold text-sm tracking-tight">{label}</span>

@@ -73,8 +73,8 @@ const Skilltest = () => {
     return (
         <div className="min-h-screen bg-[#050505] text-zinc-100 pt-24 pb-20 px-6 flex flex-col items-center relative overflow-hidden">
             {/* Background Decor */}
-            <div className="absolute top-0 left-1/4 w-[400px] h-[400px] bg-blue-600/5 blur-[120px] pointer-events-none" />
-            <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-indigo-600/5 blur-[120px] pointer-events-none" />
+            <div className="absolute top-0 left-1/4 w-[400px] h-[400px] bg-gradient-to-tr from-pink-500/5 via-purple-500/5 to-orange-500/5 blur-[120px] pointer-events-none" />
+            <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-gradient-to-tr from-purple-500/5 via-pink-500/5 to-orange-500/5 blur-[120px] pointer-events-none" />
 
             <div className="max-w-3xl w-full relative z-10">
                 <AnimatePresence mode="wait">
@@ -85,11 +85,11 @@ const Skilltest = () => {
                         >
                             {/* Header */}
                             <div className="mb-12">
-                                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-black tracking-widest uppercase mb-4">
-                                    <Sparkles size={12} /> Skill Verification
+                                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pink-500/10 border border-pink-500/20 text-pink-400 text-[10px] font-black tracking-widest uppercase mb-4">
+                                    <Sparkles size={12} className="animate-pulse" /> Skill Verification
                                 </div>
                                 <h1 className="text-4xl font-bold tracking-tighter italic">
-                                    {skillName} <span className="text-zinc-600">Assessment.</span>
+                                    {skillName} <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-600 to-orange-500">Assessment.</span>
                                 </h1>
                                 <p className="text-zinc-500 text-xs mt-2 uppercase tracking-widest font-bold">Answer all {questions.length} questions to verify your proficiency.</p>
                             </div>
@@ -104,10 +104,10 @@ const Skilltest = () => {
                                         className="bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-[2rem] p-8 shadow-xl"
                                     >
                                         <div className="flex gap-4 mb-6">
-                                            <span className="flex-shrink-0 w-8 h-8 rounded-full bg-blue-500/20 border border-blue-500/40 flex items-center justify-center text-blue-400 text-xs font-bold font-mono">
+                                            <span className="flex-shrink-0 w-8 h-8 rounded-full bg-pink-500/20 border border-pink-500/40 flex items-center justify-center text-pink-400 text-xs font-bold font-mono">
                                                 {qIdx + 1}
                                             </span>
-                                            <h3 className="text-lg font-medium text-zinc-200 leading-relaxed">
+                                            <h3 className="text-lg font-medium text-zinc-200 leading-relaxed text-left">
                                                 {q.question}
                                             </h3>
                                         </div>
@@ -119,13 +119,13 @@ const Skilltest = () => {
                                                     onClick={() => handleOptionSelect(qIdx, option)}
                                                     className={`p-4 rounded-xl text-left text-sm transition-all border ${
                                                         answers[qIdx] === option 
-                                                        ? 'bg-blue-600/20 border-blue-500 text-white shadow-[0_0_20px_rgba(59,130,246,0.1)]' 
+                                                        ? 'bg-pink-500/10 border-pink-500 text-white shadow-[0_0_20px_rgba(236,72,153,0.15)]' 
                                                         : 'bg-white/[0.02] border-white/5 text-zinc-400 hover:border-white/20'
                                                     }`}
                                                 >
                                                     <div className="flex items-center justify-between">
                                                         <span>{option}</span>
-                                                        {answers[qIdx] === option && <CheckCircle2 size={16} className="text-blue-400" />}
+                                                        {answers[qIdx] === option && <CheckCircle2 size={16} className="text-pink-400" />}
                                                     </div>
                                                 </button>
                                             ))}
@@ -138,7 +138,7 @@ const Skilltest = () => {
                                 <button
                                     onClick={handleSubmit}
                                     disabled={submitting}
-                                    className="group relative bg-indigo-600 text-white px-12 py-5 rounded-2xl font-black text-sm tracking-widest hover:bg-indigo-500 transition-all flex items-center gap-3 shadow-2xl shadow-indigo-600/40 disabled:opacity-50 active:scale-95"
+                                    className="group relative bg-gradient-to-r from-pink-500 via-purple-600 to-orange-500 text-white px-12 py-5 rounded-2xl font-black text-sm tracking-widest hover:opacity-90 transition-all flex items-center gap-3 shadow-2xl shadow-pink-500/20 disabled:opacity-50 active:scale-95"
                                 >
                                     {submitting ? <Loader2 className="animate-spin" size={20} /> : "FINISH ASSESSMENT"}
                                     {!submitting && <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />}
@@ -190,8 +190,8 @@ const Skilltest = () => {
 const TestLoader = ({ skill }) => (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#050505] space-y-6">
         <div className="relative">
-            <Loader2 className="w-12 h-12 text-blue-500 animate-spin" />
-            <div className="absolute inset-0 bg-blue-500 blur-xl opacity-20 animate-pulse" />
+            <Loader2 className="w-12 h-12 text-pink-500 animate-spin" />
+            <div className="absolute inset-0 bg-pink-500 blur-xl opacity-20 animate-pulse" />
         </div>
         <div className="text-center">
             <h2 className="text-zinc-100 font-bold tracking-tighter text-xl italic">Calibrating {skill} Assessment</h2>

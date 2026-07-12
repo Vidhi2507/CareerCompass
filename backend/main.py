@@ -86,6 +86,7 @@ def manual_entry(Userdata: UserCareerInfo):
     return {"message": "Manual entry data received successfully", "data": Userdata}
 
 
+# for update profile -- to get already existing data
 @app.get("/user-career-details/{username}")
 def get_user_career_details(username: str):
     user_data = UserCareerDetails.find_one({"username": username})

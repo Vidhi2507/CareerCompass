@@ -87,7 +87,7 @@ const ResumeUpload = () => {
 
   return (
     <div className="min-h-screen bg-[#050505] text-zinc-100 pt-32 pb-20 px-6 flex flex-col items-center relative overflow-hidden">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-500/5 blur-[120px] pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-gradient-to-tr from-pink-500/5 via-purple-500/5 to-orange-500/5 blur-[120px] pointer-events-none" />
       
       <div className="max-w-3xl w-full relative z-10">
         <motion.div 
@@ -95,11 +95,11 @@ const ResumeUpload = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[11px] font-bold tracking-widest uppercase mb-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pink-500/10 border border-pink-500/20 text-pink-400 text-[11px] font-bold tracking-widest uppercase mb-6">
             <Sparkles size={12} /> Step 01: The Blueprint
           </div>
           <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-6">
-            Upload your <span className="text-zinc-500">profile.</span>
+            Upload your <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-600 to-orange-500">profile.</span>
           </h1>
           <p className="text-zinc-400 text-lg md:text-xl max-w-lg mx-auto leading-relaxed">
             Drop your resume and let our AI map your skills to industry benchmarks in seconds.
@@ -119,7 +119,7 @@ const ResumeUpload = () => {
             className={`
               relative z-20 group border border-zinc-800 rounded-[2rem] transition-all duration-500
               flex flex-col items-center justify-center p-12 md:p-20
-              ${dragActive ? 'border-blue-500 bg-blue-500/5 scale-[1.01]' : 'bg-zinc-900/40 backdrop-blur-sm hover:border-zinc-700'}
+              ${dragActive ? 'border-pink-500 bg-pink-500/5 scale-[1.01]' : 'bg-zinc-900/40 backdrop-blur-sm hover:border-pink-500/20'}
               ${file ? 'cursor-default' : 'cursor-pointer'}
             `}
           >
@@ -131,8 +131,8 @@ const ResumeUpload = () => {
                   className="flex flex-col items-center text-center"
                   onClick={handleBrowseClick}
                 >
-                  <div className="w-20 h-20 rounded-2xl bg-zinc-800/50 flex items-center justify-center mb-8 border border-zinc-700 group-hover:border-blue-500/50 transition-all">
-                    <UploadCloud size={32} className="text-zinc-500 group-hover:text-blue-400 transition-colors" />
+                  <div className="w-20 h-20 rounded-2xl bg-zinc-800/50 flex items-center justify-center mb-8 border border-zinc-700 group-hover:border-pink-500/50 transition-all">
+                    <UploadCloud size={32} className="text-zinc-500 group-hover:text-pink-400 transition-colors" />
                   </div>
                   <h3 className="text-xl font-semibold mb-2">Drop file here</h3>
                   <p className="text-zinc-500 text-sm mb-8">PDF Files only (Max 10MB)</p>
@@ -147,7 +147,7 @@ const ResumeUpload = () => {
                     accept=".pdf"
                   />
                   
-                  <div className="text-blue-500 text-xs font-bold uppercase tracking-widest flex items-center gap-2 group-hover:gap-3 transition-all">
+                  <div className="text-pink-500 text-xs font-bold uppercase tracking-widest flex items-center gap-2 group-hover:gap-3 transition-all">
                     Browse Files <ArrowRight size={14} />
                   </div>
                 </motion.div>
@@ -157,8 +157,8 @@ const ResumeUpload = () => {
                   initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
                   className="flex flex-col items-center text-center w-full"
                 >
-                  <div className="w-16 h-16 rounded-xl bg-blue-500/10 flex items-center justify-center mb-6 border border-blue-500/20">
-                    <FileText size={28} className="text-blue-400" />
+                  <div className="w-16 h-16 rounded-xl bg-pink-500/10 flex items-center justify-center mb-6 border border-pink-500/20">
+                    <FileText size={28} className="text-pink-400" />
                   </div>
                   
                   <div className="mb-10">
@@ -172,7 +172,7 @@ const ResumeUpload = () => {
                     <button 
                       onClick={handleUpload}
                       disabled={submitting}
-                      className="flex-grow bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-xl font-bold text-sm transition-all shadow-lg shadow-blue-600/20 active:scale-95 disabled:opacity-50 flex items-center justify-center gap-2"
+                      className="flex-grow bg-gradient-to-r from-pink-500 via-purple-600 to-orange-500 text-white px-8 py-4 rounded-xl font-bold text-sm transition-all shadow-lg shadow-pink-500/20 active:scale-95 disabled:opacity-50 flex items-center justify-center gap-2 hover:opacity-90"
                     >
                       {submitting ? (
                         <>
@@ -207,7 +207,7 @@ const ResumeUpload = () => {
             Don't have a resume?{' '}
             <button 
                 onClick={handleManualEntryClick}
-                className="text-zinc-200 hover:text-blue-400 font-semibold transition-colors bg-transparent border-none cursor-pointer"
+                className="text-zinc-200 hover:text-pink-400 font-semibold transition-colors bg-transparent border-none cursor-pointer"
             >
               Enter details manually →
             </button>
