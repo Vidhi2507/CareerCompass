@@ -74,10 +74,25 @@ def register(user: User):   ## hashing of password will be done later
 def manual_entry(Userdata: UserCareerInfo):
     # Process the manual entry data and save it to the database
     if UserCareerDetails.find_one({"username": Userdata.username}):
-        UserCareerDetails.update_one({"username": Userdata.username}, {"$set": Userdata.dict()})
+        UserCareerDetails.update_one(
+            {"username": Userdata.username}, 
+            {
+                "$set": Userdata.dict(),
+                "$unset": {"Roadmap": ""}
+            }
+        )
     else:
         UserCareerDetails.insert_one(Userdata.dict())
     return {"message": "Manual entry data received successfully", "data": Userdata}
+
+
+@app.get("/user-career-details/{username}")
+def get_user_career_details(username: str):
+    user_data = UserCareerDetails.find_one({"username": username})
+    if not user_data:
+        raise HTTPException(status_code=404, detail="User career details not found")
+    user_data.pop("_id", None)
+    return user_data
 
 
 @app.get("/roadmap/{username}")
@@ -203,3 +218,8 @@ async def upload_resume(username: str, file: UploadFile = File(...)):
     # 4. Trigger Roadmap Generation logic (Reuse your existing graph logic)
     # This ensures the resume flow ends with a roadmap in the DB just like manual entry
     return {"message": "Resume analyzed and roadmap pending", "username": username}
+
+@app.get("/interview/{username}/{skill}")
+def get_interview_questions(username: str, skill: str):
+    # Implementation for fetching interview questions
+    pass

@@ -1,20 +1,20 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Sparkles, Code, Rocket, User } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Sparkles, Code, Rocket, User, Loader2 } from 'lucide-react';
 import axios from "axios";
 import html2pdf from 'html2pdf.js';
 
 const ManualEntry = () => {
   const [step, setStep] = useState(1);
   const [showPreview, setShowPreview] = useState(false);
+  const [fetchingData, setFetchingData] = useState(false);
   const navigate = useNavigate();
   const resumeRef = useRef(); 
 
   const nextStep = () => setStep(prev => prev + 1);
   const prevStep = () => setStep(prev => prev - 1);
   
-  // get the
 
   const [formData, setFormData] = useState({
     username: localStorage.getItem('username') || "UnRegistered User",
@@ -26,6 +26,36 @@ const ManualEntry = () => {
     skills: [{ skill: "", proficiency: 0 }],
     interests: []
   });
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const storedUser = localStorage.getItem('username');
+      if (storedUser) {
+        setFetchingData(true);
+        try {
+          const response = await axios.get(`https://careercompass-0b6l.onrender.com/user-career-details/${storedUser}`);
+          if (response.data) {
+            const data = response.data;
+            setFormData({
+              username: storedUser,
+              fullName: data.fullName || "",
+              currentRole: data.currentRole || "",
+              years_experience: data.years_experience !== undefined && data.years_experience !== null ? String(data.years_experience) : "",
+              education: data.education && data.education.length > 0 ? data.education : [{ school: "", degree: "", field: "", startYear: "", endYear: "" }],
+              experience: data.experience && data.experience.length > 0 ? data.experience : [{ company: "", role: "", description: "", startYear: "", endYear: "" }],
+              skills: data.skills && data.skills.length > 0 ? data.skills : [{ skill: "", proficiency: 0 }],
+              interests: data.interests || []
+            });
+          }
+        } catch (err) {
+          console.log("No existing profile data found or error fetching:", err);
+        } finally {
+          setFetchingData(false);
+        }
+      }
+    };
+    fetchUserData();
+  }, []);
 
   // --- HANDLERS ---
   const handleChange = (e) => {
@@ -100,7 +130,7 @@ const ManualEntry = () => {
     });
   };
 
-  // --- FINAL ACTIONS ---
+  
   const handleDownloadPDF = async () => {
     const element = resumeRef.current;
     if (!element) return;
@@ -113,8 +143,7 @@ const ManualEntry = () => {
         scale: 2, 
         useCORS: true,
         letterRendering: true,
-        // Force standard colors to avoid oklch crash
-        backgroundColor: '#ffffff'
+        backgroundColor: '#cfc4c4'
       },
       jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
     };
@@ -123,7 +152,6 @@ const ManualEntry = () => {
       await html2pdf().set(opt).from(element).save();
     } catch (err) {
       console.error("PDF Export failed:", err);
-      alert("PDF generation failed due to modern CSS colors. Ensure standard colors are used.");
     }
   };
 
@@ -168,6 +196,22 @@ const generateRoadmap = async () => {
         }
     }
 };
+
+  // --- CONDITIONAL RENDERING (FETCHING MODE) ---
+  if (fetchingData) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-[#050505] space-y-6">
+        <div className="relative">
+          <Loader2 className="w-12 h-12 text-indigo-500 animate-spin" />
+          <div className="absolute inset-0 bg-indigo-500/20 blur-xl opacity-20 animate-pulse" />
+        </div>
+        <div className="text-center">
+          <h2 className="text-zinc-100 font-bold tracking-tighter text-xl italic">Loading Profile Details</h2>
+          <p className="text-zinc-500 text-xs uppercase tracking-[0.2em] mt-2">Retrieving your saved information...</p>
+        </div>
+      </div>
+    );
+  }
 
   // --- CONDITIONAL RENDERING (PREVIEW MODE) ---
   if (showPreview) {

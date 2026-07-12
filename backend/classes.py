@@ -8,6 +8,7 @@ class User(BaseModel):
     password: str
 
 class UserCareerInfo(BaseModel):
+    username: Optional[str] = None
     fullName: Optional[str] = None
     currentRole: Optional[str] = None
     years_experience: Optional[int] = None
