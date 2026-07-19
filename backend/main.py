@@ -1,4 +1,5 @@
 
+from asyncio import graph
 from fastapi import HTTPException
 from fastapi import FastAPI 
 from fastapi.middleware.cors import CORSMiddleware
@@ -8,10 +9,9 @@ from pymongo.mongo_client import MongoClient
 from fastapi import File, UploadFile
 import PyPDF2
 import io
-from agents import parse_resume_to_json
 
 from typing import Annotated
-from classes import User,UserCareerInfo,Roadmapstate
+from classes import InterviewerState, User,UserCareerInfo,Roadmapstate, AnswerRequest
 from helperfunctions import create_access_token
 
 import os
@@ -21,7 +21,7 @@ load_dotenv()
 
 ##Agents
 from langgraph.graph import StateGraph, MessagesState, START, END
-from agents import Skill_Gap_Analysis, Suggest_Target_Roles, Required_Skills, normalize_userandReq_skill, roadmap_generation_agent, question_generation
+from agents import Skill_Gap_Analysis, Suggest_Target_Roles, Required_Skills, normalize_userandReq_skill, roadmap_generation_agent, question_generation,get_interview_relevant_topics, parse_resume_to_json, generate_interview_plan_api, evaluate_user_answer_api
 
 ## connect to MongoDB
 uri = os.getenv("DATABASE_URL")
@@ -29,6 +29,7 @@ client = MongoClient(uri)
 db = client["CareerCompass_db"]
 Users = db["Users"]
 UserCareerDetails = db["User_Career_details"]
+Interviews = db["Interviews"]
 
 
 app = FastAPI()
@@ -187,7 +188,7 @@ def get_user_skills(username: str):
     return {"skills": user_data.get("skills", [])}
 
 
-# Add this endpoint
+# Vidya --- Add this endpoint 
 @app.post("/upload-resume/{username}")
 async def upload_resume(username: str, file: UploadFile = File(...)):
     if file.content_type != "application/pdf":
@@ -220,7 +221,112 @@ async def upload_resume(username: str, file: UploadFile = File(...)):
     # This ensures the resume flow ends with a roadmap in the DB just like manual entry
     return {"message": "Resume analyzed and roadmap pending", "username": username}
 
-@app.get("/interview/{username}/{skill}")
-def get_interview_questions(username: str, skill: str):
-    # Implementation for fetching interview questions
-    pass
+@app.post("/interview/start/{username}")
+def start_interview(username: str):
+    user_data = UserCareerDetails.find_one({"username": username})
+    if not user_data:
+        raise HTTPException(status_code=404, detail="User career data not found")
+    
+    target_role = user_data.get("Roadmap", {}).get("role")
+    if not target_role:
+        raise HTTPException(status_code=404, detail="Target role not found. Please generate a roadmap first.")
+    
+    user_skills = user_data.get("skills", [])
+    user_skill_names = [s["skill"] for s in user_skills]
+
+    state = {
+        "role": target_role,
+        "skills": user_skill_names,
+        "education": user_data.get("education", []),
+        "experience": user_data.get("experience", [])
+    }
+    
+    topics_res = get_interview_relevant_topics(state)
+    plan = generate_interview_plan_api(target_role, user_skill_names, topics_res["topics"])
+    
+    interview_doc = {
+        "username": username,
+        "role": target_role,
+        "plan": plan["questions"],
+        "current_index": 0,
+        "history": [],
+        "is_completed": False
+    }
+    
+    # Store in DB, replace existing if there is an active one or just overwrite
+    Interviews.update_one({"username": username}, {"$set": interview_doc}, upsert=True)
+    
+    return {
+        "message": "Interview started",
+        "question": plan["questions"][0]["question"],
+        "total_questions": len(plan["questions"]),
+        "current_index": 0
+    }
+
+@app.post("/interview/answer/{username}")
+def answer_interview(username: str, req: AnswerRequest):
+    interview = Interviews.find_one({"username": username})
+    if not interview or interview.get("is_completed"):
+        raise HTTPException(status_code=400, detail="No active interview found for user.")
+    
+    current_index = interview["current_index"]
+    plan = interview["plan"]
+    
+    if current_index >= len(plan):
+        raise HTTPException(status_code=400, detail="Interview already finished.")
+        
+    current_q = plan[current_index]
+    
+    # Evaluate
+    eval_result = evaluate_user_answer_api(current_q["question"], current_q["expected_key_points"], req.answer)
+    
+    # Save to history
+    history_entry = {
+        "question": current_q["question"],
+        "answer": req.answer,
+        "score": eval_result["score"],
+        "feedback": eval_result["feedback"]
+    }
+    
+    Interviews.update_one(
+        {"username": username}, 
+        {"$push": {"history": history_entry}, "$inc": {"current_index": 1}}
+    )
+    
+    next_index = current_index + 1
+    is_completed = next_index >= len(plan)
+    
+    if is_completed:
+        Interviews.update_one({"username": username}, {"$set": {"is_completed": True}})
+        return {
+            "evaluation": eval_result,
+            "next_question": None,
+            "is_completed": True,
+            "message": "Interview completed! Please end the interview to get your final report."
+        }
+    else:
+        return {
+            "evaluation": eval_result,
+            "next_question": plan[next_index]["question"],
+            "is_completed": False
+        }
+
+@app.post("/interview/end/{username}")
+def end_interview(username: str):
+    interview = Interviews.find_one({"username": username})
+    if not interview:
+        raise HTTPException(status_code=404, detail="Interview not found")
+        
+    history = interview.get("history", [])
+    if not history:
+        return {"report": "No questions were answered."}
+        
+    avg_score = sum(h["score"] for h in history) / len(history)
+    
+    return {
+        "message": "Interview finalized",
+        "total_questions": len(interview["plan"]),
+        "answered": len(history),
+        "average_score": avg_score,
+        "history": history
+    }

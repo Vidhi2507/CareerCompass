@@ -1,5 +1,5 @@
 from pydantic import BaseModel, EmailStr,Field
-from typing import Annotated, Dict, List, Optional, TypedDict
+from typing import Annotated, Dict, List, Literal, Optional, TypedDict
 import operator
 
 class User(BaseModel):
@@ -11,8 +11,7 @@ class UserCareerInfo(BaseModel):
     username: Optional[str] = None
     fullName: Optional[str] = None
     currentRole: Optional[str] = None
-    years_experience: Optional[int] = None
-
+    years_experience: Optional[float] = None
     experience: Optional[list[dict]] = None
     education : Optional[list[dict]] = None
     skills: Annotated[list[dict], "List of skills with proficiency levels, e.g., [{'skill': 'Python', 'proficiency': 4}]"] = None
@@ -157,3 +156,58 @@ class QuestionStructuredOutput(BaseModel):
         ...,
         description="List of questions for the user to answer"
     )
+
+
+class TopicStructuredOutput(BaseModel):
+    Topics: Dict[str, List[str]] = Field(
+        ...,
+        description="Dictionary where key is skill name and value is list of topics relevant to the skill"
+    )
+
+class InterviewerState(TypedDict):
+
+    role: str
+    skills: list[str]
+    education: list[dict]
+    experience: list[dict]
+
+    topics: dict[str, list[str]]
+    interview_plan: list[dict]
+    current_question: dict
+    current_question_index: int
+
+    user_answer: str
+    evaluation: dict
+
+    interview_history: list[dict]
+    topic_mastery_score: dict[str, float]
+    overall_score: float
+    follow_up_question: dict | None
+    final_report: str
+
+    phase: Literal[
+        "planning",
+        "asking",
+        "waiting",
+        "evaluating",
+        "completed"
+    ]
+
+
+class InterviewQuestion(BaseModel):
+    question: str = Field(..., description="The interview question text.")
+    expected_key_points: List[str] = Field(..., description="Key points expected in the answer.")
+    topic: str = Field(..., description="Topic being tested.")
+    skill: str = Field(..., description="Skill being tested.")
+
+class InterviewPlanOutput(BaseModel):
+    questions: List[InterviewQuestion] = Field(..., description="List of 5-7 questions for the interview.")
+
+class AnswerEvaluation(BaseModel):
+    score: int = Field(..., description="Score out of 10 for the user's answer.")
+    feedback: str = Field(..., description="Constructive feedback for the user on what was good and what was missing.")
+    follow_up_required: bool = Field(..., description="True if a follow-up is needed to clarify or dig deeper.")
+    follow_up_question: Optional[str] = Field(None, description="The follow up question if required.")
+
+class AnswerRequest(BaseModel):
+    answer: str

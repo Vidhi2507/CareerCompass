@@ -1,10 +1,10 @@
-from langchain_google_genai import ChatGoogleGenerativeAI
+# from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_groq import ChatGroq
 from dotenv import load_dotenv 
 import os
 from pydantic import BaseModel,Field
 from typing import Annotated
-from classes import TargetRoles, RequiredSkills,RoadmapLLMStructuredOutput,QuestionStructuredOutput
+from classes import TargetRoles, RequiredSkills,RoadmapLLMStructuredOutput,QuestionStructuredOutput,TopicStructuredOutput, InterviewPlanOutput, AnswerEvaluation
 from google import genai
 from google.genai import types
 
@@ -28,6 +28,9 @@ targetrole_model = chatmodel.with_structured_output(TargetRoles)
 requiredSkills_model = chatmodel.with_structured_output(RequiredSkills)
 Roadmap_model = chatmodel.with_structured_output(RoadmapLLMStructuredOutput)
 question_model = chatmodel.with_structured_output(QuestionStructuredOutput)
+topic_model = chatmodel.with_structured_output(TopicStructuredOutput)
+interview_plan_model = chatmodel.with_structured_output(InterviewPlanOutput)
+evaluation_model = chatmodel.with_structured_output(AnswerEvaluation)
 
 embedding_client = genai.Client(api_key=os.getenv("EMBEDDING_KEY"))
 
@@ -204,3 +207,69 @@ def question_generation(skill,proficiency,role):
     prompt = f"Generate 5 MCQ questions of Interview relevant concept for the Role of {role} with strictly proficiency level {proficiency} for the skill {skill} with 4 options and also the correct answer (proficiency level 1 is basic and 5 is advanced) and the subtopic "
     Questions = question_model.invoke(prompt)
     return Questions
+
+def get_interview_relevant_topics(state):
+    role = state["role"]
+    skills = state["skills"]
+    education = state["education"]
+    experience = state["experience"]
+
+
+    prompt = f"""
+    You are an expert career coach and hiring manager.
+
+    TASK:
+    Generate a list of 3-4 interview-relevant topics for each skill relevant to the role and education and experience, strictly relevant to the interview process.
+
+    ROLE: {role}
+    SKILL: {skills}
+    Education: {education}
+    Experience: {experience}
+
+    RULES:
+    - only core interview skills and concepts should be included.
+    - Topics must be specific and relevant to the role and skill.
+    - in a order of importance for interviews.
+    - Topics must be highly relevant to interviews for the specified role.
+    - Avoid generic or vague topics; focus on specific concepts or technologies.
+    - Ensure topics are appropriate for the given proficiency level.
+    - no explanations, only output JSON.
+
+    OUTPUT SCHEMA:
+    Return JSON like:
+
+    {
+        "Skill1": [topic1, topic2, topic3,...],
+        "Skill2": [topic1, topic2, topic3,...],
+        "Skill3": [topic1, topic2, topic3,...]
+    }
+    """
+
+    topics_response = topic_model.invoke(prompt)
+    return {"topics": topics_response.topics}
+
+def generate_interview_plan_api(role, skills, topics):
+    prompt = f"""
+    You are an expert technical interviewer for the role of {role}.
+    Based on the following topics: {topics}, generate an interview plan with 5-7 technical questions.
+    Questions should be open-ended, not MCQs, to test the candidate's deep understanding.
+    Skills of candidate: {skills}.
+    """
+    plan = interview_plan_model.invoke(prompt)
+    return plan.model_dump()
+
+def evaluate_user_answer_api(question, expected_key_points, user_answer):
+    prompt = f"""
+    You are a strict technical interviewer. 
+    Question asked: {question}
+    Expected Key Points: {expected_key_points}
+    User's Answer: {user_answer}
+
+    Evaluate the answer. Give a score out of 10.
+    Provide constructive feedback.
+    Determine if a follow-up question is needed to clarify their answer. If yes, provide the follow_up_question.
+    """
+    evaluation = evaluation_model.invoke(prompt)
+    return evaluation.model_dump()
+
+
