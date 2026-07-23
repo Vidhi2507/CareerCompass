@@ -341,7 +341,7 @@ const generateRoadmap = async () => {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="md:col-span-2">
-                    <InputField label="Full Name" placeholder="Vidya Shinde" name="fullName" value={formData.fullName} onChange={handleChange} />
+                    <InputField label="Full Name" placeholder="John Doe" name="fullName" value={formData.fullName} onChange={handleChange} />
                   </div>
                   <InputField label="Current Role" placeholder="Student" name="currentRole" value={formData.currentRole} onChange={handleChange} />
                   <InputField label="Years of Experience" placeholder="2" name="years_experience" value={formData.years_experience} onChange={handleChange} />
@@ -371,7 +371,7 @@ const generateRoadmap = async () => {
                 {formData.education.map((edu, index) => (
                   <div key={index} className="space-y-4 border border-white/10 p-4 rounded-2xl bg-white/[0.02]">
                     <InputField label="School / University" name="school" placeholder="Institution Name" value={edu.school} onChange={(e) => handleEducationChange(index, e)} />
-                    <InputField label="Degree" name="degree" placeholder="B. Tech, BSc, etc." value={edu.degree} onChange={(e) => handleEducationChange(index, e)} />
+                    <InputField label="Degree" name="degree" placeholder="B.Tech CSE" value={edu.degree} onChange={(e) => handleEducationChange(index, e)} />
                     <InputField label="Field" name="field" placeholder="Computer Science" value={edu.field} onChange={(e) => handleEducationChange(index, e)} />
                     <div className="grid grid-cols-2 gap-4">
                       <InputField label="Start Year" name="startYear" placeholder="2019" value={edu.startYear} onChange={(e) => handleEducationChange(index, e)} />

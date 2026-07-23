@@ -162,11 +162,19 @@ class QuestionStructuredOutput(BaseModel):
         description="List of questions for the user to answer"
     )
 
-
-class TopicStructuredOutput(BaseModel):
-    Topics: Dict[str, List[str]] = Field(
+class Topic(BaseModel):
+    skill: str = Field(
         ...,
-        description="Dictionary where key is skill name and value is list of topics relevant to the skill"
+        description="The skill for which topics are being generated (e.g., 'Machine Learning', 'PyTorch')."
+    )
+    topics: List[str] = Field(
+        ...,
+        description="List of relevant topics or sub-skills within the specified skill."
+    )
+class TopicStructuredOutput(BaseModel):
+    Topics: List[Topic] = Field(
+        ...,
+        description="List of skills and their corresponding topics."
     )
 
 class InterviewerState(TypedDict):
@@ -216,3 +224,7 @@ class AnswerEvaluation(BaseModel):
 
 class AnswerRequest(BaseModel):
     answer: str
+
+class AgentEvaluation(BaseModel):
+    agent_score: int = Field(..., description="Score out of 10 grading the interviewer's feedback and interaction quality.")
+    agent_critique: str = Field(..., description="Constructive critique of how the AI interviewer handled the response.")
