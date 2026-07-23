@@ -19,7 +19,8 @@ const Navbar = ({ onLoginClick }) => {
 
   const handleLogout = () => {
     localStorage.clear();
-    window.location.reload();
+    window.location.href = '/';
+    // window.location.reload();
   };
 
   const handleProfileUpdate = () => {
