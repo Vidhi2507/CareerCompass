@@ -21,11 +21,16 @@ class UserCareerInfo(BaseModel):
 class TargetRoles(BaseModel):
     Roles : Annotated[list[str],"3 SuggestedTarget Roles for a person with following Interests"] = Field(default=None, max_length=3)
 
+class Skill(BaseModel):
+    skill: str
+    proficiency: int = Field(ge=0, le=5)
+
 class RequiredSkills(BaseModel):
-    Skills: Dict[str, List[Dict[str, int]]] = Field(
-        ...,
-        description="Dictionary where key is role name and value is list of skills with required levels"
-    )
+    Skills: Dict[str, Annotated[
+            List[Skill],
+            Field(min_length=10, max_length=10)
+        ]]
+
 
 class Roadmapstate(TypedDict):
     education: dict
@@ -210,4 +215,4 @@ class AnswerEvaluation(BaseModel):
     follow_up_question: Optional[str] = Field(None, description="The follow up question if required.")
 
 class AnswerRequest(BaseModel):
-    answer: str
+    answer: str

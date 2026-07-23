@@ -64,29 +64,38 @@ def Suggest_Target_Roles(state):
 def Required_Skills(state):
     Target_role = state['TargetRoles']
     prompt = f"""
-    You are an expert career coach and hiring manager.
+                You are an expert career coach and hiring manager.
 
-        TASK:
-        Generate a list of EXACTLY 10 highly important technical skills required for each target role.
+                Generate exactly 10 technical skills for EACH target role.
 
-        TARGET ROLES:
-        1. {Target_role[0]}
-        2. {Target_role[1]}
-        3. {Target_role[2]}
+                TARGET ROLES:
+                1. {Target_role[0]}
+                2. {Target_role[1]}
+                3. {Target_role[2]}
 
-        Generate the required skills for each role.
+                IMPORTANT OUTPUT FORMAT:
 
-        Follow the provided output schema exactly.
+                The top-level key "Skills" MUST be an object.
+                Each key inside "Skills" MUST be the exact role name.
+                Each role must contain a list of exactly 10 skill objects.
 
-        RULES:
-        - Skills must be resume/job-description skills only.
-        - Skills must be mostly technical and learnable (no vague soft skills).
-        - Order skills from beginner → advanced for each role.
-        - Required proficiency must be integer 0 to 5.
-        - Include modern industry-demand skills relevant in 2026.
-        - Avoid duplicates and avoid generic phrases like "problem solving".
-        - Do NOT include explanations, only output JSON.
-        """
+                Example:
+
+                {{
+                "Skills": {{
+                    "{Target_role[0]}": [
+                    {{
+                        "skill": "Python",
+                        "proficiency": 5
+                    }}
+                    ],
+                    "{Target_role[1]}": [],
+                    "{Target_role[2]}": []
+                }}
+                }}
+
+                Return only the structured output.
+                """
 
     
     skill_list = requiredSkills_model.invoke(prompt)
@@ -94,33 +103,49 @@ def Required_Skills(state):
 
 
 def normalize_userandReq_skill(state):
-    Required_Skills_dict = state["RequiredSkills"]  # normalizing all skills
+    Required_Skills_dict = state["RequiredSkills"]
     normalized_req_skills = {}
 
     for role, skill_list in Required_Skills_dict.items():
         normalized_req_skills[role] = []
 
-        for skill_dict in skill_list:   
-            new_dict = {}
+        for skill_obj in skill_list:
+            skill_name = skill_obj.skill
+            level = skill_obj.proficiency
 
-            for skill_name, level in skill_dict.items():
-                mapped_skill = normalize_skill(embedding_client, qdrant_client, skill_name)
-                new_dict[mapped_skill] = level
+            mapped_skill = normalize_skill(
+                embedding_client,
+                qdrant_client,
+                skill_name
+            )
 
-            normalized_req_skills[role].append(new_dict)
+            normalized_req_skills[role].append({
+                mapped_skill: level
+            })
 
     user_skills = state["skills"]
-    # user_skills= {'skill': 'Python', 'proficiency': 5}
-    #convert user skills to same format as required skills
-    user_skill_dicts = [{skill['skill']: skill['proficiency']} for skill in user_skills]
+
+    user_skill_dicts = [
+        {skill['skill']: skill['proficiency']}
+        for skill in user_skills
+    ]
 
     normalized_user_skills = {}
+    print("all OKAY until now")
     for skill_dict in user_skill_dicts:
         for skill_name, level in skill_dict.items():
-            mapped_skill = normalize_skill(embedding_client, qdrant_client, skill_name)
-            normalized_user_skills[mapped_skill] = level    
+            mapped_skill = normalize_skill(
+                embedding_client,
+                qdrant_client,
+                skill_name
+            )
+            normalized_user_skills[mapped_skill] = level
 
-    return {"RequiredSkills": normalized_req_skills, "skills": normalized_user_skills}
+    return {
+        "RequiredSkills": normalized_req_skills,
+        "skills": normalized_user_skills
+    }
+
 
 def Skill_Gap_Analysis(state):
     # decison = interrupt(f"choose one of the target roles for gap analysis: {state['TargetRoles']}")
