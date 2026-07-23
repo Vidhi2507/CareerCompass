@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 import os
 from pydantic import BaseModel,Field
 from typing import Annotated
-from classes import TargetRoles, RequiredSkills,RoadmapLLMStructuredOutput,QuestionStructuredOutput,TopicStructuredOutput, InterviewPlanOutput, AnswerEvaluation
+from classes import TargetRoles, RequiredSkills,RoadmapLLMStructuredOutput,QuestionStructuredOutput,TopicStructuredOutput, InterviewPlanOutput, AnswerEvaluation, AgentEvaluation
 from google import genai
 from google.genai import types
 
@@ -31,6 +31,7 @@ question_model = chatmodel.with_structured_output(QuestionStructuredOutput)
 topic_model = chatmodel.with_structured_output(TopicStructuredOutput)
 interview_plan_model = chatmodel.with_structured_output(InterviewPlanOutput)
 evaluation_model = chatmodel.with_structured_output(AnswerEvaluation)
+agent_eval_model = chatmodel.with_structured_output(AgentEvaluation)
 
 embedding_client = genai.Client(api_key=os.getenv("EMBEDDING_KEY"))
 
@@ -263,15 +264,15 @@ def get_interview_relevant_topics(state):
     OUTPUT SCHEMA:
     Return JSON like:
 
-    {
-        "Skill1": [topic1, topic2, topic3,...],
-        "Skill2": [topic1, topic2, topic3,...],
-        "Skill3": [topic1, topic2, topic3,...]
-    }
+    {{
+        "Skill1": ["topic1", "topic2", "topic3"],
+        "Skill2": ["topic1", "topic2", "topic3"],
+        "Skill3": ["topic1", "topic2", "topic3"]
+    }}
     """
 
     topics_response = topic_model.invoke(prompt)
-    return {"topics": topics_response.topics}
+    return {"topics": topics_response.Topics}
 
 def generate_interview_plan_api(role, skills, topics):
     prompt = f"""
@@ -296,5 +297,22 @@ def evaluate_user_answer_api(question, expected_key_points, user_answer):
     """
     evaluation = evaluation_model.invoke(prompt)
     return evaluation.model_dump()
+
+def evaluate_agent_performance_api(question, user_answer, agent_feedback, agent_follow_up):
+    prompt = f"""
+    You are an expert meta-evaluator observing a mock technical interview.
+    
+    Original Question: {question}
+    User's Answer: {user_answer}
+    Agent's Feedback: {agent_feedback}
+    Agent's Follow-up: {agent_follow_up if agent_follow_up else 'None'}
+
+    Your task is to grade the Agent Interviewer. Did the agent provide fair, accurate, and constructive feedback?
+    Was the follow-up question (if any) relevant and appropriate to dig deeper into the user's weaknesses?
+    
+    Grade the agent out of 10 and provide a constructive critique.
+    """
+    agent_eval = agent_eval_model.invoke(prompt)
+    return agent_eval.model_dump()
 
 

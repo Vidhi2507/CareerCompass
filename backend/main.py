@@ -19,7 +19,7 @@ load_dotenv()
 
 ##Agents
 from langgraph.graph import StateGraph, MessagesState, START, END
-from agents import Skill_Gap_Analysis, Suggest_Target_Roles, Required_Skills, normalize_userandReq_skill, roadmap_generation_agent, question_generation,get_interview_relevant_topics, parse_resume_to_json, generate_interview_plan_api, evaluate_user_answer_api
+from agents import Skill_Gap_Analysis, Suggest_Target_Roles, Required_Skills, normalize_userandReq_skill, roadmap_generation_agent, question_generation,get_interview_relevant_topics, parse_resume_to_json, generate_interview_plan_api, evaluate_user_answer_api, evaluate_agent_performance_api
 
 ## connect to MongoDB
 uri = os.getenv("DATABASE_URL")
@@ -253,7 +253,8 @@ def start_interview(username: str):
         "plan": plan["questions"],
         "current_index": 0,
         "history": [],
-        "is_completed": False
+        "is_completed": False,
+        "pending_follow_up": None
     }
     
     # Store in DB, replace existing if there is an active one or just overwrite
@@ -278,40 +279,93 @@ def answer_interview(username: str, req: AnswerRequest):
     if current_index >= len(plan):
         raise HTTPException(status_code=400, detail="Interview already finished.")
         
-    current_q = plan[current_index]
+    current_q_base = plan[current_index]
+    pending_follow_up = interview.get("pending_follow_up")
     
-    # Evaluate
-    eval_result = evaluate_user_answer_api(current_q["question"], current_q["expected_key_points"], req.answer)
+    # Determine the actual question being answered
+    if pending_follow_up:
+        current_q_text = pending_follow_up
+        # if it's a follow-up, it's still related to the same topic
+        expected_key_points = current_q_base["expected_key_points"] 
+    else:
+        current_q_text = current_q_base["question"]
+        expected_key_points = current_q_base["expected_key_points"]
+    
+    # 1. Evaluate User Answer
+    eval_result = evaluate_user_answer_api(current_q_text, expected_key_points, req.answer)
+    
+    # Prevent infinite follow-ups: if we were already answering a follow-up, don't ask another one for this topic
+    if pending_follow_up:
+        eval_result["follow_up_required"] = False
+        eval_result["follow_up_question"] = None
+
+    # 2. Meta LLM Evaluation of the Agent
+    agent_eval = evaluate_agent_performance_api(
+        question=current_q_text,
+        user_answer=req.answer,
+        agent_feedback=eval_result["feedback"],
+        agent_follow_up=eval_result.get("follow_up_question")
+    )
     
     # Save to history
     history_entry = {
-        "question": current_q["question"],
+        "question": current_q_text,
         "answer": req.answer,
         "score": eval_result["score"],
-        "feedback": eval_result["feedback"]
+        "feedback": eval_result["feedback"],
+        "agent_evaluation": agent_eval
     }
     
-    Interviews.update_one(
-        {"username": username}, 
-        {"$push": {"history": history_entry}, "$inc": {"current_index": 1}}
-    )
+    # Update state variables
+    next_question = None
+    is_completed = False
     
-    next_index = current_index + 1
-    is_completed = next_index >= len(plan)
+    if eval_result.get("follow_up_required") and eval_result.get("follow_up_question"):
+        # Set the follow up and DO NOT increment index
+        Interviews.update_one(
+            {"username": username}, 
+            {
+                "$push": {"history": history_entry}, 
+                "$set": {"pending_follow_up": eval_result["follow_up_question"]}
+            }
+        )
+        next_question = eval_result["follow_up_question"]
+        next_index = current_index
+    else:
+        # Move to next topic question
+        Interviews.update_one(
+            {"username": username}, 
+            {
+                "$push": {"history": history_entry}, 
+                "$inc": {"current_index": 1},
+                "$set": {"pending_follow_up": None}
+            }
+        )
+        next_index = current_index + 1
+        if next_index >= len(plan):
+            is_completed = True
+            Interviews.update_one({"username": username}, {"$set": {"is_completed": True}})
+        else:
+            next_question = plan[next_index]["question"]
+    
+    total_questions = len(plan)
     
     if is_completed:
-        Interviews.update_one({"username": username}, {"$set": {"is_completed": True}})
         return {
             "evaluation": eval_result,
             "next_question": None,
             "is_completed": True,
+            "current_question_number": next_index,
+            "total_questions": total_questions,
             "message": "Interview completed! Please end the interview to get your final report."
         }
     else:
         return {
             "evaluation": eval_result,
-            "next_question": plan[next_index]["question"],
-            "is_completed": False
+            "next_question": next_question,
+            "is_completed": False,
+            "current_question_number": next_index + 1 if not eval_result.get("follow_up_required") else next_index,
+            "total_questions": total_questions
         }
 
 @app.post("/interview/end/{username}")
