@@ -186,7 +186,7 @@ def get_user_skills(username: str):
     return {"skills": user_data.get("skills", [])}
 
 
-# Vidya --- Add this endpoint 
+# Vidya ---> Add this endpoint 
 @app.post("/upload-resume/{username}")
 async def upload_resume(username: str, file: UploadFile = File(...)):
     if file.content_type != "application/pdf":
@@ -205,19 +205,24 @@ async def upload_resume(username: str, file: UploadFile = File(...)):
     # 2. Parse text to structured UserCareerInfo
     parsed_info = parse_resume_to_json(resume_text)
 
-    career_data = parsed_info.dict()
+    career_data = parsed_info.model_dump(exclude_unset=True)
     career_data["username"] = username
 
     # 3. Save to MongoDB (Same logic as manual_entry)
-    UserCareerDetails.update_one(
-        {"username": username}, 
-        {"$set": parsed_info.model_dump(exclude_unset=True)}, 
-        upsert=True
-    )
+    if UserCareerDetails.find_one({"username": username}):
+        UserCareerDetails.update_one(
+            {"username": username}, 
+            {
+                "$set": career_data,
+                "$unset": {"Roadmap": ""}
+            }
+        )
+    else:
+        UserCareerDetails.insert_one(career_data)
 
     # 4. Trigger Roadmap Generation logic (Reuse your existing graph logic)
     # This ensures the resume flow ends with a roadmap in the DB just like manual entry
-    return {"message": "Resume analyzed and roadmap pending", "username": username}
+    return {"message": "Career Details stored ", "username": username}
 
 @app.post("/interview/start/{username}")
 def start_interview(username: str):
