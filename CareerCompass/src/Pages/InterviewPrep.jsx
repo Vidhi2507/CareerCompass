@@ -204,11 +204,9 @@ const InterviewPrep = () => {
                 <div className="lg:w-1/3 flex flex-col gap-6">
                     {/* Header Card */}
                     <div className="bg-zinc-900/40 border border-white/5 rounded-[2rem] p-8 backdrop-blur-xl shrink-0 flex flex-col justify-center items-center text-center">
-                        <div className="w-20 h-20 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(236,72,153,0.3)]">
-                            <Bot size={32} className="text-white" />
-                        </div>
+                        
                         <h2 className="text-2xl font-black tracking-tight mb-2">Technical Interview</h2>
-                        <p className="text-zinc-400 text-sm leading-relaxed mb-6">Respond to the questions with as much technical depth as possible. The AI will evaluate your answers in real-time.</p>
+                        
                         
                         {/* Progress Bar */}
                         <div className="w-full">

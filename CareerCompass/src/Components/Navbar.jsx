@@ -90,7 +90,7 @@ const Navbar = ({ onLoginClick }) => {
           <NavLink to="/" label="Home" active={location.pathname === "/"} />
           <NavLink to="/resume-upload" label="Roadmap" active={location.pathname === "/resume-upload"} />
           <NavLink to="/roadmap" label="Career Paths" active={location.pathname === "/roadmap"} />
-          <NavLink to="/interview" label="Interview Prep" active={location.pathname === "/interview"} />
+          <NavLink to="/interview-prep" label="Interview Prep" active={location.pathname === "/interview-prep"} />
         </div>
 
         {/* AUTH SECTION - Modern Pill Design */}
