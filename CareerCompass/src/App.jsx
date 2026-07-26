@@ -10,6 +10,7 @@ import ResumeUpload from './Pages/ResumeUpload';
 import ManualEntry from './Pages/ManualEntry';
 import Roadmap from './Pages/Roadmap';
 import Skilltest from './Pages/Skilltest';
+import InterviewPrep from './Pages/InterviewPrep';
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
@@ -68,6 +69,7 @@ function App() {
             <Route path="/manual-entry" element={<ManualEntry />} />
             <Route path='/roadmap' element={<Roadmap/>}/>
             <Route path='/test/:username/:skillName' element={<Skilltest/>}/>
+            <Route path="/interview-prep" element={<InterviewPrep/>} />
           </Routes>
         </main>
 
