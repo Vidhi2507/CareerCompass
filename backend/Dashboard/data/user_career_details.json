@@ -1,0 +1,4405 @@
+[
+  {
+    "_id": {
+      "$oid": "6a46b0954a9ea2445be55c22"
+    },
+    "username": "xyz",
+    "currentRole": "Decision Scientist",
+    "education": [
+      {
+        "degree": "Masters in Computer Application",
+        "endDate": 2027,
+        "institution": "Veermata Jijabai Institute of Technology",
+        "startDate": 2025
+      },
+      {
+        "degree": "Bachelor of Science in Computer Science",
+        "endDate": 2024,
+        "institution": "S.I.E.S College of Arts, Science & Commerce",
+        "startDate": 2021
+      }
+    ],
+    "experience": [
+      {
+        "company": "Fractal Analytics",
+        "endDate": "October 2024",
+        "role": "Decision Scientist",
+        "startDate": "Jun 2024"
+      }
+    ],
+    "fullName": "xyz sirname",
+    "interests": [],
+    "skills": [
+      {
+        "proficiency": 5,
+        "skill": "Python"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Java"
+      },
+      {
+        "proficiency": 5,
+        "skill": "SQL"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Pandas"
+      },
+      {
+        "proficiency": 5,
+        "skill": "NumPy"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Scikit-learn"
+      },
+      {
+        "proficiency": 5,
+        "skill": "NLP"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Machine Learning"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Data Modelling"
+      },
+      {
+        "proficiency": 5,
+        "skill": "LangChain"
+      },
+      {
+        "proficiency": 5,
+        "skill": "LangGraph"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Prompt Engineering"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Wordware"
+      },
+      {
+        "proficiency": 5,
+        "skill": "RAG"
+      },
+      {
+        "proficiency": 5,
+        "skill": "AI Agents"
+      },
+      {
+        "proficiency": 5,
+        "skill": "FastAPI"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Streamlit"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Pydantic"
+      },
+      {
+        "proficiency": 2,
+        "skill": "HTML"
+      },
+      {
+        "proficiency": 2,
+        "skill": "JSP"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Servlets"
+      },
+      {
+        "proficiency": 5,
+        "skill": "MySQL"
+      },
+      {
+        "proficiency": 5,
+        "skill": "MongoDB"
+      },
+      {
+        "proficiency": 5,
+        "skill": "PySpark"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Azure Data Factory"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Power BI"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Tableau"
+      },
+      {
+        "proficiency": 5,
+        "skill": "KNIME"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Matplotlib"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Seaborn"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Excel"
+      }
+    ],
+    "years_experience": 0,
+    "Roadmap": {
+      "role": "Data Scientist",
+      "readinessScore": 25,
+      "estimated_days_to_job_ready": 365,
+      "phases": [
+        {
+          "phase_name": "Beginner",
+          "duration_days": 60,
+          "skills_to_focus": [
+            {
+              "skill": "Java",
+              "tasks": [
+                "Learn Java basics",
+                "Practice Java coding challenges"
+              ],
+              "resource_book": "Head First Java",
+              "official_docs": "https://docs.oracle.com/javase/tutorial/"
+            },
+            {
+              "skill": "C++",
+              "tasks": [
+                "Learn C++ basics",
+                "Practice C++ coding challenges"
+              ],
+              "resource_book": "The C++ Programming Language",
+              "official_docs": "https://docs.microsoft.com/en-us/cpp/"
+            },
+            {
+              "skill": "Python",
+              "tasks": [
+                "Review Python basics",
+                "Practice Python coding challenges"
+              ],
+              "resource_book": "Python Crash Course",
+              "official_docs": "https://docs.python.org/3/"
+            }
+          ],
+          "mini_project": {
+            "title": "Command Line Calculator",
+            "description": "Build a command line calculator using Python",
+            "skills_used": [
+              "Python",
+              "Java",
+              "C++"
+            ],
+            "difficulty": "Beginner"
+          },
+          "major_project": {
+            "title": "Personal Finance Manager",
+            "description": "Build a personal finance manager using Java and Python",
+            "skills_used": [
+              "Java",
+              "Python",
+              "C++"
+            ],
+            "difficulty": "Intermediate"
+          }
+        },
+        {
+          "phase_name": "Intermediate",
+          "duration_days": 90,
+          "skills_to_focus": [
+            {
+              "skill": "Machine Learning",
+              "tasks": [
+                "Learn ML basics",
+                "Practice ML coding challenges"
+              ],
+              "resource_book": "Python Machine Learning",
+              "official_docs": "https://scikit-learn.org/stable/"
+            },
+            {
+              "skill": "Deep Learning",
+              "tasks": [
+                "Learn DL basics",
+                "Practice DL coding challenges"
+              ],
+              "resource_book": "Deep Learning with Python",
+              "official_docs": "https://www.tensorflow.org/"
+            },
+            {
+              "skill": "TensorFlow",
+              "tasks": [
+                "Learn TensorFlow basics",
+                "Practice TensorFlow coding challenges"
+              ],
+              "resource_book": "TensorFlow Tutorial",
+              "official_docs": "https://www.tensorflow.org/"
+            }
+          ],
+          "mini_project": {
+            "title": "Image Classification",
+            "description": "Build an image classification model using TensorFlow",
+            "skills_used": [
+              "TensorFlow",
+              "Python",
+              "Machine Learning"
+            ],
+            "difficulty": "Intermediate"
+          },
+          "major_project": {
+            "title": "Chatbot",
+            "description": "Build a chatbot using TensorFlow and Python",
+            "skills_used": [
+              "TensorFlow",
+              "Python",
+              "Machine Learning",
+              "Deep Learning"
+            ],
+            "difficulty": "Advanced"
+          }
+        },
+        {
+          "phase_name": "Advanced",
+          "duration_days": 120,
+          "skills_to_focus": [
+            {
+              "skill": "Natural Language Processing",
+              "tasks": [
+                "Learn NLP basics",
+                "Practice NLP coding challenges"
+              ],
+              "resource_book": "Natural Language Processing with Python",
+              "official_docs": "https://www.nltk.org/"
+            },
+            {
+              "skill": "Computer Vision",
+              "tasks": [
+                "Learn CV basics",
+                "Practice CV coding challenges"
+              ],
+              "resource_book": "Computer Vision with Python",
+              "official_docs": "https://docs.opencv.org/"
+            },
+            {
+              "skill": "PyTorch",
+              "tasks": [
+                "Learn PyTorch basics",
+                "Practice PyTorch coding challenges"
+              ],
+              "resource_book": "PyTorch Tutorial",
+              "official_docs": "https://pytorch.org/"
+            }
+          ],
+          "mini_project": {
+            "title": "Sentiment Analysis",
+            "description": "Build a sentiment analysis model using PyTorch",
+            "skills_used": [
+              "PyTorch",
+              "Python",
+              "Natural Language Processing"
+            ],
+            "difficulty": "Advanced"
+          },
+          "major_project": {
+            "title": "Object Detection",
+            "description": "Build an object detection model using PyTorch and Python",
+            "skills_used": [
+              "PyTorch",
+              "Python",
+              "Computer Vision",
+              "Deep Learning"
+            ],
+            "difficulty": "Advanced"
+          }
+        },
+        {
+          "phase_name": "Job Ready",
+          "duration_days": 95,
+          "skills_to_focus": [
+            {
+              "skill": "Interview Preparation",
+              "tasks": [
+                "Practice whiteboarding",
+                "Review common interview questions"
+              ],
+              "resource_book": "Cracking the Coding Interview",
+              "official_docs": "https://www.pramp.com/"
+            },
+            {
+              "skill": "Keras",
+              "tasks": [
+                "Learn Keras basics",
+                "Practice Keras coding challenges"
+              ],
+              "resource_book": "Keras Tutorial",
+              "official_docs": "https://keras.io/"
+            },
+            {
+              "skill": "Data Science",
+              "tasks": [
+                "Review data science basics",
+                "Practice data science coding challenges"
+              ],
+              "resource_book": "Data Science with Python",
+              "official_docs": "https://www.datacamp.com/"
+            }
+          ],
+          "mini_project": {
+            "title": "Data Visualization",
+            "description": "Build a data visualization dashboard using Python",
+            "skills_used": [
+              "Python",
+              "Data Science",
+              "Keras"
+            ],
+            "difficulty": "Intermediate"
+          },
+          "major_project": {
+            "title": "Capstone Project",
+            "description": "Build a capstone project using all the skills learned",
+            "skills_used": [
+              "Python",
+              "Machine Learning",
+              "Deep Learning",
+              "Natural Language Processing",
+              "Computer Vision",
+              "PyTorch",
+              "Keras",
+              "Data Science"
+            ],
+            "difficulty": "Advanced"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a4f39168ae0cfec0af786b2"
+    },
+    "username": "vidyaaa14",
+    "currentRole": null,
+    "education": [
+      {
+        "degree": "Bacheoler\u2019s in Computer Science",
+        "institution": "Veermata Jijabai Technological Institute"
+      },
+      {
+        "degree": "Masters in Computer Applications",
+        "institution": "D.G. Ruparel College of Arts , Science and Commerce"
+      }
+    ],
+    "experience": [
+      {
+        "company": "Talent Corner HR Services Pvt Ltd",
+        "duration": "July 2025 \u2013 Oct 2025",
+        "role": "Full Stack Developer"
+      }
+    ],
+    "fullName": "abc sirname2",
+    "interests": [],
+    "skills": [
+      {
+        "proficiency": 2,
+        "skill": "Python"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Java"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Kotlin"
+      },
+      {
+        "proficiency": 2,
+        "skill": "C++"
+      },
+      {
+        "proficiency": 2,
+        "skill": "SQL"
+      },
+      {
+        "proficiency": 2,
+        "skill": "HTML"
+      },
+      {
+        "proficiency": 2,
+        "skill": "CSS"
+      },
+      {
+        "proficiency": 2,
+        "skill": "JavaScript"
+      },
+      {
+        "proficiency": 2,
+        "skill": "React"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Node.js"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Express.js"
+      },
+      {
+        "proficiency": 2,
+        "skill": "RESTful APIs"
+      },
+      {
+        "proficiency": 2,
+        "skill": "MySQL"
+      },
+      {
+        "proficiency": 2,
+        "skill": "MongoDB Atlas"
+      },
+      {
+        "proficiency": 2,
+        "skill": "PostgreSQL"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Git"
+      },
+      {
+        "proficiency": 2,
+        "skill": "VS Code"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Render"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Github"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Vercel"
+      }
+    ],
+    "years_experience": 0,
+    "Roadmap": {
+      "role": "Software Engineer",
+      "readinessScore": 10,
+      "estimated_days_to_job_ready": 270,
+      "phases": [
+        {
+          "phase_name": "Beginner",
+          "duration_days": 60,
+          "skills_to_focus": [
+            {
+              "skill": "Python",
+              "tasks": [
+                "Learn basic syntax",
+                "Practice data structures and algorithms"
+              ],
+              "resource_book": "Python Crash Course",
+              "official_docs": "https://docs.python.org/3/"
+            },
+            {
+              "skill": "SQL",
+              "tasks": [
+                "Learn basic queries",
+                "Practice database design"
+              ],
+              "resource_book": "SQL Tutorial",
+              "official_docs": "https://www.w3schools.com/sql/"
+            }
+          ],
+          "mini_project": {
+            "title": "To-Do List App",
+            "description": "A simple to-do list app using Python and SQL",
+            "skills_used": [
+              "Python",
+              "SQL"
+            ],
+            "difficulty": "Beginner"
+          },
+          "major_project": {
+            "title": "Personal Finance Manager",
+            "description": "A personal finance manager app using Python and SQL",
+            "skills_used": [
+              "Python",
+              "SQL"
+            ],
+            "difficulty": "Beginner"
+          }
+        },
+        {
+          "phase_name": "Intermediate",
+          "duration_days": 60,
+          "skills_to_focus": [
+            {
+              "skill": "NoSQL",
+              "tasks": [
+                "Learn NoSQL databases",
+                "Practice data modeling"
+              ],
+              "resource_book": "NoSQL Distilled",
+              "official_docs": "https://www.mongodb.com/docs/"
+            },
+            {
+              "skill": "Machine Learning",
+              "tasks": [
+                "Learn basic machine learning concepts",
+                "Practice with scikit-learn"
+              ],
+              "resource_book": "Python Machine Learning",
+              "official_docs": "https://scikit-learn.org/stable/"
+            }
+          ],
+          "mini_project": {
+            "title": "Chatbot",
+            "description": "A simple chatbot using NoSQL and machine learning",
+            "skills_used": [
+              "NoSQL",
+              "Machine Learning"
+            ],
+            "difficulty": "Intermediate"
+          },
+          "major_project": {
+            "title": "Recommendation System",
+            "description": "A recommendation system using NoSQL and machine learning",
+            "skills_used": [
+              "NoSQL",
+              "Machine Learning"
+            ],
+            "difficulty": "Intermediate"
+          }
+        },
+        {
+          "phase_name": "Advanced",
+          "duration_days": 60,
+          "skills_to_focus": [
+            {
+              "skill": "Deep Learning",
+              "tasks": [
+                "Learn deep learning concepts",
+                "Practice with TensorFlow"
+              ],
+              "resource_book": "Deep Learning with Python",
+              "official_docs": "https://www.tensorflow.org/docs"
+            },
+            {
+              "skill": "Natural Language Processing",
+              "tasks": [
+                "Learn NLP concepts",
+                "Practice with NLTK"
+              ],
+              "resource_book": "Natural Language Processing with Python",
+              "official_docs": "https://www.nltk.org/book/"
+            }
+          ],
+          "mini_project": {
+            "title": "Sentiment Analysis",
+            "description": "A sentiment analysis tool using deep learning and NLP",
+            "skills_used": [
+              "Deep Learning",
+              "Natural Language Processing"
+            ],
+            "difficulty": "Advanced"
+          },
+          "major_project": {
+            "title": "Language Translator",
+            "description": "A language translator using deep learning and NLP",
+            "skills_used": [
+              "Deep Learning",
+              "Natural Language Processing"
+            ],
+            "difficulty": "Advanced"
+          }
+        },
+        {
+          "phase_name": "Job Ready",
+          "duration_days": 90,
+          "skills_to_focus": [
+            {
+              "skill": "R",
+              "tasks": [
+                "Learn R basics",
+                "Practice data visualization"
+              ],
+              "resource_book": "R for Data Science",
+              "official_docs": "https://www.r-project.org/"
+            },
+            {
+              "skill": "Tableau",
+              "tasks": [
+                "Learn Tableau basics",
+                "Practice data visualization"
+              ],
+              "resource_book": "Tableau Tutorial",
+              "official_docs": "https://www.tableau.com/learn"
+            }
+          ],
+          "mini_project": {
+            "title": "Data Visualization Dashboard",
+            "description": "A data visualization dashboard using R and Tableau",
+            "skills_used": [
+              "R",
+              "Tableau"
+            ],
+            "difficulty": "Intermediate"
+          },
+          "major_project": {
+            "title": "Business Intelligence Dashboard",
+            "description": "A business intelligence dashboard using R, Tableau, and Power BI",
+            "skills_used": [
+              "R",
+              "Tableau",
+              "Power BI"
+            ],
+            "difficulty": "Advanced"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a4f3b658ae0cfec0af786b4"
+    },
+    "username": "firstuser",
+    "currentRole": "Decision Scientist",
+    "education": [
+      {
+        "degree": "Masters in Computer Application",
+        "endDate": "2027",
+        "institution": "Veermata Jijabai Institute of Technology",
+        "startDate": "2025"
+      },
+      {
+        "degree": "Bachelor of Science in Computer Science",
+        "endDate": "2024",
+        "institution": "S.I.E.S College of Arts, Science & Commerce",
+        "startDate": "2021"
+      }
+    ],
+    "experience": [
+      {
+        "company": "Fractal Analytics",
+        "endDate": "October 2024",
+        "role": "Decision Scientist",
+        "startDate": "Jun 2024"
+      }
+    ],
+    "fullName": "xyz sirname",
+    "interests": [],
+    "skills": [
+      {
+        "proficiency": 5,
+        "skill": "Python"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Java"
+      },
+      {
+        "proficiency": 5,
+        "skill": "SQL"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Pandas"
+      },
+      {
+        "proficiency": 5,
+        "skill": "NumPy"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Scikit-learn"
+      },
+      {
+        "proficiency": 5,
+        "skill": "NLP"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Machine Learning"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Data Modelling"
+      },
+      {
+        "proficiency": 5,
+        "skill": "LangChain"
+      },
+      {
+        "proficiency": 5,
+        "skill": "LangGraph"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Prompt Engineering"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Wordware"
+      },
+      {
+        "proficiency": 5,
+        "skill": "RAG"
+      },
+      {
+        "proficiency": 5,
+        "skill": "AI Agents"
+      },
+      {
+        "proficiency": 5,
+        "skill": "FastAPI"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Streamlit"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Pydantic"
+      },
+      {
+        "proficiency": 2,
+        "skill": "HTML"
+      },
+      {
+        "proficiency": 2,
+        "skill": "JSP"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Servlets"
+      },
+      {
+        "proficiency": 5,
+        "skill": "MySQL"
+      },
+      {
+        "proficiency": 5,
+        "skill": "MongoDB"
+      },
+      {
+        "proficiency": 5,
+        "skill": "PySpark"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Azure Data Factory (ADF)"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Power BI"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Tableau"
+      },
+      {
+        "proficiency": 5,
+        "skill": "KNIME"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Matplotlib"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Seaborn"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Excel"
+      },
+      {
+        "skill": "Computer Vision",
+        "proficiency": 3
+      }
+    ],
+    "years_experience": 1,
+    "Roadmap": {
+      "role": "Data Scientist",
+      "readinessScore": 29,
+      "estimated_days_to_job_ready": 240,
+      "phases": [
+        {
+          "phase_name": "Beginner",
+          "duration_days": 60,
+          "skills_to_focus": [
+            {
+              "skill": "Deep Learning",
+              "tasks": [
+                "Learn basics of Deep Learning",
+                "Understand Convolutional Neural Networks (CNNs)"
+              ],
+              "resource_book": "Deep Learning by Ian Goodfellow and Yoshua Bengio",
+              "official_docs": "https://www.deeplearningbook.org/"
+            },
+            {
+              "skill": "TensorFlow",
+              "tasks": [
+                "Install TensorFlow",
+                "Learn basic operations in TensorFlow"
+              ],
+              "resource_book": "TensorFlow Tutorial by Google",
+              "official_docs": "https://www.tensorflow.org/tutorials"
+            }
+          ],
+          "mini_project": {
+            "title": "Image Classification using TensorFlow",
+            "description": "Build a simple image classification model using TensorFlow",
+            "skills_used": [
+              "TensorFlow",
+              "Deep Learning"
+            ],
+            "difficulty": "Beginner"
+          },
+          "major_project": {
+            "title": "Deep Learning for Computer Vision",
+            "description": "Build a deep learning model for computer vision tasks",
+            "skills_used": [
+              "Deep Learning",
+              "Computer Vision",
+              "TensorFlow"
+            ],
+            "difficulty": "Intermediate"
+          }
+        },
+        {
+          "phase_name": "Intermediate",
+          "duration_days": 60,
+          "skills_to_focus": [
+            {
+              "skill": "Natural Language Processing",
+              "tasks": [
+                "Learn basics of NLP",
+                "Understand Recurrent Neural Networks (RNNs)"
+              ],
+              "resource_book": "Natural Language Processing by Christopher Manning",
+              "official_docs": "https://nlp.stanford.edu/"
+            },
+            {
+              "skill": "PyTorch",
+              "tasks": [
+                "Install PyTorch",
+                "Learn basic operations in PyTorch"
+              ],
+              "resource_book": "PyTorch Tutorial by Facebook",
+              "official_docs": "https://pytorch.org/tutorials"
+            }
+          ],
+          "mini_project": {
+            "title": "Text Classification using PyTorch",
+            "description": "Build a simple text classification model using PyTorch",
+            "skills_used": [
+              "PyTorch",
+              "Natural Language Processing"
+            ],
+            "difficulty": "Intermediate"
+          },
+          "major_project": {
+            "title": "NLP for Text Analysis",
+            "description": "Build a NLP model for text analysis tasks",
+            "skills_used": [
+              "Natural Language Processing",
+              "PyTorch",
+              "Deep Learning"
+            ],
+            "difficulty": "Advanced"
+          }
+        },
+        {
+          "phase_name": "Advanced",
+          "duration_days": 60,
+          "skills_to_focus": [
+            {
+              "skill": "Computer Vision",
+              "tasks": [
+                "Learn basics of Computer Vision",
+                "Understand Object Detection"
+              ],
+              "resource_book": "Computer Vision by Richard Szeliski",
+              "official_docs": "https://docs.opencv.org/"
+            },
+            {
+              "skill": "Keras",
+              "tasks": [
+                "Install Keras",
+                "Learn basic operations in Keras"
+              ],
+              "resource_book": "Keras Tutorial by Google",
+              "official_docs": "https://keras.io/"
+            },
+            {
+              "skill": "OpenCV",
+              "tasks": [
+                "Install OpenCV",
+                "Learn basic operations in OpenCV"
+              ],
+              "resource_book": "OpenCV Tutorial by OpenCV",
+              "official_docs": "https://docs.opencv.org/"
+            }
+          ],
+          "mini_project": {
+            "title": "Object Detection using OpenCV",
+            "description": "Build a simple object detection model using OpenCV",
+            "skills_used": [
+              "OpenCV",
+              "Computer Vision"
+            ],
+            "difficulty": "Advanced"
+          },
+          "major_project": {
+            "title": "Computer Vision for Image Analysis",
+            "description": "Build a computer vision model for image analysis tasks",
+            "skills_used": [
+              "Computer Vision",
+              "OpenCV",
+              "Deep Learning"
+            ],
+            "difficulty": "Advanced"
+          }
+        },
+        {
+          "phase_name": "Job Ready",
+          "duration_days": 60,
+          "skills_to_focus": [
+            {
+              "skill": "Interview Preparation",
+              "tasks": [
+                "Practice whiteboarding",
+                "Review common data science interview questions"
+              ],
+              "resource_book": "Cracking the Coding Interview by Gayle Laakmann McDowell",
+              "official_docs": "https://www.glassdoor.com/Interview/data-scientist-interview-questions-SRCH_IL.0,13.htm"
+            }
+          ],
+          "mini_project": {
+            "title": "Data Science Portfolio",
+            "description": "Build a portfolio of data science projects",
+            "skills_used": [
+              "Data Science",
+              "Python",
+              "Machine Learning"
+            ],
+            "difficulty": "Advanced"
+          },
+          "major_project": {
+            "title": "Capstone Project",
+            "description": "Build a capstone project that showcases data science skills",
+            "skills_used": [
+              "Data Science",
+              "Python",
+              "Machine Learning",
+              "Deep Learning",
+              "Natural Language Processing",
+              "Computer Vision"
+            ],
+            "difficulty": "Advanced"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a52b96e8ae0cfec0af7a562"
+    },
+    "username": "second",
+    "currentRole": "Decision Scientist",
+    "education": [
+      {
+        "degree": "Masters in Computer Application",
+        "endDate": "2027",
+        "institution": "Veermata Jijabai Institute of Technology",
+        "startDate": "2025",
+        "school": "VJTI",
+        "field": "Computers",
+        "startYear": "2025",
+        "endYear": "2027"
+      },
+      {
+        "degree": "Bachelor of Science in Computer Science",
+        "endDate": "2024",
+        "institution": "S.I.E.S College of Arts, Science & Commerce",
+        "startDate": "2021",
+        "school": "SIES",
+        "field": "Computers",
+        "startYear": "2019",
+        "endYear": "2023"
+      }
+    ],
+    "experience": [
+      {
+        "company": "Fractal Analytics",
+        "endDate": "October 2024",
+        "role": "Decision Scientist",
+        "startDate": "Jun 2024",
+        "startYear": "2024",
+        "endYear": "2025",
+        "description": "adhoc Data analysis and dashboard creation, ML application"
+      }
+    ],
+    "fullName": "xyz sirname",
+    "interests": [
+      "AI & Machine Learning"
+    ],
+    "skills": [
+      {
+        "proficiency": 5,
+        "skill": "Python"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Java"
+      },
+      {
+        "proficiency": 5,
+        "skill": "SQL"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Pandas"
+      },
+      {
+        "proficiency": 5,
+        "skill": "NumPy"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Scikit-learn"
+      },
+      {
+        "proficiency": 5,
+        "skill": "NLP"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Machine Learning"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Data Modelling"
+      },
+      {
+        "proficiency": 5,
+        "skill": "LangChain"
+      },
+      {
+        "proficiency": 5,
+        "skill": "LangGraph"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Prompt Engineering"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Wordware"
+      },
+      {
+        "proficiency": 5,
+        "skill": "RAG"
+      },
+      {
+        "proficiency": 5,
+        "skill": "AI Agents"
+      },
+      {
+        "proficiency": 5,
+        "skill": "FastAPI"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Streamlit"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Pydantic"
+      },
+      {
+        "proficiency": 2,
+        "skill": "HTML"
+      },
+      {
+        "proficiency": 2,
+        "skill": "JSP"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Servlets"
+      },
+      {
+        "proficiency": 5,
+        "skill": "MySQL"
+      },
+      {
+        "proficiency": 5,
+        "skill": "MongoDB"
+      },
+      {
+        "proficiency": 5,
+        "skill": "PySpark"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Azure Data Factory (ADF)"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Power BI"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Tableau"
+      },
+      {
+        "proficiency": 5,
+        "skill": "KNIME"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Matplotlib"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Seaborn"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Excel"
+      },
+      {
+        "skill": "Docker",
+        "proficiency": 5
+      },
+      {
+        "skill": "Data Warehousing",
+        "proficiency": 3
+      },
+      {
+        "skill": "SSRS",
+        "proficiency": 2
+      }
+    ],
+    "years_experience": 1,
+    "Roadmap": {
+      "role": "Machine Learning Engineer",
+      "readinessScore": 74,
+      "estimated_days_to_job_ready": 180,
+      "phases": [
+        {
+          "phase_name": "Beginner",
+          "duration_days": 30,
+          "skills_to_focus": [
+            {
+              "skill": "Data Modeling",
+              "tasks": [
+                "Learn data modeling concepts",
+                "Practice data modeling using SQL"
+              ],
+              "resource_book": "Data Modeling Made Simple",
+              "official_docs": "https://www.sqltutorial.org/"
+            },
+            {
+              "skill": "ETL",
+              "tasks": [
+                "Learn ETL concepts",
+                "Practice ETL using Python"
+              ],
+              "resource_book": "ETL with Python",
+              "official_docs": "https://docs.python.org/3/"
+            }
+          ],
+          "mini_project": {
+            "title": "Data Modeling Project",
+            "description": "Create a data model for a simple e-commerce database",
+            "skills_used": [
+              "Data Modeling",
+              "SQL"
+            ],
+            "difficulty": "Beginner"
+          },
+          "major_project": {
+            "title": "ETL Pipeline Project",
+            "description": "Create an ETL pipeline using Python to extract data from a database and load it into a data warehouse",
+            "skills_used": [
+              "ETL",
+              "Python"
+            ],
+            "difficulty": "Beginner"
+          }
+        },
+        {
+          "phase_name": "Intermediate",
+          "duration_days": 60,
+          "skills_to_focus": [
+            {
+              "skill": "SSIS",
+              "tasks": [
+                "Learn SSIS concepts",
+                "Practice SSIS using SQL Server"
+              ],
+              "resource_book": "SSIS Tutorial",
+              "official_docs": "https://docs.microsoft.com/en-us/sql/integration-services/"
+            },
+            {
+              "skill": "Machine Learning Fundamentals",
+              "tasks": [
+                "Learn machine learning concepts",
+                "Practice machine learning using Python"
+              ],
+              "resource_book": "Machine Learning with Python",
+              "official_docs": "https://scikit-learn.org/"
+            }
+          ],
+          "mini_project": {
+            "title": "SSIS Project",
+            "description": "Create an SSIS package to extract data from a database and load it into a data warehouse",
+            "skills_used": [
+              "SSIS",
+              "SQL"
+            ],
+            "difficulty": "Intermediate"
+          },
+          "major_project": {
+            "title": "Machine Learning Model Project",
+            "description": "Create a machine learning model using Python to predict customer churn",
+            "skills_used": [
+              "Machine Learning",
+              "Python"
+            ],
+            "difficulty": "Intermediate"
+          }
+        },
+        {
+          "phase_name": "Advanced",
+          "duration_days": 60,
+          "skills_to_focus": [
+            {
+              "skill": "Deep Learning",
+              "tasks": [
+                "Learn deep learning concepts",
+                "Practice deep learning using Python"
+              ],
+              "resource_book": "Deep Learning with Python",
+              "official_docs": "https://www.tensorflow.org/"
+            },
+            {
+              "skill": "Natural Language Processing",
+              "tasks": [
+                "Learn NLP concepts",
+                "Practice NLP using Python"
+              ],
+              "resource_book": "NLP with Python",
+              "official_docs": "https://www.nltk.org/"
+            }
+          ],
+          "mini_project": {
+            "title": "Deep Learning Project",
+            "description": "Create a deep learning model using Python to classify images",
+            "skills_used": [
+              "Deep Learning",
+              "Python"
+            ],
+            "difficulty": "Advanced"
+          },
+          "major_project": {
+            "title": "NLP Project",
+            "description": "Create an NLP model using Python to predict sentiment analysis",
+            "skills_used": [
+              "NLP",
+              "Python"
+            ],
+            "difficulty": "Advanced"
+          }
+        },
+        {
+          "phase_name": "Job Ready",
+          "duration_days": 30,
+          "skills_to_focus": [
+            {
+              "skill": "Interview Preparation",
+              "tasks": [
+                "Practice whiteboarding",
+                "Review machine learning concepts"
+              ],
+              "resource_book": "Cracking the Coding Interview",
+              "official_docs": "https://www.pramp.com/"
+            }
+          ],
+          "mini_project": {
+            "title": "Interview Preparation Project",
+            "description": "Practice whiteboarding and review machine learning concepts",
+            "skills_used": [
+              "Interview Preparation",
+              "Machine Learning"
+            ],
+            "difficulty": "Advanced"
+          },
+          "major_project": {
+            "title": "Final Project",
+            "description": "Create a comprehensive machine learning project that showcases skills learned throughout the roadmap",
+            "skills_used": [
+              "Machine Learning",
+              "Python",
+              "Data Modeling",
+              "ETL",
+              "SSIS"
+            ],
+            "difficulty": "Advanced"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a54a5618ae0cfec0af7af89"
+    },
+    "username": "vidyaaa14",
+    "currentRole": null,
+    "education": [
+      {
+        "degree": "Bacheoler\u2019s in Computer Science",
+        "institution": "Veermata Jijabai Technological Institute"
+      },
+      {
+        "degree": "Masters in Computer Applications",
+        "institution": "D.G. Ruparel College of Arts , Science and Commerce"
+      }
+    ],
+    "experience": [
+      {
+        "company": "Talent Corner HR Services Pvt Ltd",
+        "duration": "July 2025 \u2013 Oct 2025",
+        "role": "Full Stack Developer"
+      }
+    ],
+    "fullName": "abc sirname2",
+    "interests": [],
+    "skills": [
+      {
+        "proficiency": 2,
+        "skill": "Python"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Java"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Kotlin"
+      },
+      {
+        "proficiency": 2,
+        "skill": "C++"
+      },
+      {
+        "proficiency": 2,
+        "skill": "SQL"
+      },
+      {
+        "proficiency": 2,
+        "skill": "HTML"
+      },
+      {
+        "proficiency": 2,
+        "skill": "CSS"
+      },
+      {
+        "proficiency": 2,
+        "skill": "JavaScript"
+      },
+      {
+        "proficiency": 2,
+        "skill": "React"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Node.js"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Express.js"
+      },
+      {
+        "proficiency": 2,
+        "skill": "RESTful APIs"
+      },
+      {
+        "proficiency": 2,
+        "skill": "MySQL"
+      },
+      {
+        "proficiency": 2,
+        "skill": "MongoDB Atlas"
+      },
+      {
+        "proficiency": 2,
+        "skill": "PostgreSQL"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Git"
+      },
+      {
+        "proficiency": 2,
+        "skill": "VS Code"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Render"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Github"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Vercel"
+      }
+    ],
+    "years_experience": 0
+  },
+  {
+    "_id": {
+      "$oid": "6a54a5e4843d6784078efedb"
+    },
+    "username": "Vidya14",
+    "fullName": "abc",
+    "currentRole": "Student",
+    "years_experience": 1,
+    "experience": [],
+    "education": [
+      {
+        "school": "Vjti",
+        "degree": "Mca",
+        "field": "",
+        "startYear": "",
+        "endYear": ""
+      }
+    ],
+    "skills": [
+      {
+        "skill": "Python",
+        "proficiency": 5
+      },
+      {
+        "skill": "Sql",
+        "proficiency": 5
+      }
+    ],
+    "interests": [
+      "AI & Machine Learning"
+    ],
+    "Roadmap": {
+      "role": "Machine Learning Engineer",
+      "readinessScore": 11,
+      "estimated_days_to_job_ready": 365,
+      "phases": [
+        {
+          "phase_name": "Beginner",
+          "duration_days": 60,
+          "skills_to_focus": [
+            {
+              "skill": "Python",
+              "tasks": [
+                "Learn basics of Python",
+                "Practice Python exercises"
+              ],
+              "resource_book": "Python Crash Course",
+              "official_docs": "https://docs.python.org/3/"
+            },
+            {
+              "skill": "Scikit-learn",
+              "tasks": [
+                "Learn Scikit-learn basics",
+                "Practice Scikit-learn exercises"
+              ],
+              "resource_book": "Python Machine Learning",
+              "official_docs": "https://scikit-learn.org/stable/"
+            },
+            {
+              "skill": "R",
+              "tasks": [
+                "Learn R basics",
+                "Practice R exercises"
+              ],
+              "resource_book": "R for Data Science",
+              "official_docs": "https://www.r-project.org/"
+            },
+            {
+              "skill": "Julia",
+              "tasks": [
+                "Learn Julia basics",
+                "Practice Julia exercises"
+              ],
+              "resource_book": "Julia Programming",
+              "official_docs": "https://docs.julialang.org/"
+            }
+          ],
+          "mini_project": {
+            "title": "Iris Classification",
+            "description": "Classify iris flowers into species using Scikit-learn",
+            "skills_used": [
+              "Python",
+              "Scikit-learn"
+            ],
+            "difficulty": "Beginner"
+          },
+          "major_project": {
+            "title": "House Price Prediction",
+            "description": "Predict house prices using Python and Scikit-learn",
+            "skills_used": [
+              "Python",
+              "Scikit-learn"
+            ],
+            "difficulty": "Beginner"
+          }
+        },
+        {
+          "phase_name": "Intermediate",
+          "duration_days": 90,
+          "skills_to_focus": [
+            {
+              "skill": "Deep Learning",
+              "tasks": [
+                "Learn Deep Learning basics",
+                "Practice Deep Learning exercises"
+              ],
+              "resource_book": "Deep Learning",
+              "official_docs": "https://www.deeplearning.ai/"
+            },
+            {
+              "skill": "PyTorch",
+              "tasks": [
+                "Learn PyTorch basics",
+                "Practice PyTorch exercises"
+              ],
+              "resource_book": "PyTorch Documentation",
+              "official_docs": "https://pytorch.org/"
+            },
+            {
+              "skill": "Keras",
+              "tasks": [
+                "Learn Keras basics",
+                "Practice Keras exercises"
+              ],
+              "resource_book": "Keras Documentation",
+              "official_docs": "https://keras.io/"
+            },
+            {
+              "skill": "Computer Vision",
+              "tasks": [
+                "Learn Computer Vision basics",
+                "Practice Computer Vision exercises"
+              ],
+              "resource_book": "Computer Vision",
+              "official_docs": "https://docs.opencv.org/"
+            }
+          ],
+          "mini_project": {
+            "title": "Image Classification",
+            "description": "Classify images using PyTorch",
+            "skills_used": [
+              "PyTorch",
+              "Computer Vision"
+            ],
+            "difficulty": "Intermediate"
+          },
+          "major_project": {
+            "title": "Object Detection",
+            "description": "Detect objects in images using PyTorch",
+            "skills_used": [
+              "PyTorch",
+              "Computer Vision"
+            ],
+            "difficulty": "Intermediate"
+          }
+        },
+        {
+          "phase_name": "Advanced",
+          "duration_days": 120,
+          "skills_to_focus": [
+            {
+              "skill": "Natural Language Processing",
+              "tasks": [
+                "Learn NLP basics",
+                "Practice NLP exercises"
+              ],
+              "resource_book": "Natural Language Processing",
+              "official_docs": "https://www.nltk.org/"
+            },
+            {
+              "skill": "Reinforcement Learning",
+              "tasks": [
+                "Learn Reinforcement Learning basics",
+                "Practice Reinforcement Learning exercises"
+              ],
+              "resource_book": "Reinforcement Learning",
+              "official_docs": "https://www.sutton.io/"
+            },
+            {
+              "skill": "Transformers",
+              "tasks": [
+                "Learn Transformers basics",
+                "Practice Transformers exercises"
+              ],
+              "resource_book": "Transformers",
+              "official_docs": "https://huggingface.co/transformers/"
+            }
+          ],
+          "mini_project": {
+            "title": "Text Classification",
+            "description": "Classify text using NLP",
+            "skills_used": [
+              "NLP",
+              "Transformers"
+            ],
+            "difficulty": "Advanced"
+          },
+          "major_project": {
+            "title": "Chatbot",
+            "description": "Build a chatbot using NLP and Reinforcement Learning",
+            "skills_used": [
+              "NLP",
+              "Reinforcement Learning"
+            ],
+            "difficulty": "Advanced"
+          }
+        },
+        {
+          "phase_name": "Job Ready",
+          "duration_days": 90,
+          "skills_to_focus": [
+            {
+              "skill": "Interview Preparation",
+              "tasks": [
+                "Practice whiteboarding",
+                "Review common interview questions"
+              ],
+              "resource_book": "Cracking the Coding Interview",
+              "official_docs": "https://www.pramp.com/"
+            },
+            {
+              "skill": "Resume Building",
+              "tasks": [
+                "Create a resume",
+                "Tailor resume to job descriptions"
+              ],
+              "resource_book": "Resume Building",
+              "official_docs": "https://www.resume.io/"
+            },
+            {
+              "skill": "Networking",
+              "tasks": [
+                "Attend industry events",
+                "Connect with professionals on LinkedIn"
+              ],
+              "resource_book": "Networking",
+              "official_docs": "https://www.linkedin.com/"
+            }
+          ],
+          "mini_project": {
+            "title": "Personal Project",
+            "description": "Work on a personal project to demonstrate skills",
+            "skills_used": [
+              "All skills learned"
+            ],
+            "difficulty": "Advanced"
+          },
+          "major_project": {
+            "title": "Final Project",
+            "description": "Work on a final project to demonstrate all skills learned",
+            "skills_used": [
+              "All skills learned"
+            ],
+            "difficulty": "Advanced"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5cbb346b0a543997fcb4d8"
+    },
+    "username": "Vidhi2507",
+    "fullName": "xyz sirname",
+    "currentRole": "Decision Scientist",
+    "years_experience": 1,
+    "experience": [
+      {
+        "company": "Fractal Analytics",
+        "description": "Data Analysis, Inventory Management using ML, GenAI",
+        "endDate": "2025",
+        "role": "Decision Scientist",
+        "startDate": "2024"
+      }
+    ],
+    "education": [
+      {
+        "degree": "Masters in Computer Application",
+        "endDate": "2027",
+        "institution": "Veermata Jijabai Institute of Technology",
+        "startDate": "2025"
+      },
+      {
+        "degree": "Bachelor of Science in Computer Science",
+        "endDate": "2024",
+        "institution": "S.I.E.S College of Arts, Science & Commerce",
+        "startDate": "2021"
+      }
+    ],
+    "skills": [
+      {
+        "proficiency": 5,
+        "skill": "Python"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Java"
+      },
+      {
+        "proficiency": 5,
+        "skill": "SQL"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Pandas"
+      },
+      {
+        "proficiency": 5,
+        "skill": "NumPy"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Scikit-learn"
+      },
+      {
+        "proficiency": 5,
+        "skill": "NLP"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Machine Learning"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Data Modelling"
+      },
+      {
+        "proficiency": 5,
+        "skill": "LangChain"
+      },
+      {
+        "proficiency": 5,
+        "skill": "LangGraph"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Prompt Engineering"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Wordware"
+      },
+      {
+        "proficiency": 5,
+        "skill": "RAG"
+      },
+      {
+        "proficiency": 5,
+        "skill": "AI Agents"
+      },
+      {
+        "proficiency": 5,
+        "skill": "FastAPI"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Streamlit"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Pydantic"
+      },
+      {
+        "proficiency": 2,
+        "skill": "HTML"
+      },
+      {
+        "proficiency": 2,
+        "skill": "JSP"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Servlets"
+      },
+      {
+        "proficiency": 5,
+        "skill": "MySQL"
+      },
+      {
+        "proficiency": 5,
+        "skill": "MongoDB"
+      },
+      {
+        "proficiency": 5,
+        "skill": "PySpark"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Azure Data Factory"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Power BI"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Tableau"
+      },
+      {
+        "proficiency": 5,
+        "skill": "KNIME"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Matplotlib"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Seaborn"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Excel"
+      }
+    ],
+    "interests": [],
+    "Roadmap": {
+      "role": "Data Scientist",
+      "readinessScore": 27,
+      "estimated_days_to_job_ready": 365,
+      "phases": [
+        {
+          "phase_name": "Beginner",
+          "duration_days": 60,
+          "skills_to_focus": [
+            {
+              "skill": "Java",
+              "tasks": [
+                "Learn Java basics",
+                "Practice Java coding challenges"
+              ],
+              "resource_book": "Head First Java",
+              "official_docs": "https://docs.oracle.com/javase/tutorial/"
+            },
+            {
+              "skill": "C++",
+              "tasks": [
+                "Learn C++ basics",
+                "Practice C++ coding challenges"
+              ],
+              "resource_book": "The C++ Programming Language",
+              "official_docs": "https://docs.microsoft.com/en-us/cpp/"
+            },
+            {
+              "skill": "Python",
+              "tasks": [
+                "Review Python basics",
+                "Practice Python coding challenges"
+              ],
+              "resource_book": "Python Crash Course",
+              "official_docs": "https://docs.python.org/3/"
+            }
+          ],
+          "mini_project": {
+            "title": "To-Do List App",
+            "description": "Build a simple To-Do List App using Java or Python",
+            "skills_used": [
+              "Java",
+              "Python"
+            ],
+            "difficulty": "Beginner"
+          },
+          "major_project": {
+            "title": "Personal Finance Manager",
+            "description": "Build a Personal Finance Manager using C++ or Java",
+            "skills_used": [
+              "C++",
+              "Java"
+            ],
+            "difficulty": "Beginner"
+          }
+        },
+        {
+          "phase_name": "Intermediate",
+          "duration_days": 90,
+          "skills_to_focus": [
+            {
+              "skill": "Machine Learning",
+              "tasks": [
+                "Learn ML basics",
+                "Practice ML coding challenges"
+              ],
+              "resource_book": "Python Machine Learning",
+              "official_docs": "https://scikit-learn.org/stable/"
+            },
+            {
+              "skill": "Deep Learning",
+              "tasks": [
+                "Learn DL basics",
+                "Practice DL coding challenges"
+              ],
+              "resource_book": "Deep Learning with Python",
+              "official_docs": "https://www.tensorflow.org/"
+            },
+            {
+              "skill": "TensorFlow",
+              "tasks": [
+                "Learn TensorFlow basics",
+                "Practice TensorFlow coding challenges"
+              ],
+              "resource_book": "TensorFlow Tutorial",
+              "official_docs": "https://www.tensorflow.org/"
+            }
+          ],
+          "mini_project": {
+            "title": "Image Classification",
+            "description": "Build an Image Classification model using TensorFlow",
+            "skills_used": [
+              "TensorFlow",
+              "Deep Learning"
+            ],
+            "difficulty": "Intermediate"
+          },
+          "major_project": {
+            "title": "Chatbot",
+            "description": "Build a Chatbot using Deep Learning and Natural Language Processing",
+            "skills_used": [
+              "Deep Learning",
+              "Natural Language Processing"
+            ],
+            "difficulty": "Intermediate"
+          }
+        },
+        {
+          "phase_name": "Advanced",
+          "duration_days": 120,
+          "skills_to_focus": [
+            {
+              "skill": "Natural Language Processing",
+              "tasks": [
+                "Learn NLP basics",
+                "Practice NLP coding challenges"
+              ],
+              "resource_book": "Natural Language Processing with Python",
+              "official_docs": "https://www.nltk.org/"
+            },
+            {
+              "skill": "Computer Vision",
+              "tasks": [
+                "Learn CV basics",
+                "Practice CV coding challenges"
+              ],
+              "resource_book": "Computer Vision with Python",
+              "official_docs": "https://docs.opencv.org/"
+            },
+            {
+              "skill": "PyTorch",
+              "tasks": [
+                "Learn PyTorch basics",
+                "Practice PyTorch coding challenges"
+              ],
+              "resource_book": "PyTorch Tutorial",
+              "official_docs": "https://pytorch.org/"
+            }
+          ],
+          "mini_project": {
+            "title": "Sentiment Analysis",
+            "description": "Build a Sentiment Analysis model using PyTorch",
+            "skills_used": [
+              "PyTorch",
+              "Natural Language Processing"
+            ],
+            "difficulty": "Advanced"
+          },
+          "major_project": {
+            "title": "Object Detection",
+            "description": "Build an Object Detection model using Computer Vision and PyTorch",
+            "skills_used": [
+              "Computer Vision",
+              "PyTorch"
+            ],
+            "difficulty": "Advanced"
+          }
+        },
+        {
+          "phase_name": "Job Ready",
+          "duration_days": 95,
+          "skills_to_focus": [
+            {
+              "skill": "Interview Preparation",
+              "tasks": [
+                "Practice whiteboarding",
+                "Review common interview questions"
+              ],
+              "resource_book": "Cracking the Coding Interview",
+              "official_docs": "https://www.pramp.com/"
+            },
+            {
+              "skill": "Resume Building",
+              "tasks": [
+                "Update resume",
+                "Tailor resume to Data Scientist role"
+              ],
+              "resource_book": "Resume Building Guide",
+              "official_docs": "https://www.linkedin.com/"
+            },
+            {
+              "skill": "Networking",
+              "tasks": [
+                "Attend industry events",
+                "Connect with professionals on LinkedIn"
+              ],
+              "resource_book": "Networking Guide",
+              "official_docs": "https://www.meetup.com/"
+            }
+          ],
+          "mini_project": {
+            "title": "Personal Project",
+            "description": "Work on a personal project that demonstrates Data Scientist skills",
+            "skills_used": [
+              "Data Scientist skills"
+            ],
+            "difficulty": "Advanced"
+          },
+          "major_project": {
+            "title": "Capstone Project",
+            "description": "Complete a Capstone Project that showcases Data Scientist skills",
+            "skills_used": [
+              "Data Scientist skills"
+            ],
+            "difficulty": "Advanced"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a5cbb7cac12ca78f65d02e1"
+    },
+    "username": "Meet",
+    "currentRole": "Decision Scientist",
+    "education": [
+      {
+        "degree": "Masters in Computer Application",
+        "endDate": "2027",
+        "institution": "Veermata Jijabai Institute of Technology",
+        "startDate": "2025"
+      },
+      {
+        "degree": "Bachelor of Science in Computer Science",
+        "endDate": "2024",
+        "institution": "S.I.E.S College of Arts, Science & Commerce",
+        "startDate": "2021"
+      }
+    ],
+    "experience": [
+      {
+        "company": "Fractal Analytics",
+        "endDate": "October 2024",
+        "role": "Decision Scientist",
+        "startDate": "Jun 2024"
+      }
+    ],
+    "fullName": "xyz sirname",
+    "interests": [],
+    "skills": [
+      {
+        "proficiency": 5,
+        "skill": "Python"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Java"
+      },
+      {
+        "proficiency": 5,
+        "skill": "SQL"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Pandas"
+      },
+      {
+        "proficiency": 5,
+        "skill": "NumPy"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Scikit-learn"
+      },
+      {
+        "proficiency": 5,
+        "skill": "NLP"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Machine Learning"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Data Modelling"
+      },
+      {
+        "proficiency": 5,
+        "skill": "LangChain"
+      },
+      {
+        "proficiency": 5,
+        "skill": "LangGraph"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Prompt Engineering"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Wordware"
+      },
+      {
+        "proficiency": 5,
+        "skill": "RAG"
+      },
+      {
+        "proficiency": 5,
+        "skill": "AI Agents"
+      },
+      {
+        "proficiency": 5,
+        "skill": "FastAPI"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Streamlit"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Pydantic"
+      },
+      {
+        "proficiency": 2,
+        "skill": "HTML"
+      },
+      {
+        "proficiency": 2,
+        "skill": "JSP"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Servlets"
+      },
+      {
+        "proficiency": 5,
+        "skill": "MySQL"
+      },
+      {
+        "proficiency": 5,
+        "skill": "MongoDB"
+      },
+      {
+        "proficiency": 5,
+        "skill": "PySpark"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Azure Data Factory (ADF)"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Power BI"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Tableau"
+      },
+      {
+        "proficiency": 5,
+        "skill": "KNIME"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Matplotlib"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Seaborn"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Excel"
+      }
+    ],
+    "years_experience": 0
+  },
+  {
+    "_id": {
+      "$oid": "6a5d2982ac12ca78f65d03a9"
+    },
+    "username": "xyz sirname",
+    "currentRole": "Decision Scientist",
+    "education": [
+      {
+        "degree": "Masters in Computer Application",
+        "endDate": 2027,
+        "institution": "Veermata Jijabai Institute of Technology",
+        "startDate": 2025
+      },
+      {
+        "degree": "Bachelor of Science in Computer Science",
+        "endDate": 2024,
+        "institution": "S.I.E.S College of Arts, Science & Commerce",
+        "startDate": 2021
+      }
+    ],
+    "experience": [
+      {
+        "company": "Fractal Analytics",
+        "description": "Data Analysis, Inventory Management using ML, GenAI",
+        "endDate": "October 2024",
+        "role": "Decision Scientist",
+        "startDate": "Jun 2024"
+      }
+    ],
+    "fullName": "xyz sirname",
+    "interests": [],
+    "skills": [
+      {
+        "proficiency": 5,
+        "skill": "Python"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Java"
+      },
+      {
+        "proficiency": 5,
+        "skill": "SQL"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Pandas"
+      },
+      {
+        "proficiency": 5,
+        "skill": "NumPy"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Scikit-learn"
+      },
+      {
+        "proficiency": 5,
+        "skill": "NLP"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Machine Learning"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Data Modelling"
+      },
+      {
+        "proficiency": 5,
+        "skill": "LangChain"
+      },
+      {
+        "proficiency": 5,
+        "skill": "LangGraph"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Prompt Engineering"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Wordware"
+      },
+      {
+        "proficiency": 5,
+        "skill": "RAG"
+      },
+      {
+        "proficiency": 5,
+        "skill": "AI Agents"
+      },
+      {
+        "proficiency": 5,
+        "skill": "FastAPI"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Streamlit"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Pydantic"
+      },
+      {
+        "proficiency": 2,
+        "skill": "HTML"
+      },
+      {
+        "proficiency": 2,
+        "skill": "JSP"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Servlets"
+      },
+      {
+        "proficiency": 5,
+        "skill": "MySQL"
+      },
+      {
+        "proficiency": 5,
+        "skill": "MongoDB"
+      },
+      {
+        "proficiency": 5,
+        "skill": "PySpark"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Azure Data Factory (ADF)"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Power BI"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Tableau"
+      },
+      {
+        "proficiency": 5,
+        "skill": "KNIME"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Matplotlib"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Seaborn"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Excel"
+      }
+    ],
+    "years_experience": 1.0
+  },
+  {
+    "_id": {
+      "$oid": "6a5d29a7ac12ca78f65d03aa"
+    },
+    "username": "Vidhi2507",
+    "currentRole": "Decision Scientist",
+    "education": [
+      {
+        "cgpa": 8.8,
+        "degree": "Masters in Computer Application",
+        "institution": "Veermata Jijabai Institute of Technology"
+      },
+      {
+        "cgpa": 9.9,
+        "degree": "Bachelor of Science in Computer Science",
+        "institution": "S.I.E.S College of Arts, Science & Commerce"
+      }
+    ],
+    "experience": [
+      {
+        "company": "Fractal Analytics",
+        "duration": "Jun 2024 \u2013 October 25",
+        "role": "Decision Scientist"
+      }
+    ],
+    "fullName": "xyz sirname",
+    "interests": [],
+    "skills": [
+      {
+        "proficiency": 5,
+        "skill": "Python"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Java"
+      },
+      {
+        "proficiency": 5,
+        "skill": "SQL"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Pandas"
+      },
+      {
+        "proficiency": 5,
+        "skill": "NumPy"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Scikit-learn"
+      },
+      {
+        "proficiency": 5,
+        "skill": "NLP"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Machine Learning"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Data Modelling"
+      },
+      {
+        "proficiency": 5,
+        "skill": "LangChain"
+      },
+      {
+        "proficiency": 5,
+        "skill": "LangGraph"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Prompt Engineering"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Wordware"
+      },
+      {
+        "proficiency": 5,
+        "skill": "RAG"
+      },
+      {
+        "proficiency": 5,
+        "skill": "AI Agents"
+      },
+      {
+        "proficiency": 5,
+        "skill": "FastAPI"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Streamlit"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Pydantic"
+      },
+      {
+        "proficiency": 2,
+        "skill": "HTML"
+      },
+      {
+        "proficiency": 2,
+        "skill": "JSP"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Servlets"
+      },
+      {
+        "proficiency": 5,
+        "skill": "MySQL"
+      },
+      {
+        "proficiency": 5,
+        "skill": "MongoDB"
+      },
+      {
+        "proficiency": 5,
+        "skill": "PySpark"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Azure Data Factory (ADF)"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Power BI"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Tableau"
+      },
+      {
+        "proficiency": 5,
+        "skill": "KNIME"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Matplotlib"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Seaborn"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Excel"
+      }
+    ],
+    "years_experience": 1.0
+  },
+  {
+    "_id": {
+      "$oid": "6a5d2e6bac12ca78f65d03b2"
+    },
+    "username": "interview",
+    "currentRole": "Decision Scientist",
+    "education": [
+      {
+        "degree": "Masters in Computer Application",
+        "endDate": 2027,
+        "institution": "Veermata Jijabai Institute of Technology",
+        "startDate": 2025
+      },
+      {
+        "degree": "Bachelor of Science in Computer Science",
+        "endDate": 2024,
+        "institution": "S.I.E.S College of Arts, Science & Commerce",
+        "startDate": 2021
+      }
+    ],
+    "experience": [
+      {
+        "company": "Fractal Analytics",
+        "endDate": "October 2024",
+        "role": "Decision Scientist",
+        "startDate": "Jun 2024"
+      }
+    ],
+    "fullName": "xyz sirname",
+    "interests": [],
+    "skills": [
+      {
+        "proficiency": 5,
+        "skill": "Python"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Java"
+      },
+      {
+        "proficiency": 2,
+        "skill": "SQL"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Pandas"
+      },
+      {
+        "proficiency": 2,
+        "skill": "NumPy"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Scikit-learn"
+      },
+      {
+        "proficiency": 2,
+        "skill": "NLP"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Machine Learning"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Data Modelling"
+      },
+      {
+        "proficiency": 2,
+        "skill": "LangChain"
+      },
+      {
+        "proficiency": 2,
+        "skill": "LangGraph"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Prompt Engineering"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Wordware"
+      },
+      {
+        "proficiency": 2,
+        "skill": "RAG"
+      },
+      {
+        "proficiency": 2,
+        "skill": "AI Agents"
+      },
+      {
+        "proficiency": 2,
+        "skill": "FastAPI"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Streamlit"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Pydantic"
+      },
+      {
+        "proficiency": 2,
+        "skill": "HTML"
+      },
+      {
+        "proficiency": 2,
+        "skill": "JSP"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Servlets"
+      },
+      {
+        "proficiency": 2,
+        "skill": "MySQL"
+      },
+      {
+        "proficiency": 2,
+        "skill": "MongoDB"
+      },
+      {
+        "proficiency": 2,
+        "skill": "PySpark"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Azure Data Factory (ADF)"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Power BI"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Tableau"
+      },
+      {
+        "proficiency": 2,
+        "skill": "KNIME"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Matplotlib"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Seaborn"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Excel"
+      }
+    ],
+    "years_experience": 0.0
+  },
+  {
+    "_id": {
+      "$oid": "6a61bff1a2d35322b4dbbb7a"
+    },
+    "username": "xyz sirname",
+    "currentRole": "Decision Scientist",
+    "education": [
+      {
+        "degree": "Masters in Computer Application",
+        "endDate": 2027,
+        "institution": "Veermata Jijabai Institute of Technology",
+        "startDate": 2025
+      },
+      {
+        "degree": "Bachelor of Science in Computer Science",
+        "endDate": 2024,
+        "institution": "S.I.E.S College of Arts, Science & Commerce",
+        "startDate": 2021
+      }
+    ],
+    "experience": [
+      {
+        "company": "Fractal Analytics",
+        "endDate": "October 2024",
+        "role": "Decision Scientist",
+        "startDate": "Jun 2024"
+      }
+    ],
+    "fullName": "xyz sirname",
+    "interests": [],
+    "skills": [
+      {
+        "proficiency": 5,
+        "skill": "Python"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Java"
+      },
+      {
+        "proficiency": 5,
+        "skill": "SQL"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Pandas"
+      },
+      {
+        "proficiency": 5,
+        "skill": "NumPy"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Scikit-learn"
+      },
+      {
+        "proficiency": 5,
+        "skill": "NLP"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Machine Learning"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Data Modelling"
+      },
+      {
+        "proficiency": 5,
+        "skill": "LangChain"
+      },
+      {
+        "proficiency": 5,
+        "skill": "LangGraph"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Prompt Engineering"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Wordware"
+      },
+      {
+        "proficiency": 5,
+        "skill": "RAG"
+      },
+      {
+        "proficiency": 5,
+        "skill": "AI Agents"
+      },
+      {
+        "proficiency": 5,
+        "skill": "FastAPI"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Streamlit"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Pydantic"
+      },
+      {
+        "proficiency": 2,
+        "skill": "HTML"
+      },
+      {
+        "proficiency": 2,
+        "skill": "JSP"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Servlets"
+      },
+      {
+        "proficiency": 5,
+        "skill": "MySQL"
+      },
+      {
+        "proficiency": 5,
+        "skill": "MongoDB"
+      },
+      {
+        "proficiency": 5,
+        "skill": "PySpark"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Azure Data Factory (ADF)"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Power BI"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Tableau"
+      },
+      {
+        "proficiency": 5,
+        "skill": "KNIME"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Matplotlib"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Seaborn"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Excel"
+      }
+    ],
+    "years_experience": 1.0
+  },
+  {
+    "_id": {
+      "$oid": "6a61c0a5a2d35322b4dbbb86"
+    },
+    "username": "Vidhi2507",
+    "currentRole": "Decision Scientist",
+    "education": [
+      {
+        "degree": "Masters in Computer Application",
+        "endDate": 2027,
+        "institution": "Veermata Jijabai Institute of Technology",
+        "startDate": 2025
+      },
+      {
+        "degree": "Bachelor of Science in Computer Science",
+        "endDate": 2024,
+        "institution": "S.I.E.S College of Arts, Science & Commerce",
+        "startDate": 2021
+      }
+    ],
+    "experience": [
+      {
+        "company": "Fractal Analytics",
+        "description": "Data Analysis, Inventory Management using ML, GenAI",
+        "endDate": "October 2024",
+        "role": "Decision Scientist",
+        "startDate": "Jun 2024"
+      }
+    ],
+    "fullName": "xyz sirname",
+    "interests": [],
+    "skills": [
+      {
+        "proficiency": 5,
+        "skill": "Python"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Java"
+      },
+      {
+        "proficiency": 4,
+        "skill": "SQL"
+      },
+      {
+        "proficiency": 4,
+        "skill": "Pandas"
+      },
+      {
+        "proficiency": 4,
+        "skill": "NumPy"
+      },
+      {
+        "proficiency": 4,
+        "skill": "Scikit-learn"
+      },
+      {
+        "proficiency": 4,
+        "skill": "NLP"
+      },
+      {
+        "proficiency": 4,
+        "skill": "Machine Learning"
+      },
+      {
+        "proficiency": 4,
+        "skill": "Data Modelling"
+      },
+      {
+        "proficiency": 4,
+        "skill": "LangChain"
+      },
+      {
+        "proficiency": 4,
+        "skill": "LangGraph"
+      },
+      {
+        "proficiency": 4,
+        "skill": "Prompt Engineering"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Wordware"
+      },
+      {
+        "proficiency": 4,
+        "skill": "RAG"
+      },
+      {
+        "proficiency": 4,
+        "skill": "AI Agents"
+      },
+      {
+        "proficiency": 4,
+        "skill": "FastAPI"
+      },
+      {
+        "proficiency": 4,
+        "skill": "Streamlit"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Pydantic"
+      },
+      {
+        "proficiency": 2,
+        "skill": "HTML"
+      },
+      {
+        "proficiency": 2,
+        "skill": "JSP"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Servlets"
+      },
+      {
+        "proficiency": 4,
+        "skill": "MySQL"
+      },
+      {
+        "proficiency": 4,
+        "skill": "MongoDB"
+      },
+      {
+        "proficiency": 4,
+        "skill": "PySpark"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Azure Data Factory"
+      },
+      {
+        "proficiency": 4,
+        "skill": "Power BI"
+      },
+      {
+        "proficiency": 4,
+        "skill": "Tableau"
+      },
+      {
+        "proficiency": 4,
+        "skill": "KNIME"
+      },
+      {
+        "proficiency": 4,
+        "skill": "Matplotlib"
+      },
+      {
+        "proficiency": 4,
+        "skill": "Seaborn"
+      },
+      {
+        "proficiency": 4,
+        "skill": "Excel"
+      }
+    ],
+    "years_experience": 1.0
+  },
+  {
+    "_id": {
+      "$oid": "6a61c17d343450ac84781959"
+    },
+    "username": "vidhi",
+    "fullName": "xyz",
+    "currentRole": "student",
+    "years_experience": 1.0,
+    "experience": [
+      {
+        "company": "Fractal",
+        "role": "",
+        "description": "Data engineer",
+        "startYear": "",
+        "endYear": ""
+      }
+    ],
+    "education": [
+      {
+        "school": "VJTI",
+        "degree": "MCA",
+        "field": "",
+        "startYear": "",
+        "endYear": ""
+      }
+    ],
+    "skills": [
+      {
+        "skill": "python",
+        "proficiency": 5
+      },
+      {
+        "skill": "pandas",
+        "proficiency": 5
+      },
+      {
+        "skill": "sql",
+        "proficiency": 5
+      },
+      {
+        "skill": "pyspark",
+        "proficiency": 5
+      },
+      {
+        "skill": "ADF",
+        "proficiency": 0
+      }
+    ],
+    "interests": [
+      "AI & Machine Learning"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "6a61de6e51da20a37bc20ebd"
+    },
+    "username": "xyz sirname",
+    "fullName": "xyz sirname",
+    "currentRole": "Decision Scientist",
+    "years_experience": 1.0,
+    "experience": [
+      {
+        "company": "Fractal Analytics",
+        "description": "Data Analysis, Inventory Management using ML, GenAI",
+        "endDate": "October 2024",
+        "role": "Decision Scientist",
+        "startDate": "Jun 2024"
+      }
+    ],
+    "education": [
+      {
+        "degree": "Masters in Computer Application",
+        "endDate": 2027,
+        "institution": "Veermata Jijabai Institute of Technology",
+        "startDate": 2025
+      },
+      {
+        "degree": "Bachelor of Science in Computer Science",
+        "endDate": 2024,
+        "institution": "S.I.E.S College of Arts, Science & Commerce",
+        "startDate": 2021
+      }
+    ],
+    "skills": [
+      {
+        "proficiency": 5,
+        "skill": "Python"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Java"
+      },
+      {
+        "proficiency": 5,
+        "skill": "SQL"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Pandas"
+      },
+      {
+        "proficiency": 5,
+        "skill": "NumPy"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Scikit-learn"
+      },
+      {
+        "proficiency": 5,
+        "skill": "NLP"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Machine Learning"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Data Modelling"
+      },
+      {
+        "proficiency": 5,
+        "skill": "LangChain"
+      },
+      {
+        "proficiency": 5,
+        "skill": "LangGraph"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Prompt Engineering"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Wordware"
+      },
+      {
+        "proficiency": 5,
+        "skill": "RAG"
+      },
+      {
+        "proficiency": 5,
+        "skill": "AI Agents"
+      },
+      {
+        "proficiency": 5,
+        "skill": "FastAPI"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Streamlit"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Pydantic"
+      },
+      {
+        "proficiency": 2,
+        "skill": "HTML"
+      },
+      {
+        "proficiency": 2,
+        "skill": "JSP"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Servlets"
+      },
+      {
+        "proficiency": 5,
+        "skill": "MySQL"
+      },
+      {
+        "proficiency": 5,
+        "skill": "MongoDB"
+      },
+      {
+        "proficiency": 5,
+        "skill": "PySpark"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Azure Data Factory (ADF)"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Power BI"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Tableau"
+      },
+      {
+        "proficiency": 5,
+        "skill": "KNIME"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Matplotlib"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Seaborn"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Excel"
+      }
+    ],
+    "interests": [],
+    "Roadmap": {
+      "role": "Data Analyst",
+      "readinessScore": 0,
+      "estimated_days_to_job_ready": 270,
+      "phases": [
+        {
+          "phase_name": "Beginner",
+          "duration_days": 60,
+          "skills_to_focus": [
+            {
+              "skill": "SQL",
+              "tasks": [
+                "Learn basic SQL syntax",
+                "Practice SQL queries on a sample database"
+              ],
+              "resource_book": "SQL Queries for Mere Mortals",
+              "official_docs": "https://www.w3schools.com/sql/"
+            },
+            {
+              "skill": "Python",
+              "tasks": [
+                "Learn basic Python programming",
+                "Practice Python data structures and file input/output"
+              ],
+              "resource_book": "Python Crash Course",
+              "official_docs": "https://docs.python.org/3/"
+            }
+          ],
+          "mini_project": {
+            "title": "Personal Finance Tracker",
+            "description": "Create a simple personal finance tracker using Python and SQL",
+            "skills_used": [
+              "SQL",
+              "Python"
+            ],
+            "difficulty": "Beginner"
+          },
+          "major_project": {
+            "title": "Data Analysis for a Small Business",
+            "description": "Analyze data for a small business using SQL and Python",
+            "skills_used": [
+              "SQL",
+              "Python"
+            ],
+            "difficulty": "Beginner"
+          }
+        },
+        {
+          "phase_name": "Intermediate",
+          "duration_days": 90,
+          "skills_to_focus": [
+            {
+              "skill": "JavaScript",
+              "tasks": [
+                "Learn basic JavaScript syntax",
+                "Practice JavaScript functions and events"
+              ],
+              "resource_book": "JavaScript and DOM Scripting",
+              "official_docs": "https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+            },
+            {
+              "skill": "HTML",
+              "tasks": [
+                "Learn basic HTML structure",
+                "Practice HTML tags and attributes"
+              ],
+              "resource_book": "HTML and CSS: Design and Build Websites",
+              "official_docs": "https://www.w3schools.com/html/"
+            },
+            {
+              "skill": "CSS",
+              "tasks": [
+                "Learn basic CSS selectors",
+                "Practice CSS styling and layout"
+              ],
+              "resource_book": "HTML and CSS: Design and Build Websites",
+              "official_docs": "https://www.w3schools.com/css/"
+            }
+          ],
+          "mini_project": {
+            "title": "Interactive Dashboard",
+            "description": "Create an interactive dashboard using JavaScript, HTML, and CSS",
+            "skills_used": [
+              "JavaScript",
+              "HTML",
+              "CSS"
+            ],
+            "difficulty": "Intermediate"
+          },
+          "major_project": {
+            "title": "Web Scraping and Data Visualization",
+            "description": "Scrape data from a website and visualize it using JavaScript, HTML, and CSS",
+            "skills_used": [
+              "JavaScript",
+              "HTML",
+              "CSS"
+            ],
+            "difficulty": "Intermediate"
+          }
+        },
+        {
+          "phase_name": "Advanced",
+          "duration_days": 60,
+          "skills_to_focus": [
+            {
+              "skill": "Tableau",
+              "tasks": [
+                "Learn basic Tableau interface",
+                "Practice creating visualizations and dashboards"
+              ],
+              "resource_book": "Learning Tableau",
+              "official_docs": "https://help.tableau.com/"
+            },
+            {
+              "skill": "Power BI",
+              "tasks": [
+                "Learn basic Power BI interface",
+                "Practice creating reports and dashboards"
+              ],
+              "resource_book": "Microsoft Power BI For Dummies",
+              "official_docs": "https://docs.microsoft.com/en-us/power-bi/"
+            },
+            {
+              "skill": "Data Warehousing",
+              "tasks": [
+                "Learn basic data warehousing concepts",
+                "Practice designing a data warehouse"
+              ],
+              "resource_book": "Data Warehousing For Dummies",
+              "official_docs": "https://docs.microsoft.com/en-us/azure/synapse-analytics/"
+            }
+          ],
+          "mini_project": {
+            "title": "Data Visualization with Tableau",
+            "description": "Create interactive visualizations using Tableau",
+            "skills_used": [
+              "Tableau"
+            ],
+            "difficulty": "Advanced"
+          },
+          "major_project": {
+            "title": "Data Warehouse Design and Implementation",
+            "description": "Design and implement a data warehouse using Data Warehousing and ETL concepts",
+            "skills_used": [
+              "Data Warehousing",
+              "ETL"
+            ],
+            "difficulty": "Advanced"
+          }
+        },
+        {
+          "phase_name": "Job Ready",
+          "duration_days": 30,
+          "skills_to_focus": [
+            {
+              "skill": "Interview Preparation",
+              "tasks": [
+                "Practice answering common data analyst interview questions",
+                "Review data analyst job descriptions and requirements"
+              ],
+              "resource_book": "Data Analyst Interview Questions and Answers",
+              "official_docs": "https://www.glassdoor.com/Interview/data-analyst-interview-questions-SRCH_IL.0,11.htm"
+            }
+          ],
+          "mini_project": {
+            "title": "Mock Interview",
+            "description": "Practice answering interview questions with a mock interview",
+            "skills_used": [
+              "Interview Preparation"
+            ],
+            "difficulty": "Intermediate"
+          },
+          "major_project": {
+            "title": "Final Project",
+            "description": "Work on a final project that demonstrates all the skills learned throughout the roadmap",
+            "skills_used": [
+              "SQL",
+              "Python",
+              "JavaScript",
+              "HTML",
+              "CSS",
+              "Tableau",
+              "Power BI",
+              "Data Warehousing",
+              "ETL"
+            ],
+            "difficulty": "Advanced"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a61e44ea2d35322b4dbbd2e"
+    },
+    "username": "xyz sirname",
+    "currentRole": "Decision Scientist",
+    "education": [
+      {
+        "degree": "Masters in Computer Application",
+        "end_date": 2027,
+        "institution": "Veermata Jijabai Institute of Technology",
+        "start_date": 2025
+      },
+      {
+        "degree": "Bachelor of Science in Computer Science",
+        "end_date": 2024,
+        "institution": "S.I.E.S College of Arts, Science & Commerce",
+        "start_date": 2021
+      }
+    ],
+    "experience": [
+      {
+        "company": "Fractal Analytics",
+        "end_date": "October 2024",
+        "role": "Decision Scientist",
+        "start_date": "Jun 2024"
+      }
+    ],
+    "fullName": "xyz sirname",
+    "interests": [],
+    "skills": [
+      {
+        "proficiency": 5,
+        "skill": "Python"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Java"
+      },
+      {
+        "proficiency": 5,
+        "skill": "SQL"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Pandas"
+      },
+      {
+        "proficiency": 5,
+        "skill": "NumPy"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Scikit-learn"
+      },
+      {
+        "proficiency": 5,
+        "skill": "NLP"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Machine Learning"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Data Modelling"
+      },
+      {
+        "proficiency": 5,
+        "skill": "LangChain"
+      },
+      {
+        "proficiency": 5,
+        "skill": "LangGraph"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Prompt Engineering"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Wordware"
+      },
+      {
+        "proficiency": 5,
+        "skill": "RAG"
+      },
+      {
+        "proficiency": 5,
+        "skill": "AI Agents"
+      },
+      {
+        "proficiency": 5,
+        "skill": "FastAPI"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Streamlit"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Pydantic"
+      },
+      {
+        "proficiency": 2,
+        "skill": "HTML"
+      },
+      {
+        "proficiency": 2,
+        "skill": "JSP"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Servlets"
+      },
+      {
+        "proficiency": 5,
+        "skill": "MySQL"
+      },
+      {
+        "proficiency": 5,
+        "skill": "MongoDB"
+      },
+      {
+        "proficiency": 5,
+        "skill": "PySpark"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Azure Data Factory (ADF)"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Power BI"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Tableau"
+      },
+      {
+        "proficiency": 5,
+        "skill": "KNIME"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Matplotlib"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Seaborn"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Excel"
+      }
+    ],
+    "years_experience": 1.0
+  },
+  {
+    "_id": {
+      "$oid": "6a61e88ba2d35322b4dbbd42"
+    },
+    "username": "xyz sirname",
+    "currentRole": "Decision Scientist",
+    "education": [
+      {
+        "degree": "Masters in Computer Application",
+        "endDate": 2027,
+        "institution": "Veermata Jijabai Institute of Technology",
+        "startDate": 2025
+      },
+      {
+        "degree": "Bachelor of Science in Computer Science",
+        "endDate": 2024,
+        "institution": "S.I.E.S College of Arts, Science & Commerce",
+        "startDate": 2021
+      }
+    ],
+    "experience": [
+      {
+        "company": "Fractal Analytics",
+        "endDate": "October 2024",
+        "role": "Decision Scientist",
+        "startDate": "Jun 2024"
+      }
+    ],
+    "fullName": "xyz sirname",
+    "interests": [],
+    "skills": [
+      {
+        "proficiency": 5,
+        "skill": "Python"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Java"
+      },
+      {
+        "proficiency": 5,
+        "skill": "SQL"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Pandas"
+      },
+      {
+        "proficiency": 5,
+        "skill": "NumPy"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Scikit-learn"
+      },
+      {
+        "proficiency": 5,
+        "skill": "NLP"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Machine Learning"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Data Modelling"
+      },
+      {
+        "proficiency": 5,
+        "skill": "LangChain"
+      },
+      {
+        "proficiency": 5,
+        "skill": "LangGraph"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Prompt Engineering"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Wordware"
+      },
+      {
+        "proficiency": 5,
+        "skill": "RAG"
+      },
+      {
+        "proficiency": 5,
+        "skill": "AI Agents"
+      },
+      {
+        "proficiency": 5,
+        "skill": "FastAPI"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Streamlit"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Pydantic"
+      },
+      {
+        "proficiency": 2,
+        "skill": "HTML"
+      },
+      {
+        "proficiency": 2,
+        "skill": "JSP"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Servlets"
+      },
+      {
+        "proficiency": 5,
+        "skill": "MySQL"
+      },
+      {
+        "proficiency": 5,
+        "skill": "MongoDB"
+      },
+      {
+        "proficiency": 5,
+        "skill": "PySpark"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Azure Data Factory (ADF)"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Power BI"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Tableau"
+      },
+      {
+        "proficiency": 5,
+        "skill": "KNIME"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Matplotlib"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Seaborn"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Excel"
+      }
+    ],
+    "years_experience": 1.0
+  },
+  {
+    "_id": {
+      "$oid": "6a61e9489e526ac7aa2c1226"
+    },
+    "fullName": "xyz sirname",
+    "currentRole": "Decision Scientist",
+    "years_experience": 0.0,
+    "experience": [
+      {
+        "company": "Fractal Analytics",
+        "endDate": "October 2024",
+        "role": "Decision Scientist",
+        "startDate": "Jun 2024"
+      }
+    ],
+    "education": [
+      {
+        "degree": "Masters in Computer Application",
+        "endDate": 2027,
+        "institution": "Veermata Jijabai Institute of Technology",
+        "startDate": 2025
+      },
+      {
+        "degree": "Bachelor of Science in Computer Science",
+        "endDate": 2024,
+        "institution": "S.I.E.S College of Arts, Science & Commerce",
+        "startDate": 2021
+      }
+    ],
+    "skills": [
+      {
+        "proficiency": 5,
+        "skill": "Python"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Java"
+      },
+      {
+        "proficiency": 5,
+        "skill": "SQL"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Pandas"
+      },
+      {
+        "proficiency": 5,
+        "skill": "NumPy"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Scikit-learn"
+      },
+      {
+        "proficiency": 5,
+        "skill": "NLP"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Machine Learning"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Data Modelling"
+      },
+      {
+        "proficiency": 5,
+        "skill": "LangChain"
+      },
+      {
+        "proficiency": 5,
+        "skill": "LangGraph"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Prompt Engineering"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Wordware"
+      },
+      {
+        "proficiency": 5,
+        "skill": "RAG"
+      },
+      {
+        "proficiency": 5,
+        "skill": "AI Agents"
+      },
+      {
+        "proficiency": 5,
+        "skill": "FastAPI"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Streamlit"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Pydantic"
+      },
+      {
+        "proficiency": 2,
+        "skill": "HTML"
+      },
+      {
+        "proficiency": 2,
+        "skill": "JSP"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Servlets"
+      },
+      {
+        "proficiency": 5,
+        "skill": "MySQL"
+      },
+      {
+        "proficiency": 5,
+        "skill": "MongoDB"
+      },
+      {
+        "proficiency": 5,
+        "skill": "PySpark"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Azure Data Factory (ADF)"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Power BI"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Tableau"
+      },
+      {
+        "proficiency": 5,
+        "skill": "KNIME"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Matplotlib"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Seaborn"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Excel"
+      }
+    ],
+    "interests": [],
+    "username": "xyz",
+    "Roadmap": {
+      "role": "Data Scientist",
+      "readinessScore": 32,
+      "estimated_days_to_job_ready": 240,
+      "phases": [
+        {
+          "phase_name": "Beginner",
+          "duration_days": 60,
+          "skills_to_focus": [
+            {
+              "skill": "Deep Learning",
+              "tasks": [
+                "Learn basics of Deep Learning",
+                "Implement simple neural networks"
+              ],
+              "resource_book": "Deep Learning by Ian Goodfellow",
+              "official_docs": "https://www.tensorflow.org/tutorials"
+            }
+          ],
+          "mini_project": {
+            "title": "Simple Neural Network",
+            "description": "Implement a simple neural network using TensorFlow",
+            "skills_used": [
+              "TensorFlow",
+              "Python"
+            ],
+            "difficulty": "Beginner"
+          },
+          "major_project": {
+            "title": "Image Classification",
+            "description": "Classify images using a deep neural network",
+            "skills_used": [
+              "TensorFlow",
+              "Python",
+              "OpenCV"
+            ],
+            "difficulty": "Intermediate"
+          }
+        },
+        {
+          "phase_name": "Intermediate",
+          "duration_days": 60,
+          "skills_to_focus": [
+            {
+              "skill": "Natural Language Processing",
+              "tasks": [
+                "Learn basics of NLP",
+                "Implement text preprocessing"
+              ],
+              "resource_book": "Natural Language Processing by Christopher Manning",
+              "official_docs": "https://www.nltk.org/book"
+            }
+          ],
+          "mini_project": {
+            "title": "Text Classification",
+            "description": "Classify text using a machine learning model",
+            "skills_used": [
+              "NLTK",
+              "Python"
+            ],
+            "difficulty": "Intermediate"
+          },
+          "major_project": {
+            "title": "Sentiment Analysis",
+            "description": "Analyze sentiment of text using a deep neural network",
+            "skills_used": [
+              "TensorFlow",
+              "Python",
+              "NLTK"
+            ],
+            "difficulty": "Advanced"
+          }
+        },
+        {
+          "phase_name": "Advanced",
+          "duration_days": 60,
+          "skills_to_focus": [
+            {
+              "skill": "Computer Vision",
+              "tasks": [
+                "Learn basics of Computer Vision",
+                "Implement object detection"
+              ],
+              "resource_book": "Computer Vision by Richard Szeliski",
+              "official_docs": "https://docs.opencv.org/4.x/d6/d00/tutorial_py_root.html"
+            }
+          ],
+          "mini_project": {
+            "title": "Object Detection",
+            "description": "Detect objects in images using OpenCV",
+            "skills_used": [
+              "OpenCV",
+              "Python"
+            ],
+            "difficulty": "Advanced"
+          },
+          "major_project": {
+            "title": "Image Segmentation",
+            "description": "Segment images using a deep neural network",
+            "skills_used": [
+              "TensorFlow",
+              "Python",
+              "OpenCV"
+            ],
+            "difficulty": "Advanced"
+          }
+        },
+        {
+          "phase_name": "Job Ready",
+          "duration_days": 60,
+          "skills_to_focus": [
+            {
+              "skill": "Interview Preparation",
+              "tasks": [
+                "Practice whiteboarding",
+                "Review common interview questions"
+              ],
+              "resource_book": "Cracking the Coding Interview",
+              "official_docs": "https://www.pramp.com"
+            }
+          ],
+          "mini_project": {
+            "title": "Practice Interview",
+            "description": "Practice interviewing with a mock interview",
+            "skills_used": [
+              "Python",
+              "Machine Learning"
+            ],
+            "difficulty": "Advanced"
+          },
+          "major_project": {
+            "title": "Capstone Project",
+            "description": "Complete a capstone project that demonstrates skills",
+            "skills_used": [
+              "Python",
+              "Machine Learning",
+              "Deep Learning",
+              "Natural Language Processing",
+              "Computer Vision"
+            ],
+            "difficulty": "Advanced"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a61ea97ae1015d5e09c3ee9"
+    },
+    "username": "a1",
+    "fullName": "xyz sirname",
+    "currentRole": "Decision Scientist",
+    "years_experience": 1.0,
+    "experience": [
+      {
+        "company": "Fractal Analytics",
+        "description": "Data Analysis, Inventory Management using ML, GenAI",
+        "endDate": "October 2024",
+        "role": "Decision Scientist",
+        "startDate": "Jun 2024"
+      }
+    ],
+    "education": [
+      {
+        "degree": "Masters in Computer Application",
+        "endDate": 2027,
+        "institution": "Veermata Jijabai Institute of Technology",
+        "startDate": 2025
+      },
+      {
+        "degree": "Bachelor of Science in Computer Science",
+        "endDate": 2024,
+        "institution": "S.I.E.S College of Arts, Science & Commerce",
+        "startDate": 2021
+      }
+    ],
+    "skills": [
+      {
+        "proficiency": 5,
+        "skill": "Python"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Java"
+      },
+      {
+        "proficiency": 5,
+        "skill": "SQL"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Pandas"
+      },
+      {
+        "proficiency": 5,
+        "skill": "NumPy"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Scikit-learn"
+      },
+      {
+        "proficiency": 5,
+        "skill": "NLP"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Machine Learning"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Data Modelling"
+      },
+      {
+        "proficiency": 5,
+        "skill": "LangChain"
+      },
+      {
+        "proficiency": 5,
+        "skill": "LangGraph"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Prompt Engineering"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Wordware"
+      },
+      {
+        "proficiency": 5,
+        "skill": "RAG"
+      },
+      {
+        "proficiency": 5,
+        "skill": "AI Agents"
+      },
+      {
+        "proficiency": 5,
+        "skill": "FastAPI"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Streamlit"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Pydantic"
+      },
+      {
+        "proficiency": 2,
+        "skill": "HTML"
+      },
+      {
+        "proficiency": 2,
+        "skill": "JSP"
+      },
+      {
+        "proficiency": 2,
+        "skill": "Servlets"
+      },
+      {
+        "proficiency": 5,
+        "skill": "MySQL"
+      },
+      {
+        "proficiency": 5,
+        "skill": "MongoDB"
+      },
+      {
+        "proficiency": 5,
+        "skill": "PySpark"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Azure Data Factory"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Power BI"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Tableau"
+      },
+      {
+        "proficiency": 5,
+        "skill": "KNIME"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Matplotlib"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Seaborn"
+      },
+      {
+        "proficiency": 5,
+        "skill": "Excel"
+      }
+    ],
+    "interests": [],
+    "Roadmap": {
+      "role": "Data Scientist",
+      "readinessScore": 41,
+      "estimated_days_to_job_ready": 240,
+      "phases": [
+        {
+          "phase_name": "Beginner",
+          "duration_days": 60,
+          "skills_to_focus": [
+            {
+              "skill": "Data Visualization",
+              "tasks": [
+                "Learn the basics of data visualization",
+                "Practice creating visualizations using Tableau and Power BI"
+              ],
+              "resource_book": "Data Visualization: A Handbook for Data Driven Design",
+              "official_docs": null
+            },
+            {
+              "skill": "Statistics",
+              "tasks": [
+                "Learn descriptive statistics",
+                "Practice inferential statistics"
+              ],
+              "resource_book": "Statistics in Plain English",
+              "official_docs": "https://www.khanacademy.org/math/statistics-probability"
+            }
+          ],
+          "mini_project": {
+            "title": "Visualizing COVID-19 Data",
+            "description": "Create a dashboard to visualize COVID-19 cases and deaths over time",
+            "skills_used": [
+              "Data Visualization",
+              "SQL"
+            ],
+            "difficulty": "Beginner"
+          },
+          "major_project": {
+            "title": "Analyzing Customer Purchase Behavior",
+            "description": "Analyze customer purchase behavior using data visualization and statistics",
+            "skills_used": [
+              "Data Visualization",
+              "Statistics"
+            ],
+            "difficulty": "Beginner"
+          }
+        },
+        {
+          "phase_name": "Intermediate",
+          "duration_days": 90,
+          "skills_to_focus": [
+            {
+              "skill": "Data Mining",
+              "tasks": [
+                "Learn the basics of data mining",
+                "Practice data mining using SQL and Python"
+              ],
+              "resource_book": "Data Mining: Concepts and Techniques",
+              "official_docs": "https://www.datacamp.com/tutorial/data-mining-with-python"
+            },
+            {
+              "skill": "Data Analysis",
+              "tasks": [
+                "Learn data analysis techniques",
+                "Practice data analysis using Python and SQL"
+              ],
+              "resource_book": "Data Analysis with Python",
+              "official_docs": "https://www.datacamp.com/tutorial/data-analysis-with-python"
+            }
+          ],
+          "mini_project": {
+            "title": "Predicting Customer Churn",
+            "description": "Build a model to predict customer churn using data mining and data analysis",
+            "skills_used": [
+              "Data Mining",
+              "Data Analysis"
+            ],
+            "difficulty": "Intermediate"
+          },
+          "major_project": {
+            "title": "Recommendation System",
+            "description": "Build a recommendation system using data mining and data analysis",
+            "skills_used": [
+              "Data Mining",
+              "Data Analysis"
+            ],
+            "difficulty": "Intermediate"
+          }
+        },
+        {
+          "phase_name": "Advanced",
+          "duration_days": 60,
+          "skills_to_focus": [
+            {
+              "skill": "Business Analytics",
+              "tasks": [
+                "Learn business analytics techniques",
+                "Practice business analytics using Python and SQL"
+              ],
+              "resource_book": "Business Analytics: Data Analysis and Decision Making",
+              "official_docs": "https://www.datacamp.com/tutorial/business-analytics-with-python"
+            },
+            {
+              "skill": "Reporting",
+              "tasks": [
+                "Learn reporting techniques",
+                "Practice reporting using Python and SQL"
+              ],
+              "resource_book": "Reporting: A Guide to Effective Communication",
+              "official_docs": "https://www.datacamp.com/tutorial/reporting-with-python"
+            }
+          ],
+          "mini_project": {
+            "title": "Sales Forecasting",
+            "description": "Build a model to forecast sales using business analytics and reporting",
+            "skills_used": [
+              "Business Analytics",
+              "Reporting"
+            ],
+            "difficulty": "Advanced"
+          },
+          "major_project": {
+            "title": "Business Intelligence Dashboard",
+            "description": "Build a business intelligence dashboard using business analytics and reporting",
+            "skills_used": [
+              "Business Analytics",
+              "Reporting"
+            ],
+            "difficulty": "Advanced"
+          }
+        },
+        {
+          "phase_name": "Job Ready",
+          "duration_days": 30,
+          "skills_to_focus": [
+            {
+              "skill": "Interview Preparation",
+              "tasks": [
+                "Practice answering common data science interview questions",
+                "Prepare a portfolio of projects"
+              ],
+              "resource_book": "Data Science Interview Questions and Answers",
+              "official_docs": "https://www.glassdoor.com/Interview/data-scientist-interview-questions-SRCH_IL.0,13.htm"
+            }
+          ],
+          "mini_project": {
+            "title": "Final Project",
+            "description": "Complete a final project that showcases skills learned throughout the roadmap",
+            "skills_used": [
+              "Data Visualization",
+              "Statistics",
+              "Data Mining",
+              "Data Analysis",
+              "Business Analytics",
+              "Reporting"
+            ],
+            "difficulty": "Advanced"
+          },
+          "major_project": {
+            "title": "Final Project",
+            "description": "Complete a final project that showcases skills learned throughout the roadmap",
+            "skills_used": [
+              "Data Visualization",
+              "Statistics",
+              "Data Mining",
+              "Data Analysis",
+              "Business Analytics",
+              "Reporting"
+            ],
+            "difficulty": "Advanced"
+          }
+        }
+      ]
+    }
+  }
+]
