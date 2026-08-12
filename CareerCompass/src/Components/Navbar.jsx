@@ -88,8 +88,8 @@ const Navbar = ({ onLoginClick }) => {
         {/* CENTER LINKS - Sleeker Interaction */}
         <div className="hidden md:flex items-center gap-2 p-1 rounded-xl bg-white/5 border border-white/5 backdrop-blur-sm">
           <NavLink to="/" label="Home" active={location.pathname === "/"} />
-          <NavLink to="/resume-upload" label="Roadmap" active={location.pathname === "/resume-upload"} />
-          <NavLink to="/roadmap" label="Career Paths" active={location.pathname === "/roadmap"} />
+          <NavLink to="/resume-upload" label="Profile" active={location.pathname === "/resume-upload"} />
+          <NavLink to="/roadmap" label="Roadmap" active={location.pathname === "/roadmap"} />
           <NavLink to="/interview-prep" label="Interview Prep" active={location.pathname === "/interview-prep"} />
         </div>
 

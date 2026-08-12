@@ -2,6 +2,7 @@ from fastapi import HTTPException
 from fastapi import FastAPI 
 from fastapi.middleware.cors import CORSMiddleware
 from pymongo.mongo_client import MongoClient
+from pydantic import BaseModel
 
 # Vidya part
 from fastapi import File, UploadFile
@@ -19,7 +20,7 @@ load_dotenv()
 
 ##Agents
 from langgraph.graph import StateGraph, MessagesState, START, END
-from agents import Skill_Gap_Analysis, Suggest_Target_Roles, Required_Skills, normalize_userandReq_skill, roadmap_generation_agent, question_generation,get_interview_relevant_topics, parse_resume_to_json, generate_interview_plan_api, evaluate_user_answer_api, evaluate_agent_performance_api
+from agents import Skill_Gap_Analysis, Suggest_Target_Roles, Required_Skills, normalize_userandReq_skill, roadmap_generation_agent, question_generation,get_interview_relevant_topics, parse_resume_to_json, generate_interview_plan_api, evaluate_user_answer_api, evaluate_agent_performance_api, store_user_profile_in_qdrant, rag_chat_response
 
 ## connect to MongoDB
 uri = os.getenv("DATABASE_URL")
@@ -135,6 +136,15 @@ def roadmap_generation(username: str):
     #adding roadmap to database
     UserCareerDetails.update_one({"username": username}, {"$set": {"Roadmap": roadmap_data}})
 
+    # Store user profile in Qdrant for CompassAI RAG
+    try:
+        full_user_data = UserCareerDetails.find_one({"username": username})
+        if full_user_data:
+            full_user_data.pop("_id", None)
+            store_user_profile_in_qdrant(full_user_data, roadmap_data)
+    except Exception as e:
+        print(f"[CompassAI] Warning: could not store profile in Qdrant: {e}")
+
     return {"message": "Roadmap Generated successfully", "data": roadmap_data}
 
 @app.get("/skilltest/{username}/{skill}")
@@ -186,7 +196,34 @@ def get_user_skills(username: str):
     return {"skills": user_data.get("skills", [])}
 
 
-# Vidya ---> Add this endpoint 
+# --- CompassAI RAG Chat ---
+class ChatRequest(BaseModel):
+    query: str
+
+@app.post("/chat/{username}")
+def compass_ai_chat(username: str, req: ChatRequest):
+    """RAG-powered career guidance chat endpoint for CompassAI."""
+    user_data = UserCareerDetails.find_one({"username": username})
+    if not user_data:
+        raise HTTPException(status_code=404, detail="User not found. Please complete your profile first.")
+    
+    # If profile not yet in Qdrant, store it on-demand
+    roadmap = user_data.get("Roadmap")
+    if roadmap:
+        try:
+            user_data.pop("_id", None)
+            store_user_profile_in_qdrant(user_data, roadmap)
+        except Exception:
+            pass  # Don't fail the chat if Qdrant upsert fails
+    
+    try:
+        response = rag_chat_response(username=username, query=req.query)
+        return {"response": response}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"CompassAI error: {str(e)}")
+
+
+# Vidya ---> 
 @app.post("/upload-resume/{username}")
 async def upload_resume(username: str, file: UploadFile = File(...)):
     if file.content_type != "application/pdf":
