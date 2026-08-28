@@ -11,7 +11,6 @@ import ManualEntry from './Pages/ManualEntry';
 import Roadmap from './Pages/Roadmap';
 import Skilltest from './Pages/Skilltest';
 import InterviewPrep from './Pages/InterviewPrep';
-import CompassAI from './Components/CompassAI';
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
@@ -182,9 +181,6 @@ function App() {
             </div>
           )}
         </AnimatePresence>
-
-        {/* --- COMPASSAI GLOBAL FLOATING MENTOR --- */}
-        <CompassAI />
       </div>
     </Router>
   );
