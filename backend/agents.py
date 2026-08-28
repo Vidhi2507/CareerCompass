@@ -18,7 +18,7 @@ api_key = os.getenv("API_KEY")
 secret = os.getenv("GROQ_KEY")
 
 chatmodel = ChatGroq(
-    model="llama-3.3-70b-versatile",
+    model="openai/gpt-oss-20b",
     api_key=secret,
     temperature=0.2
 )
